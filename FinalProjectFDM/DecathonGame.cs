@@ -21,12 +21,17 @@ namespace FinalProjectFDM
             return result;
         }
 
-        public void DecWin()
+        public bool DecWin()
         {
             if (GetOneTen() % 2 == 0)
             {
                 //if the result is even
                 //add from the context the game payout value to the user account value
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -101,19 +106,6 @@ namespace FinalProjectFDM
             return userlotterylist;
         }
 
-        public bool Lotteryresult(List<int> game, List<int> user)
-        {
-            if (game == user)
-            {
-                //if the generated numbers are the same as the users return true
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public int Matcher(List<int> game, List<int> user)
         {
             //counts how many of the user's numbers occur in the lottery numbers
@@ -127,25 +119,49 @@ namespace FinalProjectFDM
             return matchcount;
         }
 
-        public void LottoWin()
+        public bool Lotteryresult(List<int> game, List<int> user)
         {
-            if (Lotteryresult(lotterylist, userlotterylist) == true)
+            if (game == user)
+            {
+                //if the generated numbers are the same as the users return true
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public bool LottoWin(int o, int t, int th, int f, int fi, int s)
+        {
+            List<int> game = Lottery();
+            List<int> user = Userlottery(o, t, th, f, fi, s);
+            int matches = Matcher(game, user);
+            if (Lotteryresult(game, user) == true)
             {
                 //when the generated numbers and the user numbers match
                 //add from the context the game payout value to the user account value
+                return true;
             }
-            else if (matchcount == 4)
+            else if (matches == 4)
             {
                 //if the user has 4 of the winning numbers the can get a quarter of the payout
                 //decimal winamount = decimal payout value / 4
                 //update member account to add winamount
+                return true;
             }
-            else if (matchcount == 5)
+            else if (matches == 5)
             {
                 //the user gets a third of the payout
                 //decimal winamount = decimal payout value / 3
                 //update member account to add winamount
                 //no other lotto conditions warrant a payout
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -170,14 +186,19 @@ namespace FinalProjectFDM
             return numberlist;
         }
 
-        public void LuckyNWin(int user, List<int> lnumbers)
+        public bool LuckyNWin(int user)
             {
             //if the user's number is the lucky number occuring 3 times in the list, they win
-
+            List<int> lnumbers = LuckyNumber();
             int numcount = lnumbers.Where(x => x.Equals(user)).Count();
             if (numcount >= 3)
             {
                 //add payout value to the user's account
+                return true;
+            }
+            else
+            {
+                return false;
             }
     }
 
