@@ -1,4 +1,5 @@
-﻿using DBLayer.Create;
+﻿using DBLayer;
+using DBLayer.Create;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,8 @@ namespace WCFServiceCL.Create
     public class CreateGameService : ICreateGameService
     {
         CreateGame CreateGameObject = new CreateGame();
-        CreateGameServiceClass CreateGameServiceClassObject = new CreateGameServiceClass();
 
-        public void CreateGameServiceMethod(DBLayer.Game game)
+        public void CreateGameServiceMethod(Game game)
         {
             CreateGameObject.CreateGameMethod(game);
         }

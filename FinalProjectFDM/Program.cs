@@ -1,8 +1,11 @@
-﻿using System;
+﻿using DBLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WCFServiceCL.Create;
 
 namespace FinalProjectFDM
 {
@@ -36,6 +39,16 @@ namespace FinalProjectFDM
             Console.WriteLine("You "+TryGame[0] + ", your return is £"+TryGame[1]+"p");
             Console.ReadLine();
             */
+
+            //Testing service with a makeshift client:
+            EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/GetPriceService");
+            ICreateGameService proxy = ChannelFactory<ICreateGameService>.CreateChannel(new BasicHttpBinding(), endpoint);
+            //             Contract                                                      Binding            Address
+            Game game = new Game();
+            game.game_id = 10;
+            game.name = "Game1";
+            game.payout = 20;
+            proxy.CreateGameServiceMethod(game);
         }
     }
 }
