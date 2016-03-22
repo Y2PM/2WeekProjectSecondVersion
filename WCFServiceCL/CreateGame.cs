@@ -10,7 +10,7 @@ namespace WCFServiceCL
     [DataContract]
     public class CreateGameServiceClass
     {
-        [DataMember]
+        [DataMember] 
         public int game_id { get; set; }//serialisables
 
         [DataMember]
