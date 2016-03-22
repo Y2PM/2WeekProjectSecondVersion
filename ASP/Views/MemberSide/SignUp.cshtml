@@ -1,7 +1,27 @@
-﻿
+﻿@model ASP.Models.SignUpModel
 @{
     ViewBag.Title = "SignUp";
 }
 
-<h2>SignUp</h2>
+<h1>Sign Up</h1>
 
+@using (Html.BeginForm("SignUp", "MemberSide", FormMethod.Post))
+{
+<p>
+    <label>Name</label>
+</p>
+    @Html.EditorFor(model => model.Name)
+<p>
+    <label>Username</label>
+</p>
+    @Html.EditorFor(model => model.Username)
+<p>
+    <label>Password</label>
+</p>
+    @Html.EditorFor(model => model.Password)
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+
+    @Html.DisplayFor(model => model.signerror)
+}

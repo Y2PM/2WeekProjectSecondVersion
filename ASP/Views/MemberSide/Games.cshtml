@@ -1,7 +1,50 @@
-﻿
+﻿@model ASP.Models.GamesModel
 @{
     ViewBag.Title = "Games";
 }
 
-<h2>Games</h2>
+<style>
+    input,
+select,
+textarea {
+    max-width: 60px;
+}
+</style>
+
+<h1>Games</h1>
+<p>
+    <label>Odds N Evens</label>
+@using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
+{
+    <input type="submit" value="Submit" />
+    @Html.DisplayFor(model => model.resultmessageO)
+}
+</p>
+<p>
+    <label>Lottery</label>
+@using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
+{
+    @Html.EditorFor(model => model.one, new { style = "width: 10px;" })
+    @Html.EditorFor(model => model.two, new { style = "width: 30px;" })
+    @Html.EditorFor(model => model.three, new { style = "width: 40px;" })
+    @Html.EditorFor(model => model.four, new { style = "width: 50px;" })
+    @Html.EditorFor(model => model.five, new { style = "width: 100px;" })
+    @Html.EditorFor(model => model.six, new { style = "width: 90px;" })
+    <input type="submit" value="Submit" />
+    @Html.DisplayFor(model => model.resultmessageL)
+}
+</p>
+<p>
+    <label>Lucky Number</label>
+    @using (Html.BeginForm("PlayLucky", "MemberSide", FormMethod.Post))
+    {
+        @Html.EditorFor(model => model.usernumber)
+        <input type="submit" value="Submit" />
+    @Html.DisplayFor(model => model.resultmessageLN)
+    }
+</p>
+
+
+
+
 
