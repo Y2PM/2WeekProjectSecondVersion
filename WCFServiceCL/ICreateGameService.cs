@@ -6,12 +6,12 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBLayer.Interfaces
+namespace WCFServiceCL
 {
     [ServiceContract]
     public interface ICreateGameService
     {
         [OperationContract]
-        void CreateGameMethod(Game game);
+        void CreateGameServiceMethod(Game game);
     }
 }
