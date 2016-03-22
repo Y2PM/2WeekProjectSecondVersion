@@ -44,37 +44,37 @@ namespace Tests
             Assert.AreEqual(distinctcount, lottolist.Count());
         }
 
-        //[TestMethod]
-        //public void TestMethodLotteryReturnsASortedList()
-        //{
-        //    //Arrange
-        //    DecathonGame decgame = new DecathonGame();
-        //    List<int> lottolist = decgame.Lottery();
-        //    List<int> listsorted = new List<int>();
-        //    //Act
-        //    listsorted = lottolist.OrderBy(v => v).ToList();
+        [TestMethod]
+        public void TestMethodLotteryReturnsASortedList()
+        {
+            //Arrange
+            DecathonGame decgame = new DecathonGame();
+            List<int> lottolist = decgame.Lottery();
+            List<int> listsorted = new List<int>();
+            //Act
+            listsorted = lottolist.OrderBy(v => v).ToList();
 
-        //    //Assert
-        //    Assert.AreEqual(listsorted, lottolist);
-        //}
-        ////dec win won't add if getoneresultisodd
-        ////decwin will add to context when result is even
-        ////decwin will add value from context to another in context
+            //Assert
+            Assert.AreEqual(listsorted, lottolist);
+        }
+        //dec win won't add if getoneresultisodd
+        //decwin will add to context when result is even
+        //decwin will add value from context to another in context
 
 
-        //[TestMethod]
-        //public void TestMethodUserLotteryReturnsASortedList()
-        //{
-        //    //Arrange
-        //    DecathonGame decgame = new DecathonGame();
-        //    List<int> lottolist = decgame.Userlottery(8, 2, 3, 50, 7, 14);
-        //    List<int> listsorted = new List<int>();
-        //    //Act
-        //    listsorted = lottolist.OrderBy(v => v).ToList();
+        [TestMethod]
+        public void TestMethodUserLotteryReturnsASortedList()
+        {
+            //Arrange
+            DecathonGame decgame = new DecathonGame();
+            List<int> lottolist = decgame.Userlottery(8, 2, 3, 50, 7, 14);
+            List<int> listsorted = new List<int>();
+            //Act
+            listsorted = lottolist.OrderBy(v => v).ToList();
 
-        //    //Assert
-        //    Assert.AreEqual(listsorted, lottolist);
-        //}
+            //Assert
+            Assert.AreEqual(listsorted, lottolist);
+        }
 
         public void TestMethodUserLottoValidateReturnsFalseWhenGivenANumberOverFifty()
         {
@@ -105,7 +105,7 @@ namespace Tests
             //Assert
             Assert.AreEqual(false, decgame.userlottovalidate(24, 24, 1, 2, 3, 40));
         }
-            //lotteryresult returns true for matching lists and false otherwise
+        //lotteryresult returns true for matching lists and false otherwise
 
         public void TestMethodLotteryResultReturnsTrueWhenTheListsAreEqual()
         {
@@ -114,7 +114,7 @@ namespace Tests
             List<int> listone = new List<int>();
             List<int> listtwo = new List<int>();
             //Act
-            
+
             //Assert
             Assert.AreEqual(true, decgame.Lotteryresult(listone, listtwo));
         }
@@ -208,7 +208,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestMethodMatcherReturnsOneWhenGivenTwoListsWithOneCommonality1()
+        public void TestMethodMatcherReturnsTwoWhenGivenTwoListsWithTwoCommonalities()
         {
             //Arrange
             DecathonGame decgame = new DecathonGame();
@@ -226,18 +226,44 @@ namespace Tests
             Assert.AreEqual(2, finalnumber);
         }
 
+        [TestMethod]
+        public void TestMethodLuckyNumberReturnsSixDistinctNumbers()
+        {
+            //Arrange
+            DecathonGame decgame = new DecathonGame();
+            List<int> lnlist = decgame.LuckyNumber();
+            //Act
+            IEnumerable<int> luckydistinct = lnlist.Distinct();
+            //Act
+
+            int distinctcount = luckydistinct.Count();
+
+            //Assert
+            Assert.AreEqual(6, distinctcount);
+
+        }
+
+        [TestMethod]
+        public void TestMethodLuckyNumberReturnsAListOfLengthNine()
+        {
+            //Arrange
+            DecathonGame decgame = new DecathonGame();
+
+            //Act
+            List<int> lnlist = decgame.LuckyNumber();
+            //Assert
+            Assert.AreEqual(9, lnlist.Count());
+        }
+
+
         //lottowin adds or calls on context when matchcount is greater than or equal to four
         //lotto win adds a quarter of payout to account for match of 4
         //lottowin adds a third of payout to account for match of 5
         //lottowin adds full payout to account for match of 6
 
-        //luckynumber adds the same random number thrice to a list
-        //luckynumber adds unique numbers to list
-        //luckynumbers returns a list of length 9
-
         //luckynwin adds payout to account if user number occurs 3 or more times
 
-        
+
         //----------------Joe's tests:
         [TestMethod]
         public void Test_Bet_ReturnsNotNull_WhenCalled()
@@ -245,7 +271,7 @@ namespace Tests
             //Arrange
             BetClass BetObj = new BetClass();
             //Act
-            List<string> result = BetObj.Bet(50,5);
+            List<string> result = BetObj.Bet(50, 5);
             //Assert
             Assert.IsNotNull(result);
         }
@@ -264,6 +290,6 @@ namespace Tests
             Assert.AreEqual(expected, result2[0]);
         }
         //---------------
-        
+
     }
 }
