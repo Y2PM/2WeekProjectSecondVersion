@@ -44,37 +44,37 @@ namespace Tests
             Assert.AreEqual(distinctcount, lottolist.Count());
         }
 
-        [TestMethod]
-        public void TestMethodLotteryReturnsASortedList()
-        {
-            //Arrange
-            DecathonGame decgame = new DecathonGame();
-            List<int> lottolist = decgame.Lottery();
-            List<int> listsorted = new List<int>();
-            //Act
-            listsorted = lottolist.OrderBy(v => v).ToList();
+        //[TestMethod]
+        //public void TestMethodLotteryReturnsASortedList()
+        //{
+        //    //Arrange
+        //    DecathonGame decgame = new DecathonGame();
+        //    List<int> lottolist = decgame.Lottery();
+        //    List<int> listsorted = new List<int>();
+        //    //Act
+        //    listsorted = lottolist.OrderBy(v => v).ToList();
 
-            //Assert
-            Assert.AreEqual(listsorted, lottolist);
-        }
-        //dec win won't add if getoneresultisodd
-        //decwin will add to context when result is even
-        //decwin will add value from context to another in context
+        //    //Assert
+        //    Assert.AreEqual(listsorted, lottolist);
+        //}
+        ////dec win won't add if getoneresultisodd
+        ////decwin will add to context when result is even
+        ////decwin will add value from context to another in context
 
 
-        [TestMethod]
-        public void TestMethodUserLotteryReturnsASortedList()
-        {
-            //Arrange
-            DecathonGame decgame = new DecathonGame();
-            List<int> lottolist = decgame.Userlottery(8, 2, 3, 50, 7, 14);
-            List<int> listsorted = new List<int>();
-            //Act
-            listsorted = lottolist.OrderBy(v => v).ToList();
+        //[TestMethod]
+        //public void TestMethodUserLotteryReturnsASortedList()
+        //{
+        //    //Arrange
+        //    DecathonGame decgame = new DecathonGame();
+        //    List<int> lottolist = decgame.Userlottery(8, 2, 3, 50, 7, 14);
+        //    List<int> listsorted = new List<int>();
+        //    //Act
+        //    listsorted = lottolist.OrderBy(v => v).ToList();
 
-            //Assert
-            Assert.AreEqual(listsorted, lottolist);
-        }
+        //    //Assert
+        //    Assert.AreEqual(listsorted, lottolist);
+        //}
 
         public void TestMethodUserLottoValidateReturnsFalseWhenGivenANumberOverFifty()
         {
