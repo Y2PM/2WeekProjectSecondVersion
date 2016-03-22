@@ -73,6 +73,7 @@
       <DependentUpon>GroupProject.edmx</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICreateGameService.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Member.cs">
       <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
