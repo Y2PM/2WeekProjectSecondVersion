@@ -29,7 +29,7 @@ namespace DBLayer.Read
 
         public Game ReadSpecificGame(int id)
         {
-            Game noGameFound = new Game()
+            Game noGameFound = new Game() 
             {
                 name = "Game Does Not Exist"
             };
