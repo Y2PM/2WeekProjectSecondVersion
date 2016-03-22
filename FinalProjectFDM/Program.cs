@@ -9,7 +9,7 @@ namespace FinalProjectFDM
     public class Program
     {
         static void Main(string[] args)
-        {
+        { 
             /*
             DecathonGame decgame = new DecathonGame();
             List<int> lotto = decgame.Lottery();
