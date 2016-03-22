@@ -23,7 +23,6 @@ namespace DBLayer.Create
 
         public void CreateGameMethod(Game game)
         {
-            
             context.Games.Add(game);
             context.SaveChanges();
         }
