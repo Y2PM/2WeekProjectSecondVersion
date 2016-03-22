@@ -20,10 +20,10 @@ namespace DBLayer.Delete
             context = groupprojectEntities;
         }
 
-        public virtual void DeleteGameMethod(string game)
+        public virtual void DeleteGameMethod(int game_id)
         {
-            Game _game = context.Games.Single(x => x.name == game);
-            if (game != null)
+            Game _game = context.Games.Single(x => x.game_id == game_id);
+            if (game_id != null)
             {
                 context.Games.Remove(_game);
                 context.SaveChanges();

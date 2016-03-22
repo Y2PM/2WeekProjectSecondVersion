@@ -8,9 +8,9 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="GamesPage" Height="600" Width="600">
 
-    <!--<Page.DataContext>
+    <Page.DataContext>
         <vm:GamesPageViewModel/>
-    </Page.DataContext>-->
+    </Page.DataContext>
 
     <Grid>
         <Button  Command="{Binding navigateToHomePageCommand}" Content="Home" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
@@ -49,7 +49,7 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" Margin="37,43,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top"/>
                     <TextBox Text="{Binding game_ID}" HorizontalAlignment="Left" Height="23" Margin="67,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
-                    <Button  Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Left" Margin="174,43,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.28,0.136"/>
+                    <Button Command="{Binding deleteGameCommand}" Content="Delete" HorizontalAlignment="Left" Margin="174,43,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.28,0.136"/>
                 </Grid>
             </TabItem>
         </TabControl>

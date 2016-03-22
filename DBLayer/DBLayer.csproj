@@ -72,10 +72,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroupProject.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICreateGameService.cs" />
     <Compile Include="Member.cs">
       <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Read\ReadGame.cs" />
     <Compile Include="Read\ReadMember.cs" />
     <Compile Include="Update\UpdateGame.cs" />
     <Compile Include="Update\UpdateMember.cs" />
