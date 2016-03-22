@@ -20,6 +20,7 @@ namespace ASP.Controllers
         public ActionResult LogIn()
         {
             //call method that reads the input from logmodel.Username and logmodel.Password
+            
             return View();
         }
 
