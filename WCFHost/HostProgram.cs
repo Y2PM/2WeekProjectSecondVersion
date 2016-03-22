@@ -15,13 +15,15 @@ namespace WCFHost
         {
             using (ServiceHost host = new ServiceHost(typeof(CreateGameService)))
             {
-                string address = "http://" + Dns.GetHostName() + ":8081/GetPriceService";//FDM free from firewalls port.
+                string address = "http://" + Dns.GetHostName() + ":8081/CreateGameService";//FDM free from firewalls port.
                 host.AddServiceEndpoint(typeof(ICreateGameService), new BasicHttpBinding(), address);//Can be done in app.config too.
 
                 host.Open();
 
                 Console.WriteLine("Press enter to stop.");
                 Console.ReadLine();
+
+                host.Close();
             }
         }
     }

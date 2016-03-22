@@ -41,7 +41,7 @@ namespace FinalProjectFDM
             */
 
             //Testing service with a makeshift client:
-            EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/GetPriceService");
+            EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/CreateGameService");
             ICreateGameService proxy = ChannelFactory<ICreateGameService>.CreateChannel(new BasicHttpBinding(), endpoint);
             //             Contract                                                      Binding            Address
             Game game = new Game();
