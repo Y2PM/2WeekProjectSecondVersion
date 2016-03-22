@@ -16,7 +16,7 @@ textarea {
     <label>Odds N Evens</label>
 @using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
 {
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Play" />
     @Html.DisplayFor(model => model.resultmessageO)
 }
 </p>
@@ -78,7 +78,7 @@ textarea {
             max = 50
         }
     })
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Play" />
     @Html.DisplayFor(model => model.resultmessageL)
 <p>@Html.DisplayFor(model => model.lotteryerror)</p>
 }
@@ -96,7 +96,7 @@ textarea {
             max = 9
         }
     })
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Play" />
     @Html.DisplayFor(model => model.resultmessageLN)
     }
 </p>
