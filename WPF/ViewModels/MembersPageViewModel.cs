@@ -7,13 +7,18 @@ using System.Windows.Input;
 using WPF.Helpers;
 using DBLayer;
 using DBLayer.Read;
+using DBLayer.Delete;
+using DBLayer.Update;
 using System.Collections.ObjectModel;
 
 namespace WPF.ViewModels
 {
     public class MembersPageViewModel : BaseViewModel
     {
+        Member memberBeingSent = new Member();
         ReadMember ReadMemberInstance = new ReadMember();
+        DeleteMember DeleteMemberInstance = new DeleteMember();
+        UpdateMember UpdateMemberInstance = new UpdateMember();
 
         private ICommand _navigateToHomePageCommand;
         public ICommand navigateToHomePageCommand
@@ -48,6 +53,28 @@ namespace WPF.ViewModels
             {
                 _member_ID = value;
                 OnPropertyChanged("member_ID");
+            }
+        }
+
+        private string _member_Name;
+        public string member_Name
+        {
+            get { return _member_Name; }
+            set
+            {
+                _member_Name = value;
+                OnPropertyChanged("member_Name");
+            }
+        }
+
+        private string _member_PW;
+        public string member_PW
+        {
+            get { return _member_PW; }
+            set
+            {
+                _member_PW = value;
+                OnPropertyChanged("member_PW");
             }
         }
 
@@ -134,6 +161,66 @@ namespace WPF.ViewModels
             List<Member> listFromReadAllMembers = new List<Member>();
             listFromReadAllMembers = ReadMemberInstance.ReadAllMembers();
             members = new ObservableCollection<Member>(listFromReadAllMembers);
+        }
+
+
+        ///////////////////////////////////////
+        //delete member
+
+        private ICommand _deleteMemberCommand;
+        public ICommand deleteMemberCommand
+        {
+            get
+            {
+                if (_deleteMemberCommand == null)
+                {
+                    _deleteMemberCommand = new Command(deleteMember, canDeleteMember);
+                }
+                return _deleteMemberCommand;
+            }
+            set { _deleteMemberCommand = value; }
+        }
+
+        public bool canDeleteMember()
+        {
+            return true;
+        }
+
+        public void deleteMember()
+        {
+            DeleteMemberInstance.DeleteMemberMethod(member_ID);
+            //MessageBox.Show("User succesfully deleted");
+        }
+
+
+        //update member
+
+        private ICommand _updateMemberCommand;
+        public ICommand updateMemberCommand
+        {
+            get
+            {
+                if (_updateMemberCommand == null)
+                {
+                    _updateMemberCommand = new Command(updateMember, canUpdateMember);
+                }
+                return _updateMemberCommand;
+            }
+            set { _updateMemberCommand = value; }
+        }
+
+        public bool canUpdateMember()
+        {
+            return true;
+        }
+
+        public void updateMember()
+        {
+            memberBeingSent.m_name = member_Name;
+            memberBeingSent.m_password = member_PW;
+
+            UpdateMemberInstance.UpdateMemberMethod(memberBeingSent);
+            //MessageBox.Show("User succesfully updated");
         }
 
 

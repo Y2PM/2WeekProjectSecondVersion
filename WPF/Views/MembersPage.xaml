@@ -28,12 +28,20 @@
             <TabItem Header="Update Member">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock HorizontalAlignment="Left" Margin="47,42,0,0" TextWrapping="Wrap" Text="ID of Member:" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="140,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="47,99,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Left" Height="23" Margin="140,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="47,99,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_Name}" HorizontalAlignment="Left" Height="23" Margin="99,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="47,154,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_PW}" HorizontalAlignment="Left" Height="23" Margin="116,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Command="{Binding updateMemberCommand}" Content="Update" HorizontalAlignment="Left" Margin="125,214,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Delete Member" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="98" Margin="-2,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" Margin="39,64,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Left" Height="23" Margin="69,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
+                    <Button Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Left" Margin="173,65,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
