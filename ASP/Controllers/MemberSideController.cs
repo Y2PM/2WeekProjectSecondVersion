@@ -9,7 +9,7 @@ namespace ASP.Controllers
 {
     public class MemberSideController : Controller
     {
-        public static LogInModel logmodel = new LogInModel();
+        public static LogInModel logmodel; // = new LogInModel();
 
         // GET: MemberSide
         public ActionResult SignUp()
@@ -19,7 +19,7 @@ namespace ASP.Controllers
 
         public ActionResult LogIn()
         {
-          
+            //call method that reads the input from logmodel.Username and logmodel.Password
             return View();
         }
 
