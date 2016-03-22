@@ -1,9 +1,9 @@
 ﻿@model ASP.Models.LogInModel
 @{
-    ViewBag.Title = "LogIn";
+    ViewBag.Title = "Log In";
 }
 
-<h1>Logn In</h1>
+<h1>Log In</h1>
 
 @using (Html.BeginForm("LogIn", "MemberSide", FormMethod.Post))
 {
@@ -21,3 +21,7 @@
 
     @Html.DisplayFor(model => model.logerror)
 }
+
+<p>
+        @Html.ActionLink("Or click her to Sign Up", "SignUp", "MemberSide")
+</p>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace ASP.Controllers
 {
     public class MemberSideController : Controller
     {
+        public static LogInModel logmodel = new LogInModel();
+
         // GET: MemberSide
         public ActionResult SignUp()
         {
@@ -16,6 +19,7 @@ namespace ASP.Controllers
 
         public ActionResult LogIn()
         {
+          
             return View();
         }
 
@@ -26,6 +30,7 @@ namespace ASP.Controllers
 
         public ActionResult PlayOdds()
         {
+            //
             return View();
         }
 
