@@ -22,6 +22,7 @@ namespace WPF.ViewModels
         CreateGame CreateGameInstance = new CreateGame();
         ReadGame ReadGameInstance = new ReadGame();
         UpdateGame UpdateGameInstance = new UpdateGame();
+        DeleteGame DeleteGameInstance = new DeleteGame();
 
         private int _game_ID;
         public int game_ID
@@ -225,6 +226,36 @@ namespace WPF.ViewModels
 
             UpdateGameInstance.UpdateGameMethod(gameBeingSent);
             //MessageBox.Show("User succesfully updated");
+        }
+
+
+
+        //////////////////////////////////////
+        //delete game
+
+        private ICommand _deleteMemberCommand;
+        public ICommand deleteMemberCommand
+        {
+            get
+            {
+                if (_deleteMemberCommand == null)
+                {
+                    _deleteMemberCommand = new Command(deleteUser, canDeleteUser);
+                }
+                return _deleteMemberCommand;
+            }
+            set { _deleteMemberCommand = value; }
+        }
+
+        public bool canDeleteUser()
+        {
+            return true;
+        }
+
+        public void deleteUser()
+        {
+            DeleteGameInstance.DeleteGameMethod(game_ID);
+            //MessageBox.Show("User succesfully deleted");
         }
 
 
