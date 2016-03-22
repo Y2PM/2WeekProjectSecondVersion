@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroupProject.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICreateGameService.cs" />
     <Compile Include="Member.cs">
       <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
