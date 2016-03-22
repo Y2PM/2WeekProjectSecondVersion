@@ -40,7 +40,7 @@ namespace FinalProjectFDM
             Console.ReadLine();
             */
 
-            
+            /*
             //Testing service with a makeshift client:
             EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/CreateGameService");
             ICreateGameService proxy = ChannelFactory<ICreateGameService>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -50,7 +50,7 @@ namespace FinalProjectFDM
             game.name = "Game5";
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
-            
+            */
             
         }
     }
