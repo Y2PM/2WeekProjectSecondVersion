@@ -156,7 +156,7 @@ namespace FinalProjectFDM
             while (numberlist.Count < 9)
             {
                 result = GetOneTen();
-                if (!numberlist.Contains(result) && !numberlist.Contains(lnumber))
+                if (!numberlist.Contains(result))
                 {
                     numberlist.Add(result);
                 }
