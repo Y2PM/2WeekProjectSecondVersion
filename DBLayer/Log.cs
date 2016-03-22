@@ -13,8 +13,8 @@
 //            using (var context = new GroupProjectEntities())
 //            {
 
-//                var mem = context.Members.Find(username);
-//                if (mem.m_password == pass)
+//                var member = context.Members.Find(username);
+//                if (member.m_password == pass)
 //                {
 //                    return true;
 //                }
