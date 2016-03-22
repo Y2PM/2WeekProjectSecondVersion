@@ -19,21 +19,9 @@ m_password VARCHAR(50),
 m_account DECIMAL
 );
 
-INSERT INTO Game (name) VALUES ('Odds N Evens');
-INSERT INTO Game (payout) VALUES (10);
-INSERT INTO Game (name) VALUES ('Lottery');
-INSERT INTO Game (payout) VALUES (1000000);
-INSERT INTO Game (name) VALUES ('Lucky Number');
-INSERT INTO Game (payout) VALUES (1000);
-INSERT INTO Member (m_name) VALUES ('James');
-INSERT INTO Member (m_username) VALUES ('ragingbull');
-INSERT INTO Member (m_password) VALUES ('password123');
-INSERT INTO Member (m_account) VALUES (0.0);
-INSERT INTO Member (m_name) VALUES ('Michael');
-INSERT INTO Member (m_username) VALUES ('rocky');
-INSERT INTO Member (m_password) VALUES ('password12');
-INSERT INTO Member (m_account) VALUES (0.0);
-INSERT INTO Member (m_name) VALUES ('Rick');
-INSERT INTO Member (m_username) VALUES ('stuffandthings');
-INSERT INTO Member (m_password) VALUES ('password1');
-INSERT INTO Member (m_account) VALUES (0.0);
+INSERT INTO Game (name, payout) VALUES ('Odds N Evens', 10);
+INSERT INTO Game (name, payout) VALUES ('Lottery', 1000000);
+INSERT INTO Game (name, payout) VALUES ('Lucky Number', 1000);
+INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('James', 'ragingbull', 'password123', 0.0);
+INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('Michael', 'rocky', 'password12', 0.0);
+INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('Rick', 'stuffandthings', 'password1', 0.0);
