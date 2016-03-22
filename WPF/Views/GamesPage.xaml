@@ -8,9 +8,9 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="GamesPage" Height="600" Width="600">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:GamesPageViewModel/>
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <Grid>
         <Button  Command="{Binding navigateToHomePageCommand}" Content="Home" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
