@@ -25,13 +25,32 @@
                 </Grid>
             </TabItem>
             <TabItem Header="View Game">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button Command="{Binding readGameByIDCommand}" Content="View Game" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="110,25,0,0" TextWrapping="Wrap" Text="Game ID:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding game_ID}" HorizontalAlignment="Left" Height="23" Margin="165,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                    <DataGrid ItemsSource="{Binding game}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="56" Width="525"/>
+                    <Button Command="{Binding readAllGamesCommand}" Content="View Games" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="75"/>
+                    <DataGrid ItemsSource="{Binding games}" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Height="322" Width="525"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Update Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-2,0,0,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" Margin="32,40,0,0" TextWrapping="Wrap" Text="ID of Game:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding game_ID}" HorizontalAlignment="Left" Height="23" Margin="112,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="32,100,0,0" TextWrapping="Wrap" Text="New Name:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding name}" HorizontalAlignment="Left" Height="23" Margin="112,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="32,151,0,0" TextWrapping="Wrap" Text="New Payout:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding payout}" HorizontalAlignment="Left" Height="23" Margin="112,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Command="{Binding updateGameCommand}" Content="Update" HorizontalAlignment="Left" Margin="112,213,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Delete Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-3,0,0,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock HorizontalAlignment="Left" Margin="37,43,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding game_ID}" HorizontalAlignment="Left" Height="23" Margin="67,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+                    <Button  Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Left" Margin="174,43,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.28,0.136"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
