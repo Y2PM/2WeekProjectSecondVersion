@@ -4,12 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Tests
 {
     [TestClass]
-    public class ServiceTests
+    public class CreateGameServiceTest
     {
         [TestMethod]
-        public void Test_CreateGameServiceMethod_DoesSomething_WhenSomething()
+        public void TestMethod1()
         {
-            //In namespace WCFServiceCL.Create
         }
     }
 }

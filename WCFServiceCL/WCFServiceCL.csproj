@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Create\CreateGame.cs" />
+    <Compile Include="Create\CreateGameServiceClass.cs" />
     <Compile Include="Create\CreateGameService.cs" />
     <Compile Include="Create\ICreateGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
