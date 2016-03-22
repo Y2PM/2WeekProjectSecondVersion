@@ -24,21 +24,78 @@ textarea {
     <label>Lottery</label>
 @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
 {
-    @Html.EditorFor(model => model.one, new { style = "width: 10px;" })
-    @Html.EditorFor(model => model.two, new { style = "width: 30px;" })
-    @Html.EditorFor(model => model.three, new { style = "width: 40px;" })
-    @Html.EditorFor(model => model.four, new { style = "width: 50px;" })
-    @Html.EditorFor(model => model.five, new { style = "width: 100px;" })
-    @Html.EditorFor(model => model.six, new { style = "width: 90px;" })
+    @Html.EditorFor(model => model.one, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
+    @Html.EditorFor(model => model.two, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
+    @Html.EditorFor(model => model.three, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
+    @Html.EditorFor(model => model.four, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
+    @Html.EditorFor(model => model.five, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
+    @Html.EditorFor(model => model.six, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 50
+        }
+    })
     <input type="submit" value="Submit" />
     @Html.DisplayFor(model => model.resultmessageL)
+<p>@Html.DisplayFor(model => model.lotteryerror)</p>
 }
 </p>
 <p>
     <label>Lucky Number</label>
     @using (Html.BeginForm("PlayLucky", "MemberSide", FormMethod.Post))
     {
-        @Html.EditorFor(model => model.usernumber)
+        @Html.EditorFor(model => model.usernumber, additionalViewData: new
+    {
+        htmlAttributes = new
+        {
+
+            min = 1,
+            max = 9
+        }
+    })
         <input type="submit" value="Submit" />
     @Html.DisplayFor(model => model.resultmessageLN)
     }

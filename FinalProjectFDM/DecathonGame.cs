@@ -43,7 +43,7 @@ namespace FinalProjectFDM
             
             while (unsortedlotterylist.Count < 6)
             {
-                            result = rand.Next(1, 50);
+                            result = rand.Next(1, 51);
                             if (unsortedlotterylist.Contains(result))
                             {
                                 result ++;
