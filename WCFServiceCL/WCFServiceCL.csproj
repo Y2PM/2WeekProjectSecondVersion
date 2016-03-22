@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Create\CreateGameService.cs" />
+    <Compile Include="Create\CreateMemberService.cs" />
     <Compile Include="Create\ICreateGameService.cs" />
+    <Compile Include="Create\ICreateMemberService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
