@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFServiceCL
+namespace WCFServiceCL.Create
 {
     [ServiceContract]
     public interface ICreateGameService

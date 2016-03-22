@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCFServiceCL
+namespace WCFServiceCL.Create
 {
     [DataContract]
     public class CreateGameServiceClass

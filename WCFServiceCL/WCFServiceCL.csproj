@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateGame.cs" />
-    <Compile Include="CreateGameService.cs" />
-    <Compile Include="ICreateGameService.cs" />
+    <Compile Include="Create\CreateGame.cs" />
+    <Compile Include="Create\CreateGameService.cs" />
+    <Compile Include="Create\ICreateGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +51,11 @@
       <Project>{c26bbce2-cc2f-4949-84c5-ed6e6db30682}</Project>
       <Name>DBLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Delete\" />
+    <Folder Include="Read\" />
+    <Folder Include="Update\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
