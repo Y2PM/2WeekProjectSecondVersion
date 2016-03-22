@@ -54,6 +54,7 @@ namespace FinalProjectFDM
 
         public bool userlottovalidate(int one, int two, int three, int four, int five, int six)
         {
+            //returns true if the user's 6 given numbers are between 1 and 50
             List<int> numbers = new List<int>();
             List<int> unsorteduserlotterylist = new List<int>();
             numbers.Add(one);
@@ -85,6 +86,7 @@ namespace FinalProjectFDM
             List<int> unsorteduserlotterylist = new List<int>();
             if (userlottovalidate(one, two, three, four, five, six) == true)
             {
+                //if the user's numbers pass validation (6 distinct numbers between 1 and 50)
                 unsorteduserlotterylist.Add(one);
                 unsorteduserlotterylist.Add(two);
                 unsorteduserlotterylist.Add(three);
@@ -135,10 +137,14 @@ namespace FinalProjectFDM
             else if (matchcount == 4)
             {
                 //if the user has 4 of the winning numbers the can get a quarter of the payout
+                //decimal winamount = decimal payout value / 4
+                //update member account to add winamount
             }
             else if (matchcount == 5)
             {
                 //the user gets a third of the payout
+                //decimal winamount = decimal payout value / 3
+                //update member account to add winamount
                 //no other lotto conditions warrant a payout
             }
         }

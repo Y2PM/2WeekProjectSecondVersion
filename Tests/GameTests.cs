@@ -8,7 +8,7 @@ using Moq;
 namespace Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class GameTests
     {
         //[TestInitialize()]
         //public void Initialize()
