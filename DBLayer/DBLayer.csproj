@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BetterWork.cs" />
+    <Compile Include="Read\BetterWork.cs" />
     <Compile Include="Create\CreateGame.cs" />
     <Compile Include="Create\CreateMember.cs" />
     <Compile Include="Delete\DeleteGame.cs" />

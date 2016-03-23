@@ -25,6 +25,10 @@ namespace DBLayer
                 }
 
                 var m = context.Members.Find(memid);
+                if (memid == 0)
+                {
+                    return false;
+                }
                 if (m.m_password == pass)
                 {
                     return true;

@@ -36,5 +36,8 @@ namespace WCFServiceCL
 
         [OperationContract]
         void UpdateMemberServiceMethod(Member memberToUpdate);
+
+        [OperationContract]
+        bool LoginServiceMethod(string username, string password);
     }
 }

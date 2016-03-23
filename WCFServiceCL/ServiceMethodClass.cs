@@ -68,5 +68,11 @@ namespace WCFServiceCL
             UpdateMember UpdateMemberObject = new UpdateMember();
             UpdateMemberObject.UpdateMemberMethod(memberToUpdate);
         }
+
+        public bool LoginServiceMethod(string username, string password)
+        {
+            ReadMember ReadMemberObject = new ReadMember();
+            return ReadMemberObject.login(username, password);
+        }
     }
 }

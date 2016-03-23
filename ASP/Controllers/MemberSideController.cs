@@ -1,9 +1,13 @@
 ﻿using ASP.Models;
+using DBLayer;
+using DBLayer.Read;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using WCFServiceCL;
 
 namespace ASP.Controllers
 {
@@ -12,6 +16,24 @@ namespace ASP.Controllers
         LogInModel logmodel = new LogInModel();
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
+
+        //initialise service
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service");
+        IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
+        //might need intermediary method to mimic global userid
+
+
+        public bool logwork(string use, string pas)
+        {
+            if (proxy.LoginServiceMethod(use, pas) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         // GET: MemberSide
         public ActionResult SignUp()
@@ -32,12 +54,14 @@ namespace ASP.Controllers
             //user = logmodel.Username;
             //pass = logmodel.Password;
 
-            if (logmodel.logwork(logmodel.Username, logmodel.Password) == true)
+
+            if (logwork(logmodel.Username, logmodel.Password) == true)
             {
                 return View("Games", gamemodel);
             }
             else
             {
+                logmodel.logerror = "Log in could not be completed. Please Ensure you have entered the correct username and password";
                 return View(logmodel);
             } 
         }
@@ -47,20 +71,50 @@ namespace ASP.Controllers
                 return View();
         }
 
-        public ActionResult PlayOdds()
-        {
-            //
-            return View();
-        }
+        ////remove return view for all the games (or make it just the games page and gamemodel)
+        //public ActionResult PlayOdds()
+        //{
+        //    //takes a game win method. if it returns true read game payout and add to current user account
+        //    if (decwin == true)
+        //    {
+        //        //read game payout and add the current user's account
+        //        //gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!"
+        //    }
+        //    else
+        //    {
+        //        gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around."
+        //    }
+        //    return View("Games", gamemodel);
+        //}
 
-        public ActionResult PlayLottery()
-        {
-            return View();
-        }
+        //public ActionResult PlayLottery()
+        //{
+        //    //takes a game win method. if it returns true read game payout and add to current user account
+        //    if (lottowin == true)
+        //    {
+        //        //read game payout and add the current user's account
+        //        //gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!"
+        //    }
+        //    else
+        //    {
+        //        gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around."
+        //    }
+        //    return View("Games", gamemodel);
+        //}
 
-        public ActionResult PlayLucky()
-        {
-            return View();
-        }
+        //public ActionResult PlayLucky()
+        //{
+        //    //takes a game win method. if it returns true read game payout and add to current user account
+        //    if (luckynwin == true)
+        //    {
+        //        //read game payout and add the current user's account
+        //        //gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!"
+        //    }
+        //    else
+        //    {
+        //        gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around."
+        //    }
+        //    return View("Games", gamemodel);
+        //}
     }
 }
