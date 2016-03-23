@@ -21,10 +21,6 @@ namespace WPF.ViewModels
     {
         Game gameBeingSent = new Game();
         Game gameBeingAddedToDB = new Game();
-        CreateGame CreateGameInstance = new CreateGame();
-        ReadGame ReadGameInstance = new ReadGame();
-        UpdateGame UpdateGameInstance = new UpdateGame();
-        DeleteGame DeleteGameInstance = new DeleteGame();
 
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
