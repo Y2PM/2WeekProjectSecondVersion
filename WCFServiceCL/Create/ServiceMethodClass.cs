@@ -10,10 +10,11 @@ namespace WCFServiceCL.Create
 {
     public class ServiceMethodClass : IServe//CreateGameService
     {
-        CreateGame CreateGameObject = new CreateGame();
+        
 
         public void CreateGameServiceMethod(Game game)
         {
+            CreateGame CreateGameObject = new CreateGame();
             CreateGameObject.CreateGameMethod(game);
         }
 
