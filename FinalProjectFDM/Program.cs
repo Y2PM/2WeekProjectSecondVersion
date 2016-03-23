@@ -40,17 +40,16 @@ namespace FinalProjectFDM
             Console.ReadLine();
             */
 
-
+            
             //Testing service with a makeshift client:
             EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service");
             IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
-            //             Contract                                                      Binding            Address
             Game game = new Game();
             game.game_id = 10;
             game.name = "Game1";
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
-
+            
         }
     }
 }
