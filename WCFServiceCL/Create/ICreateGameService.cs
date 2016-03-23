@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 namespace WCFServiceCL.Create
 {
     [ServiceContract]
-    public interface ICreateGameService
+    public interface IServe
     {
         [OperationContract]
-        void CreateGameServiceMethod(Game game);
+        void CreateGameServiceMethod(Game game);//Here give many operation contracts.
+
+        [OperationContract]
+        void CreateMemberServiceMethod(Member member);
     }
 }
