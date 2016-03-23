@@ -20,14 +20,15 @@ namespace DBLayer.Delete
             context = groupprojectEntities;
         }
 
-        public virtual void DeleteMemberMethod(int id)
+        public virtual void DeleteMemberMethod(int member_id)
         {
-            Member member = context.Members.Single(x => x.member_id == id);
-            if (member != null)
+            Member _member = context.Members.Single(x => x.member_id == member_id);
+            if (member_id != null)
             {
-                context.Members.Remove(member);
+                context.Members.Remove(_member);
                 context.SaveChanges();
             }
         }
+
     }
 }

@@ -10,6 +10,8 @@ using DBLayer.Read;
 using DBLayer.Delete;
 using DBLayer.Update;
 using System.Collections.ObjectModel;
+using WCFServiceCL;
+using System.ServiceModel;
 
 namespace WPF.ViewModels
 {
@@ -19,6 +21,10 @@ namespace WPF.ViewModels
         ReadMember ReadMemberInstance = new ReadMember();
         DeleteMember DeleteMemberInstance = new DeleteMember();
         UpdateMember UpdateMemberInstance = new UpdateMember();
+
+        //initialise service
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
+        IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
 
         private ICommand _navigateToHomePageCommand;
         public ICommand navigateToHomePageCommand
@@ -116,7 +122,14 @@ namespace WPF.ViewModels
 
         public void readMemberByID()
         {
-            Member memberReturned = ReadMemberInstance.ReadSpecificMember(member_ID);
+            //Member memberReturned = ReadMemberInstance.ReadSpecificMember(member_ID);
+            //List<Member> memberList = new List<Member>();
+            //memberList.Add(memberReturned);
+            //member = new ObservableCollection<Member>(memberList);
+
+
+            ////service way
+            Member memberReturned = proxy.ReadSpecificMemberServiceMethod(member_ID);
             List<Member> memberList = new List<Member>();
             memberList.Add(memberReturned);
             member = new ObservableCollection<Member>(memberList);
@@ -158,8 +171,13 @@ namespace WPF.ViewModels
 
         public void readAllMembers()
         {
+            //List<Member> listFromReadAllMembers = new List<Member>();
+            //listFromReadAllMembers = ReadMemberInstance.ReadAllMembers();
+            //members = new ObservableCollection<Member>(listFromReadAllMembers);
+
+            ////service way
             List<Member> listFromReadAllMembers = new List<Member>();
-            listFromReadAllMembers = ReadMemberInstance.ReadAllMembers();
+            listFromReadAllMembers = proxy.ReadAllMembersServiceMethod();
             members = new ObservableCollection<Member>(listFromReadAllMembers);
         }
 
@@ -188,8 +206,11 @@ namespace WPF.ViewModels
 
         public void deleteMember()
         {
-            DeleteMemberInstance.DeleteMemberMethod(member_ID);
+            //DeleteMemberInstance.DeleteMemberMethod(member_ID);
             //MessageBox.Show("User succesfully deleted");
+
+            ////service way
+            proxy.DeleteMemberServiceMethod(member_ID);
         }
 
 
