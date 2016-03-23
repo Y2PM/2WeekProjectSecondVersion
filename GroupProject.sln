@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectFDM", "FinalProjectFDM\FinalProjectFDM.csproj", "{F3EA46D2-B18F-473C-BB98-F466A322B38F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectFDMTests", "Tests\FinalProjectFDMTests.csproj", "{B6AF0647-B10D-4121-A3F8-2488EB53D889}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B6AF0647-B10D-4121-A3F8-2488EB53D889}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFHost", "WCFHost\WCFHost.csproj", "{052A8470-9289-4B40-9EB9-16BBCF3B3786}"
 EndProject
@@ -19,6 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D8D1984-0670-40F4-99F8-4FA360D5AC38}"
 	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.bat = CodeCoverage.bat
 		GroupProjectSQLQuery.sql = GroupProjectSQLQuery.sql
 	EndProjectSection
 EndProject
