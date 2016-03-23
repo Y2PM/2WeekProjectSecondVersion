@@ -21,12 +21,7 @@ namespace WPF.ViewModels
     {
         Game gameBeingSent = new Game();
         Game gameBeingAddedToDB = new Game();
-        CreateGame CreateGameInstance = new CreateGame();
-        ReadGame ReadGameInstance = new ReadGame();
-        UpdateGame UpdateGameInstance = new UpdateGame();
-        DeleteGame DeleteGameInstance = new DeleteGame();
 
-        //initialise service
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
 
@@ -88,8 +83,6 @@ namespace WPF.ViewModels
             windowViewModel.page = "MainPage.xaml";
         }
 
-        //Add game to db
-
         private ICommand _addGameCommand;
         public ICommand addGameCommand
         {
@@ -111,20 +104,11 @@ namespace WPF.ViewModels
 
         public void addGame()
         {
-            //gameBeingAddedToDB.name = name;
-            //gameBeingAddedToDB.payout = payout;
-            //CreateGameInstance.CreateGameMethod(gameBeingAddedToDB);
-            //MessageBox.Show("Game succesfully added");
-
-            ////service way
             gameBeingAddedToDB.name = name;
             gameBeingAddedToDB.payout = payout;
             proxy.CreateGameServiceMethod(gameBeingAddedToDB);
             MessageBox.Show("Game succesfully added");
         }
-
-
-        //View game
 
         private ObservableCollection<Game> _game;
         public ObservableCollection<Game> game
@@ -158,22 +142,11 @@ namespace WPF.ViewModels
 
         public void readGameByID()
         {
-            //Game gameReturned = ReadGameInstance.ReadSpecificGame(game_ID);
-            //List<Game> gameList = new List<Game>();
-            //gameList.Add(gameReturned);
-            //game = new ObservableCollection<Game>(gameList);
-
-            ////service way
             Game gameReturned = proxy.ReadSpecificGameServiceMethod(game_ID);
             List<Game> gameList = new List<Game>();
             gameList.Add(gameReturned);
             game = new ObservableCollection<Game>(gameList);
         }
-
-
-        //<summary>
-        //view games
-        //</summary>
 
         private ObservableCollection<Game> _games;
         public ObservableCollection<Game> games
@@ -207,20 +180,10 @@ namespace WPF.ViewModels
 
         public void readAllGames()
         {
-            //List<Game> listFromReadAllGames = new List<Game>();
-            //listFromReadAllGames = ReadGameInstance.ReadAllGames();
-            //games = new ObservableCollection<Game>(listFromReadAllGames);
-
-            ////service way
             List<Game> listFromReadAllGames = new List<Game>();
             listFromReadAllGames = proxy.ReadAllGamesServiceMethod();
             games = new ObservableCollection<Game>(listFromReadAllGames);
         }
-
-
-
-        ///Update game
-        ///
 
         private ICommand _updateGameCommand;
         public ICommand updateGameCommand
@@ -243,17 +206,12 @@ namespace WPF.ViewModels
 
         public void updateGame()
         {
+            gameBeingSent.game_id = game_ID;
             gameBeingSent.name = name;
             gameBeingSent.payout = payout;
+            proxy.UpdateGameServiceMethod(gameBeingSent);
 
-            UpdateGameInstance.UpdateGameMethod(gameBeingSent);
-            //MessageBox.Show("User succesfully updated");
         }
-
-
-
-        //////////////////////////////////////
-        //delete game
 
         private ICommand _deleteGameCommand;
         public ICommand deleteGameCommand
@@ -276,13 +234,8 @@ namespace WPF.ViewModels
 
         public void deleteGame()
         {
-            //DeleteGameInstance.DeleteGameMethod(game_ID);
-            //MessageBox.Show("User succesfully deleted");
-
-            ////service way
             proxy.DeleteGameServiceMethod(game_ID);
         }
-
 
     }
 }
