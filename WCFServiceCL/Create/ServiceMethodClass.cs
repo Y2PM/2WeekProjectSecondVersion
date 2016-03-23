@@ -19,13 +19,11 @@ namespace WCFServiceCL.Create
             CreateGameObject.CreateGameMethod(game);
         }
 
-
         public void CreateMemberServiceMethod(Member member)
         {
             CreateMember CreateMemberObject = new CreateMember();
             CreateMemberObject.CreateMemberMethod(member);
         }
-
 
         public void DeleteGameServiceMethod(int game_id)
         {
@@ -33,13 +31,11 @@ namespace WCFServiceCL.Create
             DeleteGameObject.DeleteGameMethod(game_id);
         }
 
-
         public void DeleteMemberServiceMethod(int id)
         {
             DeleteMember DeleteMemberObject = new DeleteMember();
             DeleteMemberObject.DeleteMemberMethod(id);
         }
-
 
         public List<Game> ReadAllGamesServiceMethod()
         {
@@ -52,7 +48,6 @@ namespace WCFServiceCL.Create
             ReadGame ReadGameObject = new ReadGame();
             return ReadGameObject.ReadSpecificGame(id);
         }
-
 
         public List<Member> ReadAllMembersServiceMethod()
         {
@@ -71,7 +66,6 @@ namespace WCFServiceCL.Create
             UpdateGame UpdateGameObject = new UpdateGame();
             UpdateGameObject.UpdateGameMethod(gameToUpdate);
         }
-
 
         public void UpdateMemberServiceMethod(Member memberToUpdate)
         {
