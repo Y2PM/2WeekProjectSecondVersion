@@ -17,12 +17,9 @@ namespace WCFHost
             {
                 string address = "http://" + Dns.GetHostName() + ":8081/Service";
                 host.AddServiceEndpoint(typeof(IServe), new BasicHttpBinding(), address);
-
                 host.Open();
-
                 Console.WriteLine("Press enter to stop.");
                 Console.ReadLine();
-
                 host.Close();
             }
         }
