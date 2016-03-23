@@ -49,6 +49,22 @@ namespace FinalProjectFDM
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
             */
+
+            string username = Console.ReadLine();
+            string password = Console.ReadLine();
+
+            BetterWork bw = new BetterWork();
+
+            if (bw.login(username, password) == true)
+            {
+                Console.WriteLine("Successfully Logged In");
+            }
+            else
+            {
+                Console.WriteLine("Log in could not be completed");
+            }
+
+            Console.Read();
         }
     }
 }
