@@ -1,5 +1,6 @@
 ﻿using DBLayer;
 using DBLayer.Create;
+using DBLayer.Delete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,22 @@ namespace WCFServiceCL.Create
 
         public void CreateMemberServiceMethod(Member member)
         {
-            throw new NotImplementedException();
+            CreateMember CreateMemberObject = new CreateMember();
+            CreateMemberObject.CreateMemberMethod(member);
+        }
+
+
+        public void DeleteGameServiceMethod(int game_id)
+        {
+            DeleteGame DeleteGameObject = new DeleteGame();
+            DeleteGameObject.DeleteGameMethod(game_id);
+        }
+
+
+        public void DeleteMemberServiceMethod(int id)
+        {
+            DeleteMember DeleteMemberObject = new DeleteMember();
+            DeleteMemberObject.DeleteMemberMethod(id);
         }
     }
 }

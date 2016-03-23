@@ -16,5 +16,11 @@ namespace WCFServiceCL.Create
 
         [OperationContract]
         void CreateMemberServiceMethod(Member member);
+
+        [OperationContract]
+        virtual void DeleteGameServiceMethod(int game_id);
+
+        [OperationContract]
+        virtual void DeleteMemberServiceMethod(int id);
     }
 }
