@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 
-namespace Tests
+namespace FinalProjectFDMTests
 {
     [TestClass]
     public class GameTests
