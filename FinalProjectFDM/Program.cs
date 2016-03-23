@@ -12,7 +12,7 @@ namespace FinalProjectFDM
     public class Program
     {
         static void Main(string[] args)
-        { 
+        {
             /*
             DecathonGame decgame = new DecathonGame();
             List<int> lotto = decgame.Lottery();
@@ -40,7 +40,7 @@ namespace FinalProjectFDM
             Console.ReadLine();
             */
 
-            
+
             //Testing service with a makeshift client:
             EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service");
             IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -50,8 +50,7 @@ namespace FinalProjectFDM
             game.name = "Game1";
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
-            
-            
+
         }
     }
 }
