@@ -72,7 +72,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroupProject.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Log.cs" />
     <Compile Include="Member.cs">
       <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
