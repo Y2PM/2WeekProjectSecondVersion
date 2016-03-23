@@ -25,7 +25,7 @@ namespace DBLayer.Update
             if ((context.Members.SingleOrDefault(x => x.member_id == memberToUpdate.member_id)) != null)
             {
                 Member memberInDB = context.Members.Where<Member>(x => x.member_id == memberToUpdate.member_id).First();
-                memberInDB.m_username = memberToUpdate.m_username;
+                memberInDB.m_name = memberToUpdate.m_name;
                 memberInDB.m_password = memberToUpdate.m_password;
                 context.SaveChanges();
             }

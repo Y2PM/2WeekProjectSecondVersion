@@ -22,7 +22,6 @@ namespace WPF.ViewModels
         DeleteMember DeleteMemberInstance = new DeleteMember();
         UpdateMember UpdateMemberInstance = new UpdateMember();
 
-        //initialise service
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
 
@@ -84,12 +83,6 @@ namespace WPF.ViewModels
             }
         }
 
-
-
-        //<summary>
-        //view member
-        //</summary>
-
         private ObservableCollection<Member> _member;
         public ObservableCollection<Member> member
         {
@@ -122,22 +115,11 @@ namespace WPF.ViewModels
 
         public void readMemberByID()
         {
-            //Member memberReturned = ReadMemberInstance.ReadSpecificMember(member_ID);
-            //List<Member> memberList = new List<Member>();
-            //memberList.Add(memberReturned);
-            //member = new ObservableCollection<Member>(memberList);
-
-
-            ////service way
             Member memberReturned = proxy.ReadSpecificMemberServiceMethod(member_ID);
             List<Member> memberList = new List<Member>();
             memberList.Add(memberReturned);
             member = new ObservableCollection<Member>(memberList);
         }
-
-        //<summary>
-        //view members
-        //</summary>
 
         private ObservableCollection<Member> _members;
         public ObservableCollection<Member> members
@@ -171,19 +153,10 @@ namespace WPF.ViewModels
 
         public void readAllMembers()
         {
-            //List<Member> listFromReadAllMembers = new List<Member>();
-            //listFromReadAllMembers = ReadMemberInstance.ReadAllMembers();
-            //members = new ObservableCollection<Member>(listFromReadAllMembers);
-
-            ////service way
             List<Member> listFromReadAllMembers = new List<Member>();
             listFromReadAllMembers = proxy.ReadAllMembersServiceMethod();
             members = new ObservableCollection<Member>(listFromReadAllMembers);
         }
-
-
-        ///////////////////////////////////////
-        //delete member
 
         private ICommand _deleteMemberCommand;
         public ICommand deleteMemberCommand
@@ -206,15 +179,8 @@ namespace WPF.ViewModels
 
         public void deleteMember()
         {
-            //DeleteMemberInstance.DeleteMemberMethod(member_ID);
-            //MessageBox.Show("User succesfully deleted");
-
-            ////service way
             proxy.DeleteMemberServiceMethod(member_ID);
         }
-
-
-        //update member
 
         private ICommand _updateMemberCommand;
         public ICommand updateMemberCommand
@@ -237,13 +203,11 @@ namespace WPF.ViewModels
 
         public void updateMember()
         {
+            memberBeingSent.member_id = member_ID;
             memberBeingSent.m_name = member_Name;
             memberBeingSent.m_password = member_PW;
-
-            UpdateMemberInstance.UpdateMemberMethod(memberBeingSent);
-            //MessageBox.Show("User succesfully updated");
+            proxy.UpdateMemberServiceMethod(memberBeingSent);
         }
-
 
     }
 }
