@@ -23,7 +23,7 @@ namespace DBLayer.Delete
         public virtual void DeleteGameMethod(int game_id)
         {
             Game _game = context.Games.Single(x => x.game_id == game_id);
-            if (game_id != null)
+            if (game_id != 0)
             {
                 context.Games.Remove(_game);
                 context.SaveChanges();

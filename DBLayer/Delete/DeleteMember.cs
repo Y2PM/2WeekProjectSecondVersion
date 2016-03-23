@@ -23,7 +23,7 @@ namespace DBLayer.Delete
         public virtual void DeleteMemberMethod(int member_id)
         {
             Member _member = context.Members.Single(x => x.member_id == member_id);
-            if (member_id != null)
+            if (member_id != 0)
             {
                 context.Members.Remove(_member);
                 context.SaveChanges();
