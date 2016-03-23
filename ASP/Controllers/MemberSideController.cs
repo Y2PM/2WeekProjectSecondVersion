@@ -9,7 +9,9 @@ namespace ASP.Controllers
 {
     public class MemberSideController : Controller
     {
-        public static LogInModel logmodel; // = new LogInModel();
+        LogInModel logmodel = new LogInModel();
+        GamesModel gamemodel = new GamesModel();
+        SignUpModel signmodel = new SignUpModel();
 
         // GET: MemberSide
         public ActionResult SignUp()
@@ -20,13 +22,29 @@ namespace ASP.Controllers
         public ActionResult LogIn()
         {
             //call method that reads the input from logmodel.Username and logmodel.Password
-            
-            return View();
+
+            return View(logmodel);
+        }
+        
+        [HttpPost]
+        public ActionResult LogIn(LogInModel logmodel)
+        {
+            //user = logmodel.Username;
+            //pass = logmodel.Password;
+
+            if (logmodel.logwork(logmodel.Username, logmodel.Password) == true)
+            {
+                return View("Games", gamemodel);
+            }
+            else
+            {
+                return View(logmodel);
+            } 
         }
 
         public ActionResult Games()
         {
-            return View();
+                return View();
         }
 
         public ActionResult PlayOdds()

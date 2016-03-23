@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetClass.cs" />
-    <Compile Include="BetterWork.cs" />
     <Compile Include="DecathonGame.cs" />
     <Compile Include="IBet.cs" />
     <Compile Include="Program.cs" />
