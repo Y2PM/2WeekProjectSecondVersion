@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EF\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\EF\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -55,14 +62,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CreateGameServiceTest.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTests.cs" />
     <Compile Include="ControllerTests.cs" />
+    <Compile Include="DBLayerTests.cs" />
     <Compile Include="ViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj">
+      <Project>{c26bbce2-cc2f-4949-84c5-ed6e6db30682}</Project>
+      <Name>DBLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FinalProjectFDM\FinalProjectFDM.csproj">
       <Project>{f3ea46d2-b18f-473c-bb98-f466a322b38f}</Project>
       <Name>FinalProjectFDM</Name>
