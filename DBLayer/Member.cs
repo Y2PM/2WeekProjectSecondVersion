@@ -11,24 +11,13 @@ namespace DBLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class Member
     {
-        [DataMember]
         public int member_id { get; set; }
-
-        [DataMember]
         public string m_name { get; set; }
-
-        [DataMember]
         public string m_username { get; set; }
-
-        [DataMember]
         public string m_password { get; set; }
-
-        [DataMember]
         public Nullable<decimal> m_account { get; set; }
     }
 }
