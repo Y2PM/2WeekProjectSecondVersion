@@ -12,6 +12,6 @@ namespace ASP.Models
         public string Password { get; set; }
         public string signerror { get; set; }
 
-        //"Sign up could not be completed. Please try another name or username."
+        
     }
 }

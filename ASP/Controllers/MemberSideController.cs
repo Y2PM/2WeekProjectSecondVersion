@@ -36,11 +36,6 @@ namespace ASP.Controllers
         }
 
         // GET: MemberSide
-        public ActionResult SignUp()
-        {
-            return View();
-        }
-
         public ActionResult LogIn()
         {
             //call method that reads the input from logmodel.Username and logmodel.Password
@@ -65,6 +60,24 @@ namespace ASP.Controllers
                 return View(logmodel);
             } 
         }
+
+        public ActionResult SignUp()
+        {
+            return View(signmodel);
+        }
+
+    //    public ActionResult SignUp(SignUpModel signmodel)
+    //    {
+    //        if () //if sign up is successfully completed
+    //        {
+    //        return View("LogIn", logmodel);
+    //        }
+    //        else
+    //{
+        //signmodel.signerror = "Sign up could not be completed. Please try another name or username";
+    //            return View(signmodel);
+    //}
+    //    }
 
         public ActionResult Games()
         {
