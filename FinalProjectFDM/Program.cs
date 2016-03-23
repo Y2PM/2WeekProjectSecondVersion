@@ -5,7 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using WCFServiceCL.Create;
+using WCFServiceCL;
 
 namespace FinalProjectFDM
 {
@@ -40,7 +40,7 @@ namespace FinalProjectFDM
             Console.ReadLine();
             */
 
-            /*
+            
             //Testing service with a makeshift client:
             EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service");
             IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -50,7 +50,7 @@ namespace FinalProjectFDM
             game.name = "Game1";
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
-            */
+            
             
         }
     }

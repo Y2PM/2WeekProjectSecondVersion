@@ -5,7 +5,7 @@ using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using WCFServiceCL.Create;
+using WCFServiceCL;
 
 namespace WCFHost
 {
