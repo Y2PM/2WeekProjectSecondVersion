@@ -5,7 +5,7 @@ using System.Net;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using WCFServiceCL.Create;
+using WCFServiceCL;
 
 namespace WCFHost
 {
@@ -15,14 +15,11 @@ namespace WCFHost
         {
             using (ServiceHost host = new ServiceHost(typeof(ServiceMethodClass)))
             {
-                string address = "http://" + Dns.GetHostName() + ":8081/Service";//FDM free from firewalls port.
-                host.AddServiceEndpoint(typeof(IServe), new BasicHttpBinding(), address);//Can be done in app.config too.
-
+                string address = "http://" + Dns.GetHostName() + ":8081/Service";
+                host.AddServiceEndpoint(typeof(IServe), new BasicHttpBinding(), address);
                 host.Open();
-
                 Console.WriteLine("Press enter to stop.");
                 Console.ReadLine();
-
                 host.Close();
             }
         }

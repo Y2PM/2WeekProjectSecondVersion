@@ -41,15 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Create\ServiceMethodClass.cs" />
-    <Compile Include="Create\IServe.cs" />
+    <Compile Include="ServiceMethodClass.cs" />
+    <Compile Include="IServe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Delete\" />
-    <Folder Include="Read\" />
-    <Folder Include="Update\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DBLayer\DBLayer.csproj">
       <Project>{c26bbce2-cc2f-4949-84c5-ed6e6db30682}</Project>

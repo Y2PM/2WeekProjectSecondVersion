@@ -3,13 +3,9 @@ using DBLayer.Create;
 using DBLayer.Delete;
 using DBLayer.Read;
 using DBLayer.Update;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WCFServiceCL.Create
+namespace WCFServiceCL
 {
     public class ServiceMethodClass : IServe
     {

@@ -1,27 +1,23 @@
 ﻿using DBLayer;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WCFServiceCL.Create
+namespace WCFServiceCL
 {
     [ServiceContract]
     public interface IServe
     {
         [OperationContract]
-        void CreateGameServiceMethod(Game game);//Here give many operation contracts.
+        void CreateGameServiceMethod(Game game);
 
         [OperationContract]
         void CreateMemberServiceMethod(Member member);
 
         [OperationContract]
-        void DeleteGameServiceMethod(int game_id);//
+        void DeleteGameServiceMethod(int game_id);
 
         [OperationContract]
-        void DeleteMemberServiceMethod(int id);//
+        void DeleteMemberServiceMethod(int id);
 
         [OperationContract]
         List<Game> ReadAllGamesServiceMethod();
