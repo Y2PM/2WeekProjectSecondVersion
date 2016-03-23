@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WCFServiceCL.Create
 {
-    public class CreateGameService : IServe
+    public class ServiceMethodClass : IServe//CreateGameService
     {
         CreateGame CreateGameObject = new CreateGame();
 
