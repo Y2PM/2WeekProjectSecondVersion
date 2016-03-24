@@ -46,7 +46,6 @@ namespace DBLayer.Read
             int memid = 0;
             using (var context = new GroupProjectEntities())
             {
-
                 var memberidquery = (from e in context.Members
                                      where e.m_username == user
                                      select e.member_id);
