@@ -307,5 +307,36 @@ namespace Tests
             //Assert
             Assert.AreEqual(data.ToList().ElementAt(1).payout, 23);
         }
+
+        [TestMethod]
+        public void Test_UpdateMemberMethod_UpdatesMember_WhenGivenUpdatedMember()
+        {
+            //Arrange
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            UpdateMember UpdateMemberObject = new UpdateMember(MockGroupProjectEntities.Object);
+            var mockSet = new Mock<DbSet<Member>>();
+
+            //Initial Pretend Data:
+            var data = new List<Member>
+            {
+                new Member {m_name="James", m_username="ragingbull", m_password="password123", member_id= 1},
+                new Member {m_name= "Michael", m_username="rocky", m_password="password12", member_id= 2},
+                new Member {m_name = "Camel", m_username = "Camel13", m_password = "CamelPassword", member_id= 3}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSet.As<IQueryable<Member>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Members).Returns(mockSet.Object);
+
+            Member updatedMember = new Member() { m_name = "Camel", m_username = "Camel13", m_password = "PasswordCamelCamel", member_id = 3 };
+            //Act
+            UpdateMemberObject.UpdateMemberMethod(updatedMember);
+            //Assert
+            Assert.AreEqual(data.ToList().ElementAt(2).m_password, "PasswordCamelCamel");
+        }
     }
 }
