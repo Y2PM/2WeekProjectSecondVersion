@@ -22,7 +22,6 @@ namespace DBLayer.Read
 
         public List<Member> ReadAllMembers()
         {
-
             List<Member> _members = context.Members.ToList<Member>();
             return _members;
         }
