@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DBLayer.Delete;
 using DBLayer.Read;
+using DBLayer.Update;
 
 namespace Tests
 {
@@ -276,6 +277,35 @@ namespace Tests
             Member result = ReadMemberObject.ReadSpecificMember(3);
             //Assert
             Assert.AreEqual(data.ToList().ElementAt(2), result);
+        }
+
+        [TestMethod]
+        public void Test_UpdateGameMethod_UpdatesAGame_WhenGivenAGameToUpdate()
+        {
+            //Arrange
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            UpdateGame UpdateGameObject = new UpdateGame(MockGroupProjectEntities.Object);
+            var mockSet = new Mock<DbSet<Game>>();
+
+            //Initial Pretend Data:
+            var data = new List<Game>
+            {
+                new Game {name="Game1",payout=11,game_id=1},
+                new Game {name="Game2",payout=22,game_id=2}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Games).Returns(mockSet.Object);
+            Game updatedGame = new Game(){ name = "Game2", payout = 23, game_id = 2 };
+            //Act
+            UpdateGameObject.UpdateGameMethod(updatedGame);
+            //Assert
+            Assert.AreEqual(data.ToList().ElementAt(1).payout, 23);
         }
     }
 }
