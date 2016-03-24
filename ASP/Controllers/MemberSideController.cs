@@ -17,6 +17,8 @@ namespace ASP.Controllers
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
 
+        Member memberBeingAddedToDb = new Member();
+
         //initialise service
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
@@ -59,6 +61,10 @@ namespace ASP.Controllers
     //    {
     //        if () //if sign up is successfully completed
     //        {
+            //        memberBeingAddedToDb.m_name = signmodel.Name;
+            //memberBeingAddedToDb.m_username = signmodel.Username;
+            //memberBeingAddedToDb.m_password = signmodel.Password;
+            //memberBeingAddedToDb.m_account = 0.0m;
     //        return View("LogIn", logmodel);
     //        }
     //        else
