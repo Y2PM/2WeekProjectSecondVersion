@@ -15,6 +15,60 @@ namespace Tests
     [TestClass]
     public class DBLayerTests
     {
+        Mock<DbSet<Member>> mockSetMember;
+        List<Member> dataMember;
+        Mock<DbSet<Member>> mockSetGame;
+        List<Member> dataGame;
+
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            #region MemberRegion
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            UpdateMember UpdateMemberObject = new UpdateMember(MockGroupProjectEntities.Object);
+            mockSetMember = new Mock<DbSet<Member>>();
+
+
+
+            //Initial Pretend Data:
+            var dataMember = new List<Member>
+            {
+                new Member {m_name="James", m_username="ragingbull", m_password="password123", member_id= 1},
+                new Member {m_name= "Michael", m_username="rocky", m_password="password12", member_id= 2},
+                new Member {m_name = "Camel", m_username = "Camel13", m_password = "CamelPassword", member_id= 3}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSetMember.As<IQueryable<Member>>().Setup(m => m.Provider).Returns(dataMember.Provider);
+            mockSetMember.As<IQueryable<Member>>().Setup(m => m.Expression).Returns(dataMember.Expression);
+            mockSetMember.As<IQueryable<Member>>().Setup(m => m.ElementType).Returns(dataMember.ElementType);
+            mockSetMember.As<IQueryable<Member>>().Setup(m => m.GetEnumerator()).Returns(() => dataMember.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Members).Returns(mockSetMember.Object);
+            #endregion
+
+            #region GameRegion
+            UpdateGame UpdateGameObject = new UpdateGame(MockGroupProjectEntities.Object);
+            var mockSetGame = new Mock<DbSet<Game>>();
+
+            //Initial Pretend Data:
+            var dataGame = new List<Game>
+            {
+                new Game {name="Game1",payout=11,game_id=1},
+                new Game {name="Game2",payout=22,game_id=2}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSetGame.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(dataGame.Provider);
+            mockSetGame.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(dataGame.Expression);
+            mockSetGame.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(dataGame.ElementType);
+            mockSetGame.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(() => dataGame.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Games).Returns(mockSetGame.Object);
+            #endregion
+        }
+
         [TestMethod]
         public void Test_CreateGameMethod_CreatesAGame_WhenGivenAGameToCreate()
         {
@@ -28,7 +82,7 @@ namespace Tests
             var data = new List<Game>
             {
                 new Game { name = "Game1", payout=1 },
-                new Game { name="Game2", payout=2 }
+                new Game { name = "Game2", payout=2 }
             }.AsQueryable();
 
             //Making a Mockset:
@@ -301,7 +355,7 @@ namespace Tests
             mockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
 
             MockGroupProjectEntities.Setup(c => c.Games).Returns(mockSet.Object);
-            Game updatedGame = new Game(){ name = "Game2", payout = 23, game_id = 2 };
+            Game updatedGame = new Game() { name = "Game2", payout = 23, game_id = 2 };
             //Act
             UpdateGameObject.UpdateGameMethod(updatedGame);
             //Assert
