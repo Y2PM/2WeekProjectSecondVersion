@@ -135,9 +135,7 @@ namespace ASP.Controllers
             if (LuckyNWin(gamemodel.usernumber) == true)
             {
                 //read game payout and add the current user's account
-                decimal payout = proxy.ReadGamePayout(gamenamelucky);
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                
                 gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
             }
             else
@@ -278,6 +276,9 @@ namespace ASP.Controllers
                 int matches = Matcher(game, user);
                 if (Lotteryresult(game, user) == true)
                 {
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky);
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                     //when the generated numbers and the user numbers match
                     //add from the context the game payout value to the user account value
                     return true;
@@ -287,6 +288,9 @@ namespace ASP.Controllers
                     //if the user has 4 of the winning numbers the can get a quarter of the payout
                     //decimal winamount = decimal payout value / 4
                     //update member account to add winamount
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky) / 4;
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                     return true;
                 }
                 else if (matches == 5)
@@ -295,6 +299,9 @@ namespace ASP.Controllers
                     //decimal winamount = decimal payout value / 3
                     //update member account to add winamount
                     //no other lotto conditions warrant a payout
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky) / 3;
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                     return true;
                 }
                 else

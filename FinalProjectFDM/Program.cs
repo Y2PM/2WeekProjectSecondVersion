@@ -50,21 +50,17 @@ namespace FinalProjectFDM
             proxy.CreateGameServiceMethod(game);
             */
 
-            string username = Console.ReadLine();
-            string password = Console.ReadLine();
+            string one = Console.ReadLine();
+            int two = Console.Read();
 
-            BetterWork bw = new BetterWork();
+            decimal username = Convert.ToDecimal(one);
+            //int password = Convert.ToDecimal(one);
 
-            if (bw.login(username, password) == true)
-            {
-                Console.WriteLine("Successfully Logged In");
-            }
-            else
-            {
-                Console.WriteLine("Log in could not be completed");
-            }
+            decimal answer = username / two;
+            Console.WriteLine(answer);
+            
 
-            Console.Read();
+            Console.ReadLine();
         }
     }
 }
