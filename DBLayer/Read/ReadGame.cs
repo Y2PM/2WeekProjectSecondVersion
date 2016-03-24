@@ -45,26 +45,21 @@ namespace DBLayer.Read
 
         public decimal ReadGamePayout(string gamename)
         {
-            using (var context = new GroupProjectEntities())
+            decimal gamepayout = 0;
+            var gamepayoutquery = (from e in context.Games
+                                   where e.name == gamename
+                                   select e.payout);
+            foreach (var game in gamepayoutquery)
             {
-                decimal gamepayout = 0;
-
-                var gamepayoutquery = (from e in context.Games
-                                       where e.name == gamename
-                                       select e.payout);
-                foreach (var game in gamepayoutquery)
-                {
-                    gamepayout = Convert.ToDecimal(game);
-                }
-
-                if (gamepayout == 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return gamepayout;
-                }
+                gamepayout = Convert.ToDecimal(game);
+            }
+            if (gamepayout == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return gamepayout;
             }
         }
     }
