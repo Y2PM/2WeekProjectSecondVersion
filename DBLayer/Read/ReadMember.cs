@@ -47,7 +47,6 @@ namespace DBLayer.Read
             int memid = 0;
             using (var context = new GroupProjectEntities())
             {
-                //var deptforremove = context.Members.Where(m => m.usernamename == user);
 
                 var memberidquery = (from e in context.Members
                                      where e.m_username == user
@@ -69,6 +68,31 @@ namespace DBLayer.Read
                 else
                 {
                     return false;
+                }
+            }
+        }
+
+        public decimal ReadMemberAccount(int memberid)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                decimal memberaccount = 0.0m;
+
+                var memberaccountquery = (from e in context.Members
+                                       where e.member_id == memberid
+                                       select e.m_account);
+                foreach (var m_acc in memberaccountquery)
+                {
+                    memberaccount = Convert.ToDecimal(m_acc);
+                }
+
+                if (memberaccount == 0)
+                {
+                    return 0.0m;
+                }
+                else
+                {
+                    return memberaccount;
                 }
             }
         }

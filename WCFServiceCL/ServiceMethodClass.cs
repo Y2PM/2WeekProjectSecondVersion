@@ -74,5 +74,23 @@ namespace WCFServiceCL
             ReadMember ReadMemberObject = new ReadMember();
             return ReadMemberObject.login(username, password);
         }
+
+        public decimal ReadGamePayout(string gamename)
+        {
+            ReadGame ReadGameObject = new ReadGame();
+            return ReadGameObject.ReadGamePayout(gamename);
+        }
+
+        public decimal ReadMemberAccount(int memberid)
+        {
+            ReadMember ReadMemberObject = new ReadMember();
+            return ReadMemberObject.ReadMemberAccount(memberid);
+        }
+
+        public void UpdateMemberAccount(int memberid, decimal currentbalance, decimal payout)
+        {
+            UpdateMember UpdateMemberObject = new UpdateMember();
+            UpdateMemberObject.UpdateMemberAccount(memberid, currentbalance, payout);
+        }
     }
 }
