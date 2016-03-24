@@ -18,13 +18,13 @@ namespace ASP.Controllers
         SignUpModel signmodel = new SignUpModel();
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-        int currentuser;
+        static int currentuser;
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
@@ -64,7 +64,7 @@ namespace ASP.Controllers
     //        else
     //{
         //signmodel.signerror = "Sign up could not be completed. Please try another name or username";
-    //            return View(signmodel);
+    //            return View("SignUp", signmodel);
     //}
     //    }
 
@@ -81,6 +81,7 @@ namespace ASP.Controllers
             {
                 decimal payout = proxy.ReadGamePayout(gamenameodds);
                 decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                //int memberid = getUserId(logmodel.Username, logmodel.Password);
                 proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                 //read game payout and add the current user's account
                 gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
@@ -346,6 +347,5 @@ namespace ASP.Controllers
                     return false;
                 }
             }
-
         }
     }

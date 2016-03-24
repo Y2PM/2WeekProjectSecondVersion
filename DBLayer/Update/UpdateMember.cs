@@ -37,8 +37,15 @@ namespace DBLayer.Update
         {
             using (var context = new GroupProjectEntities()) 
             { 
-                var member = context.Members.Find(memberid); 
-                member.m_account = currentbalance + payout;
+                var member = context.Members.Find(memberid);
+                if (member.m_account == null || member.m_account == 0)
+                {
+                    member.m_account = currentbalance + payout;
+                }
+                else
+                {
+                    member.m_account = currentbalance + payout;
+                }
                 context.SaveChanges();
             }
         }
