@@ -29,19 +29,6 @@ namespace ASP.Controllers
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
 
-        public bool logwork(string use, string pas)
-        {
-            if (proxy.LoginServiceMethod(use, pas) == true)
-            {
-                currentuser = proxy.ReadCurrentMember(use, pas);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         // GET: MemberSide
         public ActionResult LogIn()
         {
@@ -339,6 +326,19 @@ namespace ASP.Controllers
                 if (numcount >= 3)
                 {
                     //add payout value to the user's account
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            public bool logwork(string use, string pas)
+            {
+                if (proxy.LoginServiceMethod(use, pas) == true)
+                {
+                    currentuser = proxy.ReadCurrentMember(use, pas);
                     return true;
                 }
                 else
