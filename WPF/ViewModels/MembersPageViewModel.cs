@@ -17,9 +17,11 @@ namespace WPF.ViewModels
 {
     public class MembersPageViewModel : BaseViewModel
     {
-        Member memberBeingSent = new Member();      
+        Member memberBeingSent = new Member();
 
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service");
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service");
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
 
         private ICommand _navigateToHomePageCommand;
