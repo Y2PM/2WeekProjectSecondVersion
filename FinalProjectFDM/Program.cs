@@ -49,7 +49,7 @@ namespace FinalProjectFDM
             game.payout = 20;
             proxy.CreateGameServiceMethod(game);
             */
-
+            /*
             string one = Console.ReadLine();
             int two = Console.Read();
 
@@ -60,7 +60,7 @@ namespace FinalProjectFDM
             Console.WriteLine(answer);
             
 
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
     }
 }
