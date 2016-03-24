@@ -112,5 +112,29 @@ namespace DBLayer.Read
                 return memid;
             }
         }
+
+        public bool ReadMemberNewUsername(string username)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                List<int> memberlist = new List<int>();
+                var uniqueusername = (from e in context.Members
+                                      where e.m_username == username
+                                      select e.member_id);
+                foreach (var member in uniqueusername)
+                {
+                    memberlist.Add(member);
+                }
+
+                if (memberlist.Count == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

@@ -57,22 +57,25 @@ namespace ASP.Controllers
             return View(signmodel);
         }
 
-    //    public ActionResult SignUp(SignUpModel signmodel)
-    //    {
-    //        if () //if sign up is successfully completed
-    //        {
-            //        memberBeingAddedToDb.m_name = signmodel.Name;
-            //memberBeingAddedToDb.m_username = signmodel.Username;
-            //memberBeingAddedToDb.m_password = signmodel.Password;
-            //memberBeingAddedToDb.m_account = 0.0m;
-    //        return View("LogIn", logmodel);
-    //        }
-    //        else
-    //{
-        //signmodel.signerror = "Sign up could not be completed. Please try another name or username";
-    //            return View("SignUp", signmodel);
-    //}
-    //    }
+        [HttpPost]
+        public ActionResult SignUp(SignUpModel signmodel)
+        {
+            if (proxy.ReadMemberNewUsername(signmodel.Username) == true) //if sign up is successfully completed
+            {
+
+                memberBeingAddedToDb.m_name = signmodel.Name;
+                memberBeingAddedToDb.m_username = signmodel.Username;
+                memberBeingAddedToDb.m_password = signmodel.Password;
+                memberBeingAddedToDb.m_account = 0.0m;
+                proxy.CreateMemberServiceMethod(memberBeingAddedToDb);
+                return View("LogIn", logmodel);
+            }
+            else
+            {
+                signmodel.signerror = "Sign up could not be completed. Please try another username";
+                return View("SignUp", signmodel);
+            }
+        }
 
         public ActionResult Games()
         {

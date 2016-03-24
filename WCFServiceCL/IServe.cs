@@ -51,5 +51,8 @@ namespace WCFServiceCL
 
         [OperationContract]
         int ReadCurrentMember(string user, string pass);
+
+        [OperationContract]
+        bool ReadMemberNewUsername(string username);
     }
 }
