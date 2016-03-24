@@ -190,5 +190,63 @@ namespace Tests
             //Assert
             Assert.AreEqual(data.ToList().ElementAt(1), result);
         }
+
+        [TestMethod]
+        public void Test_ReadGamePayout_ReturnsGamePayout_WhenGivenGameName()
+        {
+            //Arrange
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            ReadGame ReadGameObject = new ReadGame(MockGroupProjectEntities.Object);
+            var mockSet = new Mock<DbSet<Game>>();
+
+            //Initial Pretend Data:
+            var data = new List<Game>
+            {
+                new Game {name="Game1",payout=11,game_id=1},
+                new Game {name="Game2",payout=22,game_id=2}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Games).Returns(mockSet.Object);
+            string GameName = "Game1";
+            //Act
+            decimal result = ReadGameObject.ReadGamePayout(GameName);
+            //Assert
+            Assert.AreEqual(data.ToList().ElementAt(0).payout, result);
+        }
+
+        [TestMethod]
+        public void Test_ReadAllMembers_ReturnsAListOfMembers_WhenCalled()
+        {
+            //Arrange
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            ReadMember ReadMemberObject = new ReadMember(MockGroupProjectEntities.Object);
+            var mockSet = new Mock<DbSet<Member>>();
+
+            //Initial Pretend Data:
+            var data = new List<Member>
+            {
+                new Member {m_name="James", m_username="ragingbull", m_password="password123",member_id= 1},
+                new Member {m_name= "Michael", m_username="rocky",m_password= "password12",member_id= 2},
+                new Member() { m_name = "Camel", m_username = "Camel13", m_password = "CamelPassword" }
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSet.As<IQueryable<Member>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Member>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Members).Returns(mockSet.Object);
+            //Act
+            List<Member> result = ReadMemberObject.ReadAllMembers();
+            //Assert
+            CollectionAssert.AreEqual(data.ToList(), result);
+        }
     }
 }
