@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using DBLayer.Delete;
+using DBLayer.Read;
 
 namespace Tests
 {
@@ -125,7 +126,6 @@ namespace Tests
             mockSet.As<IQueryable<Member>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<Member>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
 
-            //Member member = new Member() { m_name = "Camel", m_username = "Camel13", m_password = "CamelPassword", member_id = 3};
             int memberID = 2;
 
             MockGroupProjectEntities.Setup(c => c.Members).Returns(mockSet.Object);
@@ -133,6 +133,34 @@ namespace Tests
             DeleteMemberObject.DeleteMemberMethod(memberID);
             //Assert
             MockGroupProjectEntities.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Test_ReadAllGames_ReturnsAListOfGames_WhenCalled()
+        {
+            //Arrange
+            Mock<GroupProjectEntities> MockGroupProjectEntities = new Mock<GroupProjectEntities>();
+            ReadGame ReadGameObject = new ReadGame(MockGroupProjectEntities.Object);
+            var mockSet = new Mock<DbSet<Game>>();
+
+            //Initial Pretend Data:
+            var data = new List<Game>
+            {
+                new Game {name="Game1",payout=11,game_id=1},
+                new Game {name="Game2",payout=22,game_id=2}
+            }.AsQueryable();
+
+            //Making a Mockset:
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Game>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            MockGroupProjectEntities.Setup(c => c.Games).Returns(mockSet.Object);
+            //Act
+            List<Game> result = ReadGameObject.ReadAllGames();
+            //Assert
+            CollectionAssert.AreEqual(data.ToList(), result);
         }
     }
 }
