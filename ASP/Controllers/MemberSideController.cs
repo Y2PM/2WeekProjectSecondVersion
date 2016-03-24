@@ -21,7 +21,7 @@ namespace ASP.Controllers
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service");
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-
+        //int currentuser = ;
 
         public bool logwork(string use, string pas)
         {
@@ -38,17 +38,12 @@ namespace ASP.Controllers
         // GET: MemberSide
         public ActionResult LogIn()
         {
-            //call method that reads the input from logmodel.Username and logmodel.Password
-
             return View(logmodel);
         }
         
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
-            //user = logmodel.Username;
-            //pass = logmodel.Password;
-
 
             if (logwork(logmodel.Username, logmodel.Password) == true)
             {

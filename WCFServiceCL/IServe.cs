@@ -48,5 +48,8 @@ namespace WCFServiceCL
 
         [OperationContract]
         void UpdateMemberAccount(int memberid, decimal currentbalance, decimal payout);
+
+        [OperationContract]
+        int ReadCurrentMember(string user, string pass);
     }
 }

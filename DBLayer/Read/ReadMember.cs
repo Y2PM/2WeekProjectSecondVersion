@@ -79,8 +79,8 @@ namespace DBLayer.Read
                 decimal memberaccount = 0.0m;
 
                 var memberaccountquery = (from e in context.Members
-                                       where e.member_id == memberid
-                                       select e.m_account);
+                                          where e.member_id == memberid
+                                          select e.m_account);
                 foreach (var m_acc in memberaccountquery)
                 {
                     memberaccount = Convert.ToDecimal(m_acc);
@@ -94,6 +94,24 @@ namespace DBLayer.Read
                 {
                     return memberaccount;
                 }
+            }
+        }
+
+        public int ReadCurrentMember(string user, string pass)
+        {
+            int memid = 0;
+            using (var context = new GroupProjectEntities())
+            {
+
+                var memberidquery = (from e in context.Members
+                                     where e.m_username == user
+                                     select e.member_id);
+                foreach (var mem in memberidquery)
+                {
+                    memid = Convert.ToInt32(mem);
+                }
+
+                return memid;
             }
         }
     }
