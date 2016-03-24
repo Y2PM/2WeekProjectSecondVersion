@@ -19,7 +19,5 @@ namespace ASP.Models
         public string resultmessageL { get; set; }
         public string resultmessageLN { get; set; }
 
-
-        //"Ensure that Lottery numbers are unique"
     }
 }
