@@ -24,7 +24,7 @@ namespace ASP.Controllers
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-
+        //int currentuser = ;
 
         public bool logwork(string use, string pas)
         {
@@ -39,24 +39,14 @@ namespace ASP.Controllers
         }
 
         // GET: MemberSide
-        public ActionResult SignUp()
-        {
-            return View();
-        }
-
         public ActionResult LogIn()
         {
-            //call method that reads the input from logmodel.Username and logmodel.Password
-
             return View(logmodel);
         }
         
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
-            //user = logmodel.Username;
-            //pass = logmodel.Password;
-
 
             if (logwork(logmodel.Username, logmodel.Password) == true)
             {
@@ -68,6 +58,24 @@ namespace ASP.Controllers
                 return View(logmodel);
             } 
         }
+
+        public ActionResult SignUp()
+        {
+            return View(signmodel);
+        }
+
+    //    public ActionResult SignUp(SignUpModel signmodel)
+    //    {
+    //        if () //if sign up is successfully completed
+    //        {
+    //        return View("LogIn", logmodel);
+    //        }
+    //        else
+    //{
+        //signmodel.signerror = "Sign up could not be completed. Please try another name or username";
+    //            return View(signmodel);
+    //}
+    //    }
 
         public ActionResult Games()
         {

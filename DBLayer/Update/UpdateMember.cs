@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBLayer.Read;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,14 @@ namespace DBLayer.Update
             else { }
         }
 
-
+        public void UpdateMemberAccount(int memberid, decimal currentbalance, decimal payout)
+        {
+            using (var context = new GroupProjectEntities()) 
+            { 
+                var member = context.Members.Find(memberid); 
+                member.m_account = currentbalance + payout;
+                context.SaveChanges();
+            }
+        }
     }
 }

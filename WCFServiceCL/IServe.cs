@@ -39,5 +39,17 @@ namespace WCFServiceCL
 
         [OperationContract]
         bool LoginServiceMethod(string username, string password);
+
+        [OperationContract]
+        decimal ReadGamePayout(string gamename);
+
+        [OperationContract]
+        decimal ReadMemberAccount(int memberid);
+
+        [OperationContract]
+        void UpdateMemberAccount(int memberid, decimal currentbalance, decimal payout);
+
+        [OperationContract]
+        int ReadCurrentMember(string user, string pass);
     }
 }

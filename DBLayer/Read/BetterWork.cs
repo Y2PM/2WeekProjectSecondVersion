@@ -14,7 +14,6 @@ namespace DBLayer
         {
             using (var context = new GroupProjectEntities())
             {
-                //var deptforremove = context.Members.Where(m => m.usernamename == user);
 
                 var memberidquery = (from e in context.Members
                                      where e.m_username == user

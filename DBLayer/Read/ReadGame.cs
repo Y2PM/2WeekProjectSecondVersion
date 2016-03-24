@@ -29,7 +29,7 @@ namespace DBLayer.Read
 
         public Game ReadSpecificGame(int id)
         {
-            Game noGameFound = new Game() 
+            Game noGameFound = new Game()
             {
                 name = "Game Does Not Exist"
             };
@@ -41,7 +41,31 @@ namespace DBLayer.Read
             }
             else { return noGameFound; }
 
-            
+        }
+
+        public decimal ReadGamePayout(string gamename)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                decimal gamepayout = 0;
+
+                var gamepayoutquery = (from e in context.Games
+                                       where e.name == gamename
+                                       select e.payout);
+                foreach (var game in gamepayoutquery)
+                {
+                    gamepayout = Convert.ToDecimal(game);
+                }
+
+                if (gamepayout == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return gamepayout;
+                }
+            }
         }
     }
 }
