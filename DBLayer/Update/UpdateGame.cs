@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBLayer.Update
 {
-    public class UpdateGame
+    public class UpdateGame : IDisposable
     {
         private GroupProjectEntities context;
 
@@ -30,6 +30,22 @@ namespace DBLayer.Update
                 context.SaveChanges();
             }
             else { }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                context.Dispose();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
     }

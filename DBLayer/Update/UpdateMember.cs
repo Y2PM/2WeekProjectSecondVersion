@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DBLayer.Update
 {
-    public class UpdateMember
+    public class UpdateMember : IDisposable
     {
         private GroupProjectEntities context;
 
@@ -48,6 +48,22 @@ namespace DBLayer.Update
                 }
                 context.SaveChanges();
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                context.Dispose();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

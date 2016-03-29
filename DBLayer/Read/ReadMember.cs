@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBLayer.Read
 {
-    public class ReadMember
+    public class ReadMember : IDisposable
     {
         private GroupProjectEntities context;
 
@@ -135,6 +135,22 @@ namespace DBLayer.Read
                     return false;
                 }
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                context.Dispose();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

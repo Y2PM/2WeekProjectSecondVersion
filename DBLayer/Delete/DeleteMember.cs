@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBLayer.Delete
 {
-    public class DeleteMember
+    public class DeleteMember : IDisposable
     {
         private GroupProjectEntities context;
 
@@ -28,6 +28,22 @@ namespace DBLayer.Delete
                 context.Members.Remove(_member);
                 context.SaveChanges();
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                context.Dispose();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
     }

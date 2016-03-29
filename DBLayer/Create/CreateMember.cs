@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBLayer.Create
 {
-    public class CreateMember
+    public class CreateMember : IDisposable
     {
         private GroupProjectEntities context;
 
@@ -24,6 +24,22 @@ namespace DBLayer.Create
         {
             context.Members.Add(member);
             context.SaveChanges();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // dispose managed resources
+                context.Dispose();
+            }
+            // free native resources
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
