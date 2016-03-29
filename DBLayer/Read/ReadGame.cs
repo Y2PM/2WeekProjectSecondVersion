@@ -10,10 +10,6 @@ namespace DBLayer.Read
     {
         private GroupProjectEntities context;
 
-        public ReadGame()
-        {
-            context = new GroupProjectEntities();
-        }
 
         public ReadGame(GroupProjectEntities groupprojectEntities)
         {

@@ -10,10 +10,7 @@ namespace DBLayer.Delete
     {
         private GroupProjectEntities context;
 
-        public DeleteMember()
-        {
-            context = new GroupProjectEntities();
-        }
+       
 
         public DeleteMember(GroupProjectEntities groupprojectEntities)
         {
