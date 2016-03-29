@@ -24,6 +24,7 @@ namespace DBLayer.Update
                 Game gameInDB = context.Games.Where<Game>(x => x.game_id == gameToUpdate.game_id).First();
                 gameInDB.name = gameToUpdate.name;
                 gameInDB.payout = gameToUpdate.payout;
+                gameInDB.price = gameToUpdate.price;
                 context.SaveChanges();
             }
             else { }

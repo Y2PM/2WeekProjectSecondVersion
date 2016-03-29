@@ -41,8 +41,8 @@ namespace WPF.ViewModels
             }
         }
 
-        private int _payout;
-        public int payout
+        private decimal _payout;
+        public decimal payout
         {
             get { return _payout; }
             set
@@ -112,6 +112,7 @@ namespace WPF.ViewModels
             gameBeingAddedToDB.name = name;
             gameBeingAddedToDB.payout = payout;
             gameBeingAddedToDB.price = price;
+            gameBeingAddedToDB.profit = 0;
             proxy.CreateGameServiceMethod(gameBeingAddedToDB);
             MessageBox.Show("Game succesfully added");
         }

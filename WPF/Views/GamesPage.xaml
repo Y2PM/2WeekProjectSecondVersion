@@ -44,9 +44,9 @@
                     <TextBox Text="{Binding name}" HorizontalAlignment="Left" Height="23" Margin="112,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBlock HorizontalAlignment="Left" Margin="32,151,0,0" TextWrapping="Wrap" Text="New Payout:" VerticalAlignment="Top"/>
                     <TextBox Text="{Binding payout}" HorizontalAlignment="Left" Height="23" Margin="112,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Button Command="{Binding updateGameCommand}" Content="Update" HorizontalAlignment="Left" Margin="112,239,0,0" VerticalAlignment="Top" Width="75"/>
                     <TextBlock HorizontalAlignment="Left" Margin="43,200,0,0" TextWrapping="Wrap" Text="New Price:" VerticalAlignment="Top"/>
                     <TextBox Text="{Binding price}" HorizontalAlignment="Left" Height="23" Margin="113,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Command="{Binding updateGameCommand}" Content="Update" HorizontalAlignment="Left" Margin="112,239,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Delete Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-3,0,0,0">
