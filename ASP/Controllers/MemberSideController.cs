@@ -16,6 +16,7 @@ namespace ASP.Controllers
         LogInModel logmodel = new LogInModel();
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
+        EditMemberModel editmodel = new EditMemberModel();
 
         Member memberBeingAddedToDb = new Member();
 
@@ -151,6 +152,16 @@ namespace ASP.Controllers
             return View("Games", gamemodel);
         }
 
+        public ActionResult EditMember()
+        {
+            return View("EditMember", editmodel);
+        }
+
+        [HttpPost]
+        public ActionResult EditMember(EditMemberModel editmodel)
+        {
+            return View("EditMember", editmodel);
+        }
             List<int> lotterylist;
             List<int> userlotterylist;
             int result;
