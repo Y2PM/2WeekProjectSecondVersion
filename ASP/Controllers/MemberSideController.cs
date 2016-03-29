@@ -21,9 +21,9 @@ namespace ASP.Controllers
         Member memberBeingAddedToDb = new Member();
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -82,7 +82,10 @@ namespace ASP.Controllers
 
         public ActionResult Games()
         {
-                return View();
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
+            return View(gamemodel);
         }
 
         //remove return view for all the games (or make it just the games page and gamemodel)
