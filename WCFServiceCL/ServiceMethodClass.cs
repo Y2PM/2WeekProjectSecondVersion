@@ -118,5 +118,11 @@ namespace WCFServiceCL
             UpdateMember UpdateMemberObject = new UpdateMember();
             UpdateMemberObject.UpdateMemberAccountBalance(memberid, currentbalance, addtoaccount);
         }
+
+        public decimal ReadGamePrice(string gamename)
+        {
+            ReadGame ReadGameObject = new ReadGame(context);
+            return ReadGameObject.ReadGamePrice(gamename);
+        }
     }
 }

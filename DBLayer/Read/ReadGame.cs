@@ -57,6 +57,26 @@ namespace DBLayer.Read
             }
         }
 
+        public decimal ReadGamePrice(string gamename)
+        {
+            decimal gameprice = 0;
+            var gamepayoutquery = (from e in context.Games
+                                   where e.name == gamename
+                                   select e.price);
+            foreach (var game in gamepayoutquery)
+            {
+                gameprice = Convert.ToDecimal(game);
+            }
+            if (gameprice == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return gameprice;
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
