@@ -3,9 +3,9 @@
     ViewBag.Title = "EditMember";
 }
 
-<h2>EditMember</h2>
+<h2>Edit Account</h2>
 
-@using (Html.BeginForm("EditMemberPassword", "MemberSide", FormMethod.Post))
+@using (Html.BeginForm("EditMember", "MemberSide", FormMethod.Post))
 {
     <p>
         <label>Current Password</label>
@@ -15,18 +15,18 @@
         <label>New Password</label>
     
     @Html.PasswordFor(model => model.newpassword)
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Change Password" />
     </p>
     @Html.DisplayFor(model => model.passworderror)
 }
 @Html.DisplayFor(model => model.passwordsuccess)
 
-@using (Html.BeginForm("EditMemberBalance", "MemberSide", FormMethod.Post))
+@using (Html.BeginForm("EditMember", "MemberSide", FormMethod.Post))
 {
     <p>
-        <label>Add to account</label>
+        <label>Add to account </label>
         @Html.EditorFor(model => model.addtobalance)
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Add" />
     </p>
     @Html.DisplayFor(model => model.balancesuccess)
 }

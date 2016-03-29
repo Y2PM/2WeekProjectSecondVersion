@@ -163,6 +163,11 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult EditMember(EditMemberModel editmodel)
         {
+            //if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+            //{
+            //proxy check current password matches password and update the member password to the editmode.newpassword
+            //}
+            
             return View("EditMember", editmodel);
         }
             List<int> lotterylist;
