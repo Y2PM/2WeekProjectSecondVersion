@@ -7,7 +7,9 @@ CREATE TABLE Game
 (
 game_id INT IDENTITY(1,1) PRIMARY KEY,
 name VARCHAR(50),
-payout DECIMAL
+payout DECIMAL,
+price DECIMAL,
+profit DECIMAL
 );
 
 CREATE TABLE Member
@@ -19,9 +21,9 @@ m_password VARCHAR(50),
 m_account DECIMAL
 );
 
-INSERT INTO Game (name, payout) VALUES ('Odds N Evens', 10);
-INSERT INTO Game (name, payout) VALUES ('Lottery', 1000000);
-INSERT INTO Game (name, payout) VALUES ('Lucky Number', 1000);
+INSERT INTO Game (name, payout, price, profit) VALUES ('Odds N Evens', 10, 1.00, 0);
+INSERT INTO Game (name, payout, price, profit) VALUES ('Lottery', 1000000, 2.00, 0);
+INSERT INTO Game (name, payout, price, profit) VALUES ('Lucky Number', 1000, 1.50, 0);
 INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('James', 'ragingbull', 'password123', 0.0);
 INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('Michael', 'rocky', 'password12', 0.0);
 INSERT INTO Member (m_name, m_username, m_password, m_account) VALUES ('Rick', 'stuffandthings', 'password1', 0.0);
