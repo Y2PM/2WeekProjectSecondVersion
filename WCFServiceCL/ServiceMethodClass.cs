@@ -106,5 +106,17 @@ namespace WCFServiceCL
             ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadMemberNewUsername(user);
         }
+
+        public bool UpdateMemberAccountPay(int memberid, decimal currentbalance, decimal price)
+        {
+            UpdateMember UpdateMemberObject = new UpdateMember();
+            return UpdateMemberObject.UpdateMemberAccountPay(memberid, currentbalance, price);
+        }
+
+        public void UpdateMemberAccountBalance(int memberid, decimal currentbalance, decimal addtoaccount)
+        {
+            UpdateMember UpdateMemberObject = new UpdateMember();
+            UpdateMemberObject.UpdateMemberAccountBalance(memberid, currentbalance, addtoaccount);
+        }
     }
 }
