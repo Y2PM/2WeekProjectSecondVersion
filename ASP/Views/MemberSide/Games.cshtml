@@ -13,15 +13,17 @@ textarea {
 
 <h1>Games</h1>
 <p>
-    <label>Odds N Evens</label>
+    <label>Odds N Evens £@Html.DisplayFor(model => model.priceO)</label>
 @using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
 {
     <input type="submit" value="Play" />
     @Html.DisplayFor(model => model.resultmessageO)
 }
 </p>
+@Html.DisplayFor(model => model.fundserrorO)
+
 <p>
-    <label>Lottery</label>
+    <label>Lottery £@Html.DisplayFor(model => model.priceL)</label>
 @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
 {
     @Html.EditorFor(model => model.one, additionalViewData: new
@@ -83,8 +85,9 @@ textarea {
 <p>@Html.DisplayFor(model => model.lotteryerror)</p>
 }
 </p>
+@Html.DisplayFor(model => model.fundserrorL)
 <p>
-    <label>Lucky Number</label>
+    <label>Lucky Number £@Html.DisplayFor(model => model.priceLN)</label>
     @using (Html.BeginForm("PlayLucky", "MemberSide", FormMethod.Post))
     {
         @Html.EditorFor(model => model.usernumber, additionalViewData: new
@@ -100,6 +103,7 @@ textarea {
     @Html.DisplayFor(model => model.resultmessageLN)
     }
 </p>
+@Html.DisplayFor(model => model.fundserrorLN)
 
 
 

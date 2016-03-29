@@ -13,6 +13,13 @@ namespace FinalProjectFDM
     {
         static void Main(string[] args)
         {
+            ReadMemeberTest rmt = new ReadMemeberTest();
+
+            string username = "barry";
+            string password = "greg";
+            rmt.login(username, password);
+
+            Console.WriteLine("Message");
             /*
             DecathonGame decgame = new DecathonGame();
             List<int> lotto = decgame.Lottery();
@@ -61,6 +68,13 @@ namespace FinalProjectFDM
             
 
             Console.ReadLine();*/
+
+            //string username = Console.ReadLine();
+            //string password = Console.ReadLine();
+
+
+
+
         }
     }
 }

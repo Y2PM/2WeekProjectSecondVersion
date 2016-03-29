@@ -14,6 +14,12 @@ namespace ASP.Models
         public int five { get; set; }
         public int six { get; set; }
         public int usernumber { get; set; }
+        public decimal priceO { get; set; }
+        public decimal priceL { get; set; }
+        public decimal priceLN { get; set; }
+        public string fundserrorO { get; set; }
+        public string fundserrorL { get; set; }
+        public string fundserrorLN { get; set; }
         public string lotteryerror { get; set; }
         public string resultmessageO { get; set; }
         public string resultmessageL { get; set; }

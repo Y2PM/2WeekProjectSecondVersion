@@ -19,6 +19,7 @@
     </p>
     @Html.DisplayFor(model => model.passworderror)
 }
+@Html.DisplayFor(model => model.passwordsuccess)
 
 @using (Html.BeginForm("EditMemberBalance", "MemberSide", FormMethod.Post))
 {
@@ -27,4 +28,5 @@
         @Html.EditorFor(model => model.addtobalance)
         <input type="submit" value="Sign Up" />
     </p>
+    @Html.DisplayFor(model => model.balancesuccess)
 }

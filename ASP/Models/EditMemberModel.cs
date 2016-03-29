@@ -11,5 +11,7 @@ namespace ASP.Models
         public string newpassword { get; set; }
         public decimal addtobalance { get; set; }
         public string passworderror { get; set; }
+        public string passwordsuccess { get; set; }
+        public string balancesuccess { get; set; }
     }
 }
