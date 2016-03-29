@@ -54,5 +54,11 @@ namespace WCFServiceCL
 
         [OperationContract]
         bool ReadMemberNewUsername(string username);
+
+        [OperationContract]
+        bool UpdateMemberAccountPay(int memberid, decimal currentbalance, decimal price);
+
+        [OperationContract]
+        void UpdateMemberAccountBalance(int memberid, decimal currentbalance, decimal addtoaccount);
     }
 }

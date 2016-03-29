@@ -46,6 +46,42 @@ namespace DBLayer.Update
             }
         }
 
+        public bool UpdateMemberAccountPay(int memberid, decimal currentbalance, decimal price)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                var member = context.Members.Find(memberid);
+                if (member.m_account >= price)
+                    //(member.m_account == null || member.m_account == 0)
+                {
+                    member.m_account = currentbalance - price;
+                    context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public void UpdateMemberAccountBalance(int memberid, decimal currentbalance, decimal addtoaccount)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                var member = context.Members.Find(memberid);
+                if (member.m_account == null || member.m_account == 0)
+                {
+                    member.m_account = currentbalance + addtoaccount;
+                }
+                else
+                {
+                    member.m_account = currentbalance + addtoaccount;
+                }
+                context.SaveChanges();
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
