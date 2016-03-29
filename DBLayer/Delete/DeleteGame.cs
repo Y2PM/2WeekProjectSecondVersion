@@ -7,10 +7,6 @@ namespace DBLayer.Delete
     {
         private GroupProjectEntities context;
 
-        public DeleteGame()
-        {
-            context = new GroupProjectEntities();
-        }
 
         public DeleteGame(GroupProjectEntities groupprojectEntities)
         {

@@ -9,51 +9,53 @@ namespace WCFServiceCL
 {
     public class ServiceMethodClass : IServe
     {
+        GroupProjectEntities context = new GroupProjectEntities();
+
         public void CreateGameServiceMethod(Game game)
         {
-            CreateGame CreateGameObject = new CreateGame();
+            CreateGame CreateGameObject = new CreateGame(context);
             CreateGameObject.CreateGameMethod(game);
         }
 
         public void CreateMemberServiceMethod(Member member)
         {
-            CreateMember CreateMemberObject = new CreateMember();
+            CreateMember CreateMemberObject = new CreateMember(context);
             CreateMemberObject.CreateMemberMethod(member);
         }
 
         public void DeleteGameServiceMethod(int game_id)
         {
-            DeleteGame DeleteGameObject = new DeleteGame();
+            DeleteGame DeleteGameObject = new DeleteGame(context);
             DeleteGameObject.DeleteGameMethod(game_id);
         }
 
         public void DeleteMemberServiceMethod(int id)
         {
-            DeleteMember DeleteMemberObject = new DeleteMember();
+            DeleteMember DeleteMemberObject = new DeleteMember(context);
             DeleteMemberObject.DeleteMemberMethod(id);
         }
 
         public List<Game> ReadAllGamesServiceMethod()
         {
-            ReadGame ReadGameObject = new ReadGame();
+            ReadGame ReadGameObject = new ReadGame(context);
             return ReadGameObject.ReadAllGames();
         }
 
         public Game ReadSpecificGameServiceMethod(int id)
         {
-            ReadGame ReadGameObject = new ReadGame();
+            ReadGame ReadGameObject = new ReadGame(context);
             return ReadGameObject.ReadSpecificGame(id);
         }
 
         public List<Member> ReadAllMembersServiceMethod()
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadAllMembers();
         }
 
         public Member ReadSpecificMemberServiceMethod(int id)
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadSpecificMember(id);
         }
 
@@ -71,19 +73,19 @@ namespace WCFServiceCL
 
         public bool LoginServiceMethod(string username, string password)
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.login(username, password);
         }
 
         public decimal ReadGamePayout(string gamename)
         {
-            ReadGame ReadGameObject = new ReadGame();
+            ReadGame ReadGameObject = new ReadGame(context);
             return ReadGameObject.ReadGamePayout(gamename);
         }
 
         public decimal ReadMemberAccount(int memberid)
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadMemberAccount(memberid);
         }
 
@@ -95,13 +97,13 @@ namespace WCFServiceCL
 
         public int ReadCurrentMember(string user, string pass)
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadCurrentMember(user, pass);
         }
 
         public bool ReadMemberNewUsername(string user)
         {
-            ReadMember ReadMemberObject = new ReadMember();
+            ReadMember ReadMemberObject = new ReadMember(context);
             return ReadMemberObject.ReadMemberNewUsername(user);
         }
     }

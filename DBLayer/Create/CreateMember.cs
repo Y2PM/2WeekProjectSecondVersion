@@ -6,10 +6,6 @@ namespace DBLayer.Create
     {
         private GroupProjectEntities context;
 
-        public CreateMember()
-        {
-            context = new GroupProjectEntities();
-        }
 
         public CreateMember(GroupProjectEntities groupprojectEntities)
         {

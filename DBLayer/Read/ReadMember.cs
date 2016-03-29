@@ -8,10 +8,6 @@ namespace DBLayer.Read
     {
         private GroupProjectEntities context;
 
-        public ReadMember()
-        {
-            context = new GroupProjectEntities();
-        }
 
         public ReadMember(GroupProjectEntities groupprojectEntities)
         {

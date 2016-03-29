@@ -6,10 +6,6 @@ namespace DBLayer.Create
     {
         private GroupProjectEntities context;
 
-        public CreateGame()
-        {
-            context = new GroupProjectEntities();
-        }
 
         public CreateGame(GroupProjectEntities groupprojectEntities)
         {
