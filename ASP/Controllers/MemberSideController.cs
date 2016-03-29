@@ -91,66 +91,89 @@ namespace ASP.Controllers
         //remove return view for all the games (or make it just the games page and gamemodel)
         public ActionResult PlayOdds()
         {
-            //takes a game win method. if it returns true read game payout and add to current user account
-            if (DecWin() == true)
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceO) == true)
             {
-                decimal payout = proxy.ReadGamePayout(gamenameodds);
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                //int memberid = getUserId(logmodel.Username, logmodel.Password);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                //read game payout and add the current user's account
-                gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
+                //takes a game win method. if it returns true read game payout and add to current user account
+                if (DecWin() == true)
+                {
+                    decimal payout = proxy.ReadGamePayout(gamenameodds);
+
+                    //int memberid = getUserId(logmodel.Username, logmodel.Password);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                    //read game payout and add the current user's account
+                    gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
+                }
+                else
+                {
+                    gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
+                }
             }
             else
             {
-                gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
+                gamemodel.fundserrorO = "You have insufficient funds to play this game. Go to Edit Account.";
             }
             return View("Games", gamemodel);
         }
 
         public ActionResult PlayLottery()
         {
-            //takes a game win method. if it returns true read game payout and add to current user account
-            if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceL) == true)
             {
-                if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
+                //takes a game win method. if it returns true read game payout and add to current user account
+                if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
-                    gamemodel.lotteryerror = "";
+                    if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
+                    {
+                        gamemodel.lotteryerror = "";
+                    }
+                    else
+                    {
+                        gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                    }
+                    return View("Games", gamemodel);
+                }
+
+                if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+                {
+                    //read game payout and add the current user's account
+                    decimal payout = proxy.ReadGamePayout(gamenamelottery);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                    gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
                 }
                 else
                 {
-                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                    gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
                 }
-                return View("Games", gamemodel);
-            }
-            
-            if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
-            {
-                //read game payout and add the current user's account
-                decimal payout = proxy.ReadGamePayout(gamenamelottery);
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
             }
             else
             {
-                gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
+                gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
             }
-            return View("Games", gamemodel);
+                return View("Games", gamemodel);
         }
 
         public ActionResult PlayLucky()
         {
-            //takes a game win method. if it returns true read game payout and add to current user account
-            if (LuckyNWin(gamemodel.usernumber) == true)
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceLN) == true)
             {
-                //read game payout and add the current user's account
-                
-                gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                //takes a game win method. if it returns true read game payout and add to current user account
+                if (LuckyNWin(gamemodel.usernumber) == true)
+                {
+                    //read game payout and add the current user's account
+
+                    gamemodel.resultmessageLN = "Congrats, you won! Keep your lucky streak going and play on!";
+                }
+                else
+                {
+                    gamemodel.resultmessageLN = "Better luck next time. Play again to turn your luck around.";
+                }
             }
             else
             {
-                gamemodel.resultmessageLN = "Better luck next time. Play again to turn your luck around.";
+                gamemodel.fundserrorLN = "You have insufficient funds to play this game. Go to Edit Account.";
             }
             return View("Games", gamemodel);
         }
