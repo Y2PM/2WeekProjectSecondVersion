@@ -17,8 +17,9 @@ namespace ASP.Controllers
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
         EditMemberModel editmodel = new EditMemberModel();
-
         Member memberBeingAddedToDb = new Member();
+
+        public 
 
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
@@ -239,7 +240,6 @@ namespace ASP.Controllers
                 lotterylist = unsortedlotterylist.OrderBy(v => v).ToList();
                 //this sorts the list in ascending order
                 return lotterylist;
-
             }
 
             public bool userlottovalidate(int one, int two, int three, int four, int five, int six)
@@ -319,7 +319,7 @@ namespace ASP.Controllers
 
             public bool LottoWin(int o, int t, int th, int f, int fi, int s)
             {
-                List<int> game = Lottery();
+                List<int> game = Lottery(); //----------------> this is the list of the lottery 
                 List<int> user = Userlottery(o, t, th, f, fi, s);
                 int matches = Matcher(game, user);
                 if (Lotteryresult(game, user) == true)
