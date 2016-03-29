@@ -41,8 +41,10 @@ namespace ASP.Controllers
         public ActionResult LogIn(LogInModel logmodel)
         {
 
-            if (logwork(logmodel.Username, logmodel.Password) == true)
+            if (proxy.LoginServiceMethod(logmodel.Username, logmodel.Password) == true)
+                //logwork(logmodel.Username, logmodel.Password) == true)
             {
+                currentuser = proxy.ReadCurrentMember(logmodel.Username, logmodel.Password);
                 return View("Games", gamemodel);
             }
             else
