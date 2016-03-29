@@ -1,0 +1,30 @@
+﻿@model ASP.Models.EditMemberModel
+@{
+    ViewBag.Title = "EditMember";
+}
+
+<h2>EditMember</h2>
+
+@using (Html.BeginForm("EditMemberPassword", "MemberSide", FormMethod.Post))
+{
+    <p>
+        <label>Current Password</label>
+
+    @Html.PasswordFor(model => model.currentpassword)
+
+        <label>New Password</label>
+    
+    @Html.PasswordFor(model => model.newpassword)
+        <input type="submit" value="Sign Up" />
+    </p>
+    @Html.DisplayFor(model => model.passworderror)
+}
+
+@using (Html.BeginForm("EditMemberBalance", "MemberSide", FormMethod.Post))
+{
+    <p>
+        <label>Add to account</label>
+        @Html.EditorFor(model => model.addtobalance)
+        <input type="submit" value="Sign Up" />
+    </p>
+}
