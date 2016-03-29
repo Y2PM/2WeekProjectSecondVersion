@@ -17,7 +17,7 @@ namespace Tests
     {
         Mock<DbSet<Member>> mockSetMember;
         IQueryable<DBLayer.Member> dataMember;
-        Mock<DbSet<Member>> mockSetGame;
+        Mock<DbSet<Game>> mockSetGame;
         IQueryable<DBLayer.Game> dataGame;
         Mock<GroupProjectEntities> MockGroupProjectEntities;
 
@@ -26,7 +26,6 @@ namespace Tests
         {
             #region MemberRegion
             MockGroupProjectEntities = new Mock<GroupProjectEntities>();
-            //UpdateMember UpdateMemberObject = new UpdateMember(MockGroupProjectEntities.Object);//Test specific, not required.
             mockSetMember = new Mock<DbSet<Member>>();
 
             //Initial Pretend Data:
@@ -47,11 +46,10 @@ namespace Tests
             #endregion
 
             #region GameRegion
-            //UpdateGame UpdateGameObject = new UpdateGame(MockGroupProjectEntities.Object);
-            var mockSetGame = new Mock<DbSet<Game>>();
+            mockSetGame = new Mock<DbSet<Game>>();
 
             //Initial Pretend Data:
-            var dataGame = new List<Game>
+            dataGame = new List<Game>
             {
                 new Game {name="Game1",payout=11,game_id=1},
                 new Game {name="Game2",payout=22,game_id=2}
