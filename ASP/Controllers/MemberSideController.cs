@@ -107,7 +107,14 @@ namespace ASP.Controllers
             //takes a game win method. if it returns true read game payout and add to current user account
             if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
             {
-                gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
+                {
+                    gamemodel.lotteryerror = "";
+                }
+                else
+                {
+                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                }
                 return View("Games", gamemodel);
             }
             
