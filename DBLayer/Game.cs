@@ -17,5 +17,7 @@ namespace DBLayer
         public int game_id { get; set; }
         public string name { get; set; }
         public Nullable<decimal> payout { get; set; }
+        public Nullable<decimal> price { get; set; }
+        public Nullable<decimal> profit { get; set; }
     }
 }

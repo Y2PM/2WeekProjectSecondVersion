@@ -1,19 +1,11 @@
-﻿using System;
+﻿using DBLayer;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using WPF.Helpers;
-using DBLayer;
-using DBLayer.Create;
-using DBLayer.Read;
-using DBLayer.Update;
-using DBLayer.Delete;
-using System.Windows;
 using System.Collections.ObjectModel;
-using WCFServiceCL;
 using System.ServiceModel;
+using System.Windows;
+using System.Windows.Input;
+using WCFServiceCL;
+using WPF.Helpers;
 
 namespace WPF.ViewModels
 {
@@ -57,6 +49,17 @@ namespace WPF.ViewModels
             {
                 _payout = value;
                 OnPropertyChanged("payout");
+            }
+        }
+
+        private decimal _price;
+        public decimal price
+        {
+            get { return _price; }
+            set
+            {
+                _price = value;
+                OnPropertyChanged("price");
             }
         }
 
@@ -108,6 +111,7 @@ namespace WPF.ViewModels
         {
             gameBeingAddedToDB.name = name;
             gameBeingAddedToDB.payout = payout;
+            gameBeingAddedToDB.price = price;
             proxy.CreateGameServiceMethod(gameBeingAddedToDB);
             MessageBox.Show("Game succesfully added");
         }
@@ -211,6 +215,7 @@ namespace WPF.ViewModels
             gameBeingSent.game_id = game_ID;
             gameBeingSent.name = name;
             gameBeingSent.payout = payout;
+            gameBeingSent.price = price;
             proxy.UpdateGameServiceMethod(gameBeingSent);
 
         }
