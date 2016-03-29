@@ -14,9 +14,9 @@ namespace WPF.ViewModels
         Game gameBeingSent = new Game();
         Game gameBeingAddedToDB = new Game();
 
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service");
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service");
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service");
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //cemal
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Jo
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
 
         private int _game_ID;
@@ -41,8 +41,8 @@ namespace WPF.ViewModels
             }
         }
 
-        private int _payout;
-        public int payout
+        private decimal _payout;
+        public decimal payout
         {
             get { return _payout; }
             set
@@ -112,6 +112,7 @@ namespace WPF.ViewModels
             gameBeingAddedToDB.name = name;
             gameBeingAddedToDB.payout = payout;
             gameBeingAddedToDB.price = price;
+            gameBeingAddedToDB.profit = 0;
             proxy.CreateGameServiceMethod(gameBeingAddedToDB);
             MessageBox.Show("Game succesfully added");
         }
