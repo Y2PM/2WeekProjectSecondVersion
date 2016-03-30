@@ -53,32 +53,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Read\BetterWork.cs" />
     <Compile Include="Create\CreateGame.cs" />
     <Compile Include="Create\CreateMember.cs" />
     <Compile Include="Delete\DeleteGame.cs" />
     <Compile Include="Delete\DeleteMember.cs" />
-    <Compile Include="Game.cs">
-      <DependentUpon>GroupProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GroupProject.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GroupProject.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GroupProject.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GroupProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GroupProject.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GroupProject.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Member.cs">
-      <DependentUpon>GroupProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Read\ReadGame.cs" />
     <Compile Include="Read\ReadMember.cs" />
@@ -86,25 +89,23 @@
     <Compile Include="Update\UpdateMember.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="GroupProject.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GroupProject.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="GroupProject.Context.tt">
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GroupProject.edmx</DependentUpon>
-      <LastGenOutput>GroupProject.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </None>
-    <None Include="GroupProject.edmx.diagram">
-      <DependentUpon>GroupProject.edmx</DependentUpon>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
-    <None Include="GroupProject.tt">
+    <None Include="Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GroupProject.edmx</DependentUpon>
-      <LastGenOutput>GroupProject.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

@@ -8,10 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using WCFServiceCL;
 
+//[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.xml", Watch = true)]
+
+
 namespace WCFHost
 {
+
     class HostProgram
     {
+
         static void Main(string[] args)
         {
             using (ServiceHost host = new ServiceHost(typeof(ServiceMethodClass)))
