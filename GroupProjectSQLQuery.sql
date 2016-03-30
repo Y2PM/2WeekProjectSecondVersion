@@ -1,8 +1,8 @@
-﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Game]') AND type in (N'U'))
-DROP TABLE [dbo].[Game]
+﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GroupProject].[dbo].[Game]') AND type in (N'U'))
+DROP TABLE [GroupProject].[dbo].[Game]
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Member]') AND type in (N'U'))
-DROP TABLE [dbo].[Member]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GroupProject].[dbo].[Member]') AND type in (N'U'))
+DROP TABLE [GroupProject].[dbo].[Member]
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GroupProject].[dbo].[Log]') AND type in (N'U'))
 drop table [GroupProject].[dbo].[Log]
