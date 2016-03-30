@@ -41,7 +41,6 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
-
             if (proxy.LoginServiceMethod(logmodel.Username, logmodel.Password) == true)
                 //logwork(logmodel.Username, logmodel.Password) == true)
             {
