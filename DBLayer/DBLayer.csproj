@@ -54,28 +54,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>GroupProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupProject.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupProject.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupProject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupProject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupProject.edmx</DependentUpon>
     </Compile>
     <Compile Include="Log.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>GroupProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Read\BetterWork.cs" />
     <Compile Include="Create\CreateGame.cs" />
@@ -90,22 +90,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="GroupProject.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>GroupProject.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.Context.tt">
+    <None Include="GroupProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>GroupProject.edmx</DependentUpon>
+      <LastGenOutput>GroupProject.Context.cs</LastGenOutput>
     </None>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="GroupProject.edmx.diagram">
+      <DependentUpon>GroupProject.edmx</DependentUpon>
     </None>
-    <None Include="Model.tt">
+    <None Include="GroupProject.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>GroupProject.edmx</DependentUpon>
+      <LastGenOutput>GroupProject.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

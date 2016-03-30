@@ -79,7 +79,7 @@
           <Property Name="m_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="m_account" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityContainer Name="GroupProjectEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GroupProjectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="Self.Game" />
           <EntitySet Name="Logs" EntityType="Self.Log" />
           <EntitySet Name="Members" EntityType="Self.Member" />
@@ -89,7 +89,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GroupProjectModelStoreContainer" CdmEntityContainer="GroupProjectEntities1">
+        <EntityContainerMapping StorageEntityContainer="GroupProjectModelStoreContainer" CdmEntityContainer="GroupProjectEntities">
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="GroupProjectModel.Game">
               <MappingFragment StoreEntitySet="Game">
