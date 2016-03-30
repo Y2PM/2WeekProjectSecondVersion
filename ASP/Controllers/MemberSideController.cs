@@ -19,8 +19,7 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        public 
-
+        
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
