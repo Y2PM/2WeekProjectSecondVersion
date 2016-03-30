@@ -11,36 +11,75 @@
     <Page.DataContext>
         <vm:MembersPageViewModel/>
     </Page.DataContext>
-
-    <Grid>
-        <Button  Command="{Binding navigateToHomePageCommand}" Content="Home" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+    <Page.Resources>
+        <Style x:Key="bg" TargetType="Grid">
+            <Setter Property="Background" Value="LightBlue"></Setter>
+        </Style>
+        <Style x:Key="font" TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
+        </Style>
+        <Style x:Key="bo" TargetType="Button">
+            <Setter Property="Background" Value="Aquamarine"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="tab" TargetType="TabItem">
+            <Setter Property="Background" Value="Aquamarine"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Chocolate" />
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Style="{StaticResource bg}">
+        <Button  Style="{StaticResource bo}"  Command="{Binding navigateToHomePageCommand}" Content="Home" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="37"/>
         <TabControl HorizontalAlignment="Left" Height="538" Margin="10,52,0,0" VerticalAlignment="Top" Width="580">
-            <TabItem Header="View Members">
-                <Grid Background="#FFE5E5E5">
-                    <Button Command="{Binding readMemberByIDCommand}" Content="View Member" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBlock Text="Member ID:" HorizontalAlignment="Left" Margin="119,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Left" Height="23" Margin="190,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
-                    <DataGrid ItemsSource="{Binding member}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Height="38" Width="550"/>
-                    <Button Command="{Binding readAllMembersCommand}" Content="View Members" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.278,-0.338"/>
-                    <DataGrid ItemsSource="{Binding members}" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Height="343" Width="550"/>
+            <TabItem Style="{StaticResource tab}" Header="View Members">
+                <Grid Style="{StaticResource bg}">
+                    <Button Style="{StaticResource bo}" Command="{Binding readMemberByIDCommand}" Content="View Member" HorizontalAlignment="Center" Margin="349,17,131,0" VerticalAlignment="Top" Width="90" Height="50"/>
+                    <TextBlock Style="{StaticResource font}" Text="Member ID:" HorizontalAlignment="Center" Margin="129,30,338,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Center" Height="23" Margin="228,30,247,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
+                    <DataGrid ItemsSource="{Binding member}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="38" Width="550"/>
+                    <Button Style="{StaticResource bo}" Command="{Binding readAllMembersCommand}" Content="View Members" HorizontalAlignment="Left" Margin="231,154,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.278,-0.338" Height="50"/>
+                    <DataGrid ItemsSource="{Binding members}" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top" Height="267" Width="550"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Update Member">
-                <Grid Background="#FFE5E5E5">
-                    <TextBlock HorizontalAlignment="Left" Margin="47,42,0,0" TextWrapping="Wrap" Text="ID of Member:" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Left" Height="23" Margin="140,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="47,99,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding member_Name}" HorizontalAlignment="Left" Height="23" Margin="99,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="47,154,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding member_PW}" HorizontalAlignment="Left" Height="23" Margin="116,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Button Command="{Binding updateMemberCommand}" Content="Update" HorizontalAlignment="Left" Margin="125,214,0,0" VerticalAlignment="Top" Width="75"/>
+            <TabItem Style="{StaticResource tab}" Header="Update Member">
+                <Grid Style="{StaticResource bg}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="236*"/>
+                        <ColumnDefinition Width="335*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="116,53,3.5,0" TextWrapping="Wrap" Text="ID of Member:" VerticalAlignment="Top" Width="116"/>
+                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Center" Height="23" Margin="25.5,54,230,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Grid.Column="1"/>
+                    <TextBlock Style="{StaticResource font}" HorizontalAlignment="Left" Margin="179,106,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_Name}" HorizontalAlignment="Center" Height="23" Margin="25.5,106,189,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                    <TextBlock Style="{StaticResource font}" HorizontalAlignment="Left" Margin="148,154,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top"/>
+                    <TextBox Text="{Binding member_PW}" HorizontalAlignment="Center" Height="23" Margin="25.5,154,189,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                    <Button Style="{StaticResource bo}" Command="{Binding updateMemberCommand}" Content="Update" HorizontalAlignment="Left" Margin="200,236,0,0" VerticalAlignment="Top" Width="108" Height="50" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Delete Member" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="98" Margin="-2,0">
-                <Grid Background="#FFE5E5E5">
-                    <TextBlock HorizontalAlignment="Left" Margin="39,64,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Left" Height="23" Margin="69,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
-                    <Button Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Left" Margin="173,65,0,0" VerticalAlignment="Top" Width="75"/>
+            <TabItem Style="{StaticResource tab}" Header="Delete Member" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="98" Margin="-2,0">
+                <Grid Style="{StaticResource bg}">
+                    <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="215,89,332,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="0.087,0.676"/>
+                    <TextBox Text="{Binding member_ID}" HorizontalAlignment="Center" Height="23" Margin="273,87,223,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
+                    <Button Style="{StaticResource bo}" Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Center" Margin="230,228,236,0" VerticalAlignment="Top" Width="104" Height="50" Click="Button_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>
