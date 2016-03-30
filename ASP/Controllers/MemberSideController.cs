@@ -3,6 +3,7 @@ using DBLayer;
 using DBLayer.Read;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
@@ -19,12 +20,21 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        public 
+        //for the graphics lotto balls
+        public List<int> game;
+
+        public bool isUnique;
+        public bool uniqueIdentifier { get; set; }
+
+        public void DrawEllipse(Pen pen, int x, int y, int width, int height)
+        {
+
+        }
 
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -125,6 +135,21 @@ namespace ASP.Controllers
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
+
+                    
+
+                    //if (uniqueIdentifier == true)
+                    //{
+                    //    gamemodel.lotteryerror = "";
+                    //}
+                    //else
+                    //{
+                    //    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                    //}
+                    //return View("Games", gamemodel);
+
+
+
                     if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
                     {
                         gamemodel.lotteryerror = "";
@@ -288,6 +313,15 @@ namespace ASP.Controllers
 
                 userlotterylist = unsorteduserlotterylist.OrderBy(v => v).ToList();
                 //the list is sorted so it can be compared
+
+                ////Check if lotto numbers selected are unique
+                //bool isUnique = userlotterylist.Distinct().Count() == userlotterylist.Count();
+
+                //if (isUnique)
+                //{
+                //    uniqueIdentifier = true;
+                //}
+
                 return userlotterylist;
             }
 
