@@ -13,29 +13,29 @@
     </Page.DataContext>
     <Page.Resources>
         <Style x:Key="bg" TargetType="Grid">
-            <Setter Property="Background" Value="Bisque"></Setter>
+            <Setter Property="Background" Value="LightBlue"></Setter>
         </Style>
         <Style x:Key="font" TargetType="TextBlock">
             <Setter Property="FontStyle" Value="Normal"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="FontFamily" Value="Arial"></Setter>
-            <Setter Property="Foreground" Value="DarkOrange"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
         </Style>
         <Style x:Key="bo" TargetType="Button">
-            <Setter Property="Background" Value="Tomato"></Setter>
-            <Setter Property="Foreground" Value="Yellow"></Setter>
+            <Setter Property="Background" Value="Aquamarine"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="Chocolate"></Setter>
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Chocolate"></Setter>
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="tab" TargetType="TabItem">
-            <Setter Property="Background" Value="Tomato"></Setter>
-            <Setter Property="Foreground" Value="Yellow"></Setter>
+            <Setter Property="Background" Value="Aquamarine"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter Property="Background" Value="Chocolate" />
