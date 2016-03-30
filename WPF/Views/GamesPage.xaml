@@ -58,7 +58,7 @@
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="162,38,326,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Width="57"/>
                     <TextBox Text="{Binding name}" HorizontalAlignment="Center" Height="23" Margin="254,38,171,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="155,88,326,0" TextWrapping="Wrap" Text="Payout:" VerticalAlignment="Top" Width="64"/>
-                    <TextBox Text="{Binding payout}" HorizontalAlignment="Center" Height="23" Margin="254,86,171,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+                    <TextBox Text="{Binding payout}" HorizontalAlignment="Center" Height="23" Margin="254,86,171,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Button Style="{StaticResource bo}" Command="{Binding addGameCommand}" Content="Add Game" HorizontalAlignment="Left" Margin="210,244,0,0" VerticalAlignment="Top" Width="120" Height="46"/>
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="169,148,326,0" TextWrapping="Wrap" Text="Price:" VerticalAlignment="Top" Width="50"/>
                     <TextBox Text="{Binding price}" HorizontalAlignment="Center" Height="23" Margin="254,146,171,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.581,2.178"/>
@@ -68,9 +68,9 @@
                 <Grid Style="{StaticResource bg}">
                     <Button Style="{StaticResource bo}" Command="{Binding readGameByIDCommand}" Content="View Game" HorizontalAlignment="Center" Margin="356,21,94,0" VerticalAlignment="Top" Width="95" Height="50"/>
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="129,30,338,0" TextWrapping="Wrap" Text="Game ID:" VerticalAlignment="Top"/>
-                    <TextBox Text="{Binding game_ID}" HorizontalAlignment="Center" Height="23" Margin="228,30,247,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" TextChanged="TextBox_TextChanged_1"/>
+                    <TextBox Text="{Binding game_ID}" HorizontalAlignment="Center" Height="23" Margin="228,30,247,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
                     <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding game}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Height="64" Width="525"/>
-                    <Button Style="{StaticResource bo}" Command="{Binding readAllGamesCommand}" Content="View Games" HorizontalAlignment="Center" Margin="219,170,231,0" VerticalAlignment="Top" Width="95" Height="50" Click="Button_Click"/>
+                    <Button Style="{StaticResource bo}" Command="{Binding readAllGamesCommand}" Content="View Games" HorizontalAlignment="Center" Margin="219,170,231,0" VerticalAlignment="Top" Width="95" Height="50"/>
                     <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding games}" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="243" Width="525"/>
                 </Grid>
             </TabItem>

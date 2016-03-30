@@ -79,7 +79,7 @@
                 <Grid Style="{StaticResource bg}">
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="215,89,332,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="0.087,0.676"/>
                     <TextBox Text="{Binding member_ID}" HorizontalAlignment="Center" Height="23" Margin="273,87,223,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
-                    <Button Style="{StaticResource bo}" Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Center" Margin="230,228,236,0" VerticalAlignment="Top" Width="104" Height="50" Click="Button_Click"/>
+                    <Button Style="{StaticResource bo}" Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Center" Margin="230,228,236,0" VerticalAlignment="Top" Width="104" Height="50"/>
                 </Grid>
             </TabItem>
         </TabControl>
