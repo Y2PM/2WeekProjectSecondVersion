@@ -13,7 +13,7 @@
     </Page.DataContext>
     <Page.Resources>
         <Style x:Key="bg" TargetType="Grid">
-            <Setter Property="Background" Value="Bisque"></Setter>
+            <Setter Property="Background" Value="LightBlue"></Setter>
         </Style>
         <Style x:Key="font" TargetType="TextBlock">
             <Setter Property="FontStyle" Value="Normal"></Setter>
