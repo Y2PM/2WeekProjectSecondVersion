@@ -27,5 +27,6 @@ namespace DBLayer
     
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
     }
 }
