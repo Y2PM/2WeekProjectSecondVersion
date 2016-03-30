@@ -4193,7 +4193,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
 }
 
-.navbar-brand {
+/*.navbar-brand {
   float: left;
   padding: 15px 15px;
   font-size: 18px;
@@ -4209,7 +4209,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   .navbar > .container .navbar-brand {
     margin-left: -15px;
   }
-}
+}*/
 
 .navbar-toggle {
   position: relative;
@@ -4390,7 +4390,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-color: #e7e7e7;
 }
 
-.navbar-default .navbar-brand {
+/*.navbar-default .navbar-brand {
   color: green;
 }
 
@@ -4398,7 +4398,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-brand:focus {
   color:white;
   background-color: transparent;
-}
+}*/
 
 .navbar-default .navbar-text {
   color: #777777;
@@ -4507,7 +4507,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-color: #080808;
 }
 
-.navbar-inverse .navbar-brand {
+/*.navbar-inverse .navbar-brand {
   color: green;
 }
 
@@ -4515,7 +4515,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-brand:focus {
   color: green;
   background-color: transparent;
-}
+}*/
 
 .navbar-inverse .navbar-text {
   color: #999999;
@@ -6837,7 +6837,24 @@ body
 
 div li
 {
-  color:red;
-  font-size:1.5em;
-  background-color:blue;
+  text-align:center;
+  font-size:1.25em;
+  border-left:solid 1px;
+  border-color:rgb(136,0,21);
+  transition: background-color 0.4s linear;
+  
 }
+#contact,#loginLink
+{
+    border-right:solid  1px;
+}
+div li:hover
+{
+  background-color:rgba(136,0,21,1); 
+}
+
+#partial
+{
+   
+}
+
