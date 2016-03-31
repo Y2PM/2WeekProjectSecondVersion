@@ -1,2 +1,12 @@
 30.03.2016 09:03:40 [12] INFO ReadMember.cs - Login fail 
 31.03.2016 09:44:55 [10] INFO ReadMember.cs - Login fail 
+31.03.2016 10:06:19 [11] INFO ReadMember.cs - Login fail 
+31.03.2016 10:07:09 [11] INFO ReadMember.cs - Login fail 
+31.03.2016 10:09:48 [11] INFO ReadMember.cs - Login sucsess 
+31.03.2016 10:10:24 [13] INFO ReadMember.cs - Login sucsess 
+31.03.2016 10:14:17 [10] INFO ReadMember.cs - Login fail 
+31.03.2016 10:14:29 [12] INFO ReadMember.cs - Login fail 
+31.03.2016 10:14:30 [12] INFO ReadMember.cs - Login fail 
+31.03.2016 10:17:07 [11] INFO ReadMember.cs - Login fail 
+31.03.2016 10:31:20 [12] INFO ReadMember.cs - Login fail 
+31.03.2016 10:31:40 [13] INFO ReadMember.cs - Login sucsess, Username: 1A 

@@ -47,6 +47,7 @@ namespace DBLayer.Read
             var memberidquery = (from e in context.Members
                                  where e.m_username == user
                                  select e.member_id);
+
             foreach (var mem in memberidquery)
             {
                 memid = Convert.ToInt32(mem);
@@ -60,7 +61,7 @@ namespace DBLayer.Read
             }
             if (m.m_password == pass)
             {
-                logger.Info("Login sucsess");
+                logger.Info("Login sucsess, Username: "+ m.m_username);
                 return true;
             }
             else
