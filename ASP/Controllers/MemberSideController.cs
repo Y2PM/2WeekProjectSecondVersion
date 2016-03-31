@@ -25,9 +25,9 @@ namespace ASP.Controllers
         public bool uniqueIdentifier { get; set; }
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -214,7 +214,9 @@ namespace ASP.Controllers
             //{
             //proxy check current password matches password and update the member password to the editmode.newpassword
             //}
-            
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            proxy.UpdateMemberAccount(currentuser, currentbalance, editmodel.addtobalance);
+            editmodel.balancesuccess = "£" + editmodel.addtobalance + " was added to your account";
             return View("EditMember", editmodel);
         }
             List<int> lotterylist;

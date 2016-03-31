@@ -130,6 +130,10 @@ namespace DBLayer.Read
                 {
                     return true;
                 }
+                    else if (username == "")
+                {
+                    return false;
+                }
                 else
                 {
                     return false;
