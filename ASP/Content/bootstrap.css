@@ -1,3 +1,4 @@
+
 /* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -313,7 +314,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Bauhaus 93", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -475,7 +476,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Bauhaus 93", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
 }
@@ -6821,6 +6822,7 @@ td.visible-print {
 
 body
 {
+  font-family: "Bauhaus 93";
   color:black;
   background-image:url(http://www.likehdwallpaper.com/wp-content/uploads/Simple%20Background/FTP1/1600x900/Simple%20light%20red%20background%20Wallpaper%201600x900.jpg);
  /* background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEsav1AXWLZ4eFh1ODIPYMYSmfKbVOVSbbmDuMyW-7DSPq8EUS);*/
@@ -6851,10 +6853,26 @@ div li
 div li:hover
 {
   background-color:rgba(136,0,21,1); 
+  color: yellow;
 }
 
-#partial
+.games
 {
-   
+    
+    margin:auto;
+    margin-top: 15px;
+    height:700px;
+    width:800px;
+    
 }
+
+.game
+{
+    font-size: 1.15em;
+    height:170px;
+    margin-top: 50px;
+    background-color:rgba(136,0,21,0.5);
+    box-shadow: 2px 2px 2px 2px;
+}
+
 

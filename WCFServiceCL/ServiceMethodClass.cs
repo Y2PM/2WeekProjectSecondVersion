@@ -59,6 +59,12 @@ namespace WCFServiceCL
             return ReadMemberObject.ReadSpecificMember(id);
         }
 
+        public List<Log> ReadAllLogsServiceMethod()
+        {
+            ReadMember ReadMemberObject = new ReadMember(context);
+            return ReadMemberObject.ReadAllLogs();
+        }
+
         public void UpdateGameServiceMethod(Game gameToUpdate)
         {
             UpdateGame UpdateGameObject = new UpdateGame();

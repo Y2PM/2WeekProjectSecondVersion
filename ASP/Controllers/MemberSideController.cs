@@ -20,10 +20,6 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        //for the graphics lotto balls
-        public bool isUnique;
-        public bool uniqueIdentifier { get; set; }
-
         //initialise service
         static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
@@ -56,7 +52,6 @@ namespace ASP.Controllers
                 gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
                 gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                 return View("Games", gamemodel);
-                //return Games(gamemodel);
             }
             else
             {
@@ -350,12 +345,7 @@ namespace ASP.Controllers
                 //the list is sorted so it can be compared
 
                 ////Check if lotto numbers selected are unique
-                //bool isUnique = userlotterylist.Distinct().Count() == userlotterylist.Count();
 
-                //if (isUnique)
-                //{
-                //    uniqueIdentifier = true;
-                //}
 
                 return userlotterylist;
             }

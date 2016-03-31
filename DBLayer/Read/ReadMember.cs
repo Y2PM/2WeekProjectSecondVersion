@@ -1,5 +1,4 @@
 ﻿using log4net;
-using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +38,17 @@ namespace DBLayer.Read
             else { return noMemberFound; }
         }
 
+        public List<Log> ReadAllLogs()
+        {
+            List<Log> _logs = context.Logs.ToList<Log>();
+            return _logs;
+        }
+
         public bool login(string user, string pass)
         {
-            int memid = 0;           
+            int memid = 0;
+            string message = "Login fail";
+
             var memberidquery = (from e in context.Members
                                  where e.m_username == user
                                  select e.member_id);
@@ -50,11 +57,11 @@ namespace DBLayer.Read
             {
                 memid = Convert.ToInt32(mem);
             }
+
             var m = context.Members.Find(memid);
-            string messageF = "Login fail, Username: " + user;
             if (memid == 0)
             {
-                logger.Info(messageF);
+                logger.Info(message);
                 return false;
             }
             if (m.m_password == pass)
@@ -64,7 +71,7 @@ namespace DBLayer.Read
             }
             else
             {
-                logger.Info(messageF);
+                logger.Info(message);
                 return false;
             }
         }
@@ -128,10 +135,6 @@ namespace DBLayer.Read
                 if (memberlist.Count == 0)
                 {
                     return true;
-                }
-                    else if (username == "")
-                {
-                    return false;
                 }
                 else
                 {
