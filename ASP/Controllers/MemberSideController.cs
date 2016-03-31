@@ -25,10 +25,9 @@ namespace ASP.Controllers
         public bool uniqueIdentifier { get; set; }
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11699:8081/Service"); //Oyeniyi
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -52,7 +51,12 @@ namespace ASP.Controllers
                 //logwork(logmodel.Username, logmodel.Password) == true)
             {
                 currentuser = proxy.ReadCurrentMember(logmodel.Username, logmodel.Password);
+                GamesModel gamemodel = new GamesModel();
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                 return View("Games", gamemodel);
+                //return Games(gamemodel);
             }
             else
             {
@@ -131,30 +135,10 @@ namespace ASP.Controllers
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
-
-
-
-                    //if (uniqueIdentifier == true)
-                    //{
-                    //    gamemodel.lotteryerror = "";
-                    //}
-                    //else
-                    //{
-                    //    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
-                    //}
-                    //return View("Games", gamemodel);
-
-
-
-                    if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
-                    {
-                        gamemodel.lotteryerror = "";
-                    }
-                    else
-                    {
-                        gamemodel.lotteryerror = " ";
-
-
+                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                }
+                else
+                {
                         if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
                         {
                             //read game payout and add the current user's account
@@ -166,10 +150,10 @@ namespace ASP.Controllers
                         {
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
+            }
                         return View("Games", gamemodel);
                     }
-                }
-            }
+                
             else
             {
                 gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
@@ -209,13 +193,25 @@ namespace ASP.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditMember(EditMemberModel editmodel)
+        public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
+            //add your update member method using currentuser and editmodel.newpassword
             //if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
             //{
             //proxy check current password matches password and update the member password to the editmode.newpassword
             //}
+            editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
+            editmodel.passwordsuccess = "Your password has been changed successfully";
+            return View("EditMember", editmodel);
+        }
+
+        [HttpPost]
+        public ActionResult EditMemberBalance(EditMemberModel editmodel)
+        {
             
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            proxy.UpdateMemberAccount(currentuser, currentbalance, editmodel.addtobalance);
+            editmodel.balancesuccess = "£" + editmodel.addtobalance + " was added to your account";
             return View("EditMember", editmodel);
         }
             List<int> lotterylist;
@@ -353,7 +349,7 @@ namespace ASP.Controllers
 
             public bool LottoWin(int o, int t, int th, int f, int fi, int s)
             {
-                List<int> game = Lottery(); //----------------> this is the list of the lottery 
+                game = Lottery(); //----------------> this is the list of the lottery 
                 List<int> user = Userlottery(o, t, th, f, fi, s);
                 int matches = Matcher(game, user);
                 if (Lotteryresult(game, user) == true)
