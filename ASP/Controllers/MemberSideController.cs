@@ -20,16 +20,14 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        //for the graphics lotto balls.
-        public List<int> game;
-
+        //for the graphics lotto balls
         public bool isUnique;
         public bool uniqueIdentifier { get; set; }
 
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -37,6 +35,7 @@ namespace ASP.Controllers
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
+        static public List<int> game;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -86,7 +85,7 @@ namespace ASP.Controllers
             }
         }
 
-        public ActionResult Games()
+        public ActionResult Games(GamesModel gamemodel)
         {
             gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
             gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
@@ -122,7 +121,8 @@ namespace ASP.Controllers
             return View("Games", gamemodel);
         }
 
-        public ActionResult PlayLottery()
+        [HttpPost]
+        public ActionResult PlayLottery(GamesModel gamemodel)
         {
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceL) == true)
@@ -131,7 +131,7 @@ namespace ASP.Controllers
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
 
-                    
+
 
                     //if (uniqueIdentifier == true)
                     //{
@@ -151,31 +151,33 @@ namespace ASP.Controllers
                     }
                     else
                     {
-                        gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
-                    }
-                    return View("Games", gamemodel);
-                }
+                        gamemodel.lotteryerror = " ";
 
-                if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
-                {
-                    //read game payout and add the current user's account
-                    decimal payout = proxy.ReadGamePayout(gamenamelottery);
-                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                    gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
+
+                        if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+                        {
+                            //read game payout and add the current user's account
+                            decimal payout = proxy.ReadGamePayout(gamenamelottery);
+                            proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                            gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                        }
+                        else
+                        {
+                            gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
+                        }
+                        return View("Games", gamemodel);
+                    }
                 }
                 else
                 {
-                    gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
+                    gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
                 }
             }
-            else
-            {
-                gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
-            }
-                return View("Games", gamemodel);
+            return View("Games", gamemodel);
         }
 
-        public ActionResult PlayLucky()
+        [HttpPost]
+        public ActionResult PlayLucky(GamesModel gamemodel)
         {
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceLN) == true)
@@ -260,6 +262,7 @@ namespace ASP.Controllers
                 lotterylist = unsortedlotterylist.OrderBy(v => v).ToList();
                 //this sorts the list in ascending order
                 return lotterylist;
+
             }
 
             public bool userlottovalidate(int one, int two, int three, int four, int five, int six)
