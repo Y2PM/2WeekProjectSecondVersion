@@ -18,11 +18,11 @@ namespace ASP.Controllers
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
         EditMemberModel editmodel = new EditMemberModel();
-        Member memberBeingAddedToDb = new Member();
+        Member memberBeingSent = new Member();
 
         //initialise service
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -42,7 +42,6 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
-
             if (proxy.LoginServiceMethod(logmodel.Username, logmodel.Password) == true)
                 //logwork(logmodel.Username, logmodel.Password) == true)
             {
@@ -70,12 +69,11 @@ namespace ASP.Controllers
         {
             if (proxy.ReadMemberNewUsername(signmodel.Username) == true) //if sign up is successfully completed
             {
-
-                memberBeingAddedToDb.m_name = signmodel.Name;
-                memberBeingAddedToDb.m_username = signmodel.Username;
-                memberBeingAddedToDb.m_password = signmodel.Password;
-                memberBeingAddedToDb.m_account = 0.0m;
-                proxy.CreateMemberServiceMethod(memberBeingAddedToDb);
+                memberBeingSent.m_name = signmodel.Name;
+                memberBeingSent.m_username = signmodel.Username;
+                memberBeingSent.m_password = signmodel.Password;
+                memberBeingSent.m_account = 0.0m;
+                proxy.CreateMemberServiceMethod(memberBeingSent);
                 return View("LogIn", logmodel);
             }
             else
@@ -157,13 +155,12 @@ namespace ASP.Controllers
                         {
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
-            }
+                }
                 gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
                 gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
                 gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
-                        return View("Games", gamemodel);
-                    }
-                
+                return View("Games", gamemodel);
+            }
             else
             {
                 gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
@@ -214,27 +211,44 @@ namespace ASP.Controllers
             }
         }
 
+        //[HttpPost]
+        //public ActionResult EditMemberPassword(EditMemberModel editmodel)
+        //{
+        //    ////add your update member method using currentuser and editmodel.newpassword
+        //    //if (editmodel.newpassword != editmodel.confirmpassword)
+        //    //{
+        //    //    //update member password with editmodel.confirmpassword value
+        //    //    editmodel.passwordsuccess = "Your password has been changed successfully";
+        //    //}
+        //    //else
+        //    //{
+        //    //    editmodel.passworderror = "Please ensure you have typed in the correct password";
+        //    //}
+        //    ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+        //    //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
+        //    //{
+        //    //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
+        //    //}
+
+        //    //memberBeingSent.member_id = currentuser;
+        //    //memberBeingSent.m_password = editmodel.newpassword;
+        //    //proxy.UpdateMemberServiceMethod(memberBeingSent);
+            
+        //    return View("EditMember", editmodel);
+        //}
+
         [HttpPost]
         public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
-            ////add your update member method using currentuser and editmodel.newpassword
-            //if (editmodel.newpassword != editmodel.confirmpassword)
-            //{
-            //    //update member password with editmodel.confirmpassword value
-            //    editmodel.passwordsuccess = "Your password has been changed successfully";
-            //}
-            //else
-            //{
-            //    editmodel.passworderror = "Please ensure you have typed in the correct password";
-            //}
-            ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
-            //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
-            //{
-            //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
-            //}
-            
-            
-            
+
+            if (editmodel.newpassword != editmodel.confirmpassword || proxy.UpdateMemberPassword(currentuser, editmodel.currentpassword, editmodel.confirmpassword) == false)
+            {
+                editmodel.passworderror = "Please ensure you have typed in the correct password";
+            }
+            else
+            {
+                editmodel.passwordsuccess = "Your password has been changed successfully";
+            }
             return View("EditMember", editmodel);
         }
 

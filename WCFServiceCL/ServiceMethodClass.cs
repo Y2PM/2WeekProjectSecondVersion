@@ -130,5 +130,11 @@ namespace WCFServiceCL
             ReadGame ReadGameObject = new ReadGame(context);
             return ReadGameObject.ReadGamePrice(gamename);
         }
+
+        public bool UpdateMemberPassword(int currentuser, string p1, string p2)
+        {
+            UpdateMember UpdateMemberObject = new UpdateMember();
+            return UpdateMemberObject.UpdateMemberPassword(currentuser, p1, p2);
+        }
     }
 }

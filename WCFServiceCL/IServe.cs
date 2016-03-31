@@ -66,5 +66,8 @@ namespace WCFServiceCL
 
         [OperationContract]
         decimal ReadGamePrice(string gamename);
+
+        [OperationContract]
+        bool UpdateMemberPassword(int currentuser, string p1, string p2);
     }
 }
