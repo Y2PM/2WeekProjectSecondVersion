@@ -218,15 +218,21 @@ namespace ASP.Controllers
         public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
             ////add your update member method using currentuser and editmodel.newpassword
+            //if (editmodel.newpassword != editmodel.confirmpassword)
+            //{
+            //    //update member password with editmodel.confirmpassword value
+            //    editmodel.passwordsuccess = "Your password has been changed successfully";
+            //}
+            //else
+            //{
+            //    editmodel.passworderror = "Please ensure you have typed in the correct password";
+            //}
             ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
             //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
             //{
             //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
             //}
-            //else
-            //{
-            //    editmodel.passwordsuccess = "Your password has been changed successfully";
-            //}
+            
             
             
             return View("EditMember", editmodel);
