@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:WPF.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="GamesPage" Height="600" Width="600">
+	Title="GamesPage" Height="650" Width="650">
 
     <Page.DataContext>
         <vm:GamesPageViewModel/>
@@ -22,16 +22,24 @@
             <Setter Property="Foreground" Value="DarkOrange"></Setter>
         </Style>
         <Style x:Key="bo" TargetType="Button">
-            <Setter Property="Background" Value="Tomato"></Setter>
             <Setter Property="Foreground" Value="Yellow"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="Chocolate"></Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Chocolate"></Setter>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" BorderBrush="LightGoldenrodYellow" CornerRadius="5" BorderThickness="2" Background="Tomato">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="5"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkSlateBlue"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="tab" TargetType="TabItem">
             <Setter Property="Background" Value="Tomato"></Setter>
@@ -68,9 +76,9 @@
                     <Button Style="{StaticResource bo}" Command="{Binding readGameByIDCommand}" Content="View Game" HorizontalAlignment="Center" Margin="356,21,94,0" VerticalAlignment="Top" Width="95" Height="50"/>
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="129,30,338,0" TextWrapping="Wrap" Text="Game ID:" VerticalAlignment="Top"/>
                     <TextBox Text="{Binding game_ID}" HorizontalAlignment="Center" Height="23" Margin="228,30,247,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                    <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding game}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Height="51" Width="525"/>
+                    <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding game}" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Height="64" Width="525"/>
                     <Button Style="{StaticResource bo}" Command="{Binding readAllGamesCommand}" Content="View Games" HorizontalAlignment="Center" Margin="219,170,231,0" VerticalAlignment="Top" Width="95" Height="50"/>
-                    <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding games}" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="243" Width="525"/>
+                    <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding games}" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="243" Width="525"/>
                 </Grid>
             </TabItem>
             <TabItem Style="{StaticResource tab}" Header="Update Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-2,0,0,0">
