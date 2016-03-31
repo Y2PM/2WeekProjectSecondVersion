@@ -56,7 +56,7 @@
                                 <Setter Property="Cursor" Value="Wait"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="DarkSlateBlue"></Setter>
+                                <Setter TargetName="border" Property="Background" Value="Orange"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
