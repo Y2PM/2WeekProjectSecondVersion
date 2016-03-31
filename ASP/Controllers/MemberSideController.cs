@@ -132,7 +132,7 @@ namespace ASP.Controllers
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
 
-                    
+
 
                     //if (uniqueIdentifier == true)
                     //{
@@ -152,28 +152,29 @@ namespace ASP.Controllers
                     }
                     else
                     {
-                    gamemodel.lotteryerror = " ";
+                        gamemodel.lotteryerror = " ";
 
 
-                if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
-                {
-                    //read game payout and add the current user's account
-                    decimal payout = proxy.ReadGamePayout(gamenamelottery);
-                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                        gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                        if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+                        {
+                            //read game payout and add the current user's account
+                            decimal payout = proxy.ReadGamePayout(gamenamelottery);
+                            proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                            gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                        }
+                        else
+                        {
+                            gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
+                        }
+                        return View("Games", gamemodel);
+                    }
                 }
                 else
                 {
-                        gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
-                    }
-                    return View("Games", gamemodel);
+                    gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
                 }
             }
-            else
-            {
-                gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
-            }
-                return View("Games", gamemodel);
+            return View("Games", gamemodel);
         }
 
         [HttpPost]
