@@ -20,7 +20,7 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        //for the graphics lotto balls
+        //for the graphics lotto balls.
         public List<int> game;
 
         public bool isUnique;
