@@ -31,6 +31,7 @@ namespace ASP.Controllers
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
+        static List<int> game;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -80,7 +81,7 @@ namespace ASP.Controllers
             }
         }
 
-        public ActionResult Games()
+        public ActionResult Games(GamesModel gamemodel)
         {
             gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
             gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
@@ -116,7 +117,8 @@ namespace ASP.Controllers
             return View("Games", gamemodel);
         }
 
-        public ActionResult PlayLottery()
+        [HttpPost]
+        public ActionResult PlayLottery(GamesModel gamemodel)
         {
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceL) == true)
@@ -124,27 +126,26 @@ namespace ASP.Controllers
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
-                    if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
-                    {
-                        gamemodel.lotteryerror = "";
-                    }
-                    else
-                    {
-                        gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
-                    }
+                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
                     return View("Games", gamemodel);
-                }
-
-                if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
-                {
-                    //read game payout and add the current user's account
-                    decimal payout = proxy.ReadGamePayout(gamenamelottery);
-                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                    gamemodel.resultmessageO = "Congrats, you won! Keep your lucky streak going and play on!";
                 }
                 else
                 {
-                    gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
+                    gamemodel.lotteryerror = " ";
+
+
+                    if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+                    {
+                        //read game payout and add the current user's account
+                        decimal payout = proxy.ReadGamePayout(gamenamelottery);
+                        proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                        gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                    }
+                    else
+                    {
+                        gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
+                    }
+                    return View("Games", gamemodel);
                 }
             }
             else
@@ -154,7 +155,8 @@ namespace ASP.Controllers
                 return View("Games", gamemodel);
         }
 
-        public ActionResult PlayLucky()
+        [HttpPost]
+        public ActionResult PlayLucky(GamesModel gamemodel)
         {
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceLN) == true)
@@ -319,7 +321,7 @@ namespace ASP.Controllers
 
             public bool LottoWin(int o, int t, int th, int f, int fi, int s)
             {
-                List<int> game = Lottery();
+                game = Lottery();
                 List<int> user = Userlottery(o, t, th, f, fi, s);
                 int matches = Matcher(game, user);
                 if (Lotteryresult(game, user) == true)
