@@ -10,6 +10,6 @@ namespace ASP.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string logerror { get; set; }
-        
+        public string accessmessage { get; set; }
     }
 }

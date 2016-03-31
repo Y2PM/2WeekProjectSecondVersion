@@ -92,10 +92,19 @@ namespace ASP.Controllers
 
         public ActionResult Games(GamesModel gamemodel)
         {
-            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
-            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
-            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
-            return View(gamemodel);
+            if (currentuser != 0)
+            {
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
+                return View(gamemodel);
+            }
+            else
+            {
+                LogInModel logmodel = new LogInModel();
+                logmodel.accessmessage = "To access the Games page you must log in";
+                return View("LogIn", logmodel);
+            }
         }
 
         //remove return view for all the games (or make it just the games page and gamemodel)
@@ -189,7 +198,16 @@ namespace ASP.Controllers
 
         public ActionResult EditMember()
         {
+            if (currentuser != 0)
+            {
             return View("EditMember", editmodel);
+            }
+            else
+            {
+                LogInModel logmodel = new LogInModel();
+                logmodel.accessmessage = "To access the Edit Account page you must log in";
+                return View("LogIn", logmodel);
+            }
         }
 
         [HttpPost]
