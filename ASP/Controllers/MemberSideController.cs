@@ -168,11 +168,12 @@ namespace ASP.Controllers
                         return View("Games", gamemodel);
                     }
                 }
-                else
-                {
-                    gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
-                }
             }
+            else
+            {
+                gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
+            }
+            
             return View("Games", gamemodel);
         }
 
