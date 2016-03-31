@@ -21,8 +21,6 @@ namespace ASP.Controllers
         Member memberBeingAddedToDb = new Member();
 
         //for the graphics lotto balls
-        public List<int> game;
-
         public bool isUnique;
         public bool uniqueIdentifier { get; set; }
 
@@ -37,6 +35,7 @@ namespace ASP.Controllers
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
+        static public List<int> game;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -169,11 +168,12 @@ namespace ASP.Controllers
                         return View("Games", gamemodel);
                     }
                 }
-                else
-                {
-                    gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
-                }
             }
+            else
+            {
+                gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
+            }
+            
             return View("Games", gamemodel);
         }
 
