@@ -32,9 +32,10 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Opacity" Value="5"></Setter>
+                                <Setter Property="Cursor" Value="Wait"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="DarkSlateBlue"></Setter>
+                                <Setter TargetName="border" Property="Background" Value="Orange"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -44,14 +45,24 @@
         <Style x:Key="tab" TargetType="TabItem">
             <Setter Property="Background" Value="Tomato"></Setter>
             <Setter Property="Foreground" Value="Yellow"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Background" Value="Chocolate" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="true">
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid>
+                            <Border Name="Border" Margin="0,0,0,0" Background="Tomato" BorderBrush="White" BorderThickness="1" CornerRadius="5,5,0,0" >
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,5,10,5"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="Orange" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="dg" TargetType="DataGrid">
             <Setter Property="Background" Value="White"></Setter>
@@ -81,7 +92,7 @@
                     <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding games}" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="243" Width="525"/>
                 </Grid>
             </TabItem>
-            <TabItem Style="{StaticResource tab}" Header="Update Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-2,0,0,0">
+            <TabItem Style="{StaticResource tab}" Header="Update Game">
                 <Grid Style="{StaticResource bg}">
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="116,47,328,0" TextWrapping="Wrap" Text="ID of Game:" VerticalAlignment="Top" Width="101"/>
                     <TextBox Text="{Binding game_ID}" HorizontalAlignment="Center" Height="23" Margin="268,47,207,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
@@ -94,7 +105,7 @@
                     <Button Style="{StaticResource bo}"  Command="{Binding updateGameCommand}" Content="Update" HorizontalAlignment="Center" Margin="217,257,221,0" VerticalAlignment="Top" Width="107" Height="55"/>
                 </Grid>
             </TabItem>
-            <TabItem Style="{StaticResource tab}" Header="Delete Game" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-3,0,0,0">
+            <TabItem Style="{StaticResource tab}" Header="Delete Game">
                 <Grid Style="{StaticResource bg}">
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="232,68,290,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="-1.696,1.095"/>
                     <TextBox Text="{Binding game_ID}" HorizontalAlignment="Center" Height="23" Margin="278,68,195,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>

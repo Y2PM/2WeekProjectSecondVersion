@@ -32,6 +32,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Opacity" Value="5"></Setter>
+                                <Setter Property="Cursor" Value="Wait"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="GhostWhite"></Setter>
@@ -42,16 +43,25 @@
             </Setter>
         </Style>
         <Style x:Key="tab" TargetType="TabItem">
-            <Setter Property="Background" Value="Aquamarine"></Setter>
             <Setter Property="Foreground" Value="Blue"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Background" Value="Chocolate" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="true">
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid>
+                            <Border Name="Border" Margin="0,0,0,0" Background="Aquamarine" BorderBrush="White" BorderThickness="1" CornerRadius="5,5,0,0" >
+                               <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,5,10,5"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="dg" TargetType="DataGrid">
             <Setter Property="Background" Value="White"></Setter>
@@ -90,14 +100,14 @@
                     <Button Style="{StaticResource bo}" Command="{Binding updateMemberCommand}" Content="Update" HorizontalAlignment="Left" Margin="200,236,0,0" VerticalAlignment="Top" Width="108" Height="50" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Style="{StaticResource tab}" Header="Delete Member" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="98" Margin="-2,0">
+            <TabItem Style="{StaticResource tab}" Header="Delete Member" >
                 <Grid Style="{StaticResource bg}">
                     <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="215,89,332,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top" RenderTransformOrigin="0.087,0.676"/>
                     <TextBox Text="{Binding member_ID}" HorizontalAlignment="Center" Height="23" Margin="273,87,223,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
                     <Button Style="{StaticResource bo}" Command="{Binding deleteMemberCommand}" Content="Delete" HorizontalAlignment="Center" Margin="230,228,236,0" VerticalAlignment="Top" Width="104" Height="50"/>
                 </Grid>
             </TabItem>
-            <TabItem Style="{StaticResource tab}" Header="View Logs" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="88" Margin="-2,0,-3,0">
+            <TabItem Style="{StaticResource tab}" Header="View Logs">
                 <Grid Style="{StaticResource bg}">
                     <Button Style="{StaticResource bo}" Command="{Binding readAllLogsCommand}" Content="View Logs" HorizontalAlignment="Center" Margin="252,14,242,0" VerticalAlignment="Top" Width="76" Height="36"/>
                     <DataGrid Style="{StaticResource dg}" ItemsSource="{Binding logs}" ScrollViewer.CanContentScroll="True" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Grid.ColumnSpan="4" Height="434" Width="534"/>
