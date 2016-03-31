@@ -25,9 +25,9 @@ namespace ASP.Controllers
         public bool uniqueIdentifier { get; set; }
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
@@ -132,6 +132,9 @@ namespace ASP.Controllers
             {
                 gamemodel.fundserrorO = "You have insufficient funds to play this game. Go to Edit Account.";
             }
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
@@ -160,6 +163,9 @@ namespace ASP.Controllers
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
             }
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                         return View("Games", gamemodel);
                     }
                 
@@ -193,6 +199,9 @@ namespace ASP.Controllers
             {
                 gamemodel.fundserrorLN = "You have insufficient funds to play this game. Go to Edit Account.";
             }
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
@@ -237,6 +246,13 @@ namespace ASP.Controllers
             editmodel.balancesuccess = "£" + editmodel.addtobalance + " was added to your account";
             return View("EditMember", editmodel);
         }
+
+        public ActionResult LogOut()
+        {
+            currentuser = 0;
+            return View("SignUp", signmodel);
+        }
+
             List<int> lotterylist;
             List<int> userlotterylist;
             int result;
