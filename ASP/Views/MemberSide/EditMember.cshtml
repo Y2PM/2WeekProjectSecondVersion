@@ -15,6 +15,10 @@
         <label>New Password</label>
     
     @Html.PasswordFor(model => model.newpassword)
+
+        @*<label>Confirm Password</label>
+
+        @Html.PasswordFor(model => model.confirmpassword)*@
         <input type="submit" value="Change Password" />
     </p>
     @Html.DisplayFor(model => model.passworderror)
