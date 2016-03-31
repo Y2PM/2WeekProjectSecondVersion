@@ -5,28 +5,33 @@
 
 <style>
     input,
-select,
-textarea {
-    max-width: 60px;
-}
+    select,
+    textarea {
+        max-width: 60px;
+    }
 </style>
 
-<h1>Games</h1>
-<p>
-    <label>Odds N Evens</label> £@Html.DisplayFor(model => model.priceO)
-@using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
-{
-    <input type="submit" value="Play" />
-    @Html.DisplayFor(model => model.resultmessageO)
-}
-</p>
-@Html.DisplayFor(model => model.fundserrorO)
 
-<p>
-    <label>Lottery</label> £@Html.DisplayFor(model => model.priceL)
-@using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
-{
-    @Html.EditorFor(model => model.one, additionalViewData: new
+
+<div class="games">
+    <h1>Games</h1>
+    <div class="game">
+        <p>
+            <label>Odds N Evens</label> £@Html.DisplayFor(model => model.priceO)
+            @using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
+            {
+                <input type="submit" value="Play" />
+                @Html.DisplayFor(model => model.resultmessageO)
+            }
+        </p>
+        @Html.DisplayFor(model => model.fundserrorO)
+    </div>
+    <div class="game">
+        <p>
+            <label>Lottery</label> £@Html.DisplayFor(model => model.priceL)
+            @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Get))
+            {
+                @Html.EditorFor(model => model.one, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -35,7 +40,7 @@ textarea {
             max = 50
         }
     })
-    @Html.EditorFor(model => model.two, additionalViewData: new
+                @Html.EditorFor(model => model.two, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -44,7 +49,7 @@ textarea {
             max = 50
         }
     })
-    @Html.EditorFor(model => model.three, additionalViewData: new
+                @Html.EditorFor(model => model.three, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -53,7 +58,7 @@ textarea {
             max = 50
         }
     })
-    @Html.EditorFor(model => model.four, additionalViewData: new
+                @Html.EditorFor(model => model.four, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -62,7 +67,7 @@ textarea {
             max = 50
         }
     })
-    @Html.EditorFor(model => model.five, additionalViewData: new
+                @Html.EditorFor(model => model.five, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -71,7 +76,7 @@ textarea {
             max = 50
         }
     })
-    @Html.EditorFor(model => model.six, additionalViewData: new
+                @Html.EditorFor(model => model.six, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -80,17 +85,20 @@ textarea {
             max = 50
         }
     })
-    <input type="submit" value="Play" />
-    @Html.DisplayFor(model => model.resultmessageL)
-<p>@Html.DisplayFor(model => model.lotteryerror)</p>
-}
-@*</p>*@
-@Html.DisplayFor(model => model.fundserrorL)
-<p>
-    <label>Lucky Number</label> £@Html.DisplayFor(model => model.priceLN)
-    @using (Html.BeginForm("PlayLucky", "MemberSide", FormMethod.Post))
-    {
-        @Html.EditorFor(model => model.usernumber, additionalViewData: new
+                <input type="submit" value="Play" />
+                @Html.DisplayFor(model => model.resultmessageL)
+            <p>@Html.DisplayFor(model => model.lotteryerror)</p>
+            }
+            @*</p>*@
+            @Html.DisplayFor(model => model.fundserrorL)
+        </div>
+        <div class="game">
+            <p>
+
+                <label>Lucky Number</label> £@Html.DisplayFor(model => model.priceLN)
+                @using (Html.BeginForm("PlayLucky", "MemberSide", FormMethod.Post))
+                {
+                    @Html.EditorFor(model => model.usernumber, additionalViewData: new
     {
         htmlAttributes = new
         {
@@ -99,11 +107,14 @@ textarea {
             max = 9
         }
     })
-        <input type="submit" value="Play" />
-    @Html.DisplayFor(model => model.resultmessageLN)
-    }
-</p>
-@Html.DisplayFor(model => model.fundserrorLN)
+                    <input type="submit" value="Play" />
+                    @Html.DisplayFor(model => model.resultmessageLN)
+                }
+            </p>
+            @Html.DisplayFor(model => model.fundserrorLN)
+        </div>
+
+    </div>
 
 
 
