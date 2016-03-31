@@ -213,13 +213,18 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
-            //add your update member method using currentuser and editmodel.newpassword
-            //if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+            ////add your update member method using currentuser and editmodel.newpassword
+            ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+            //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
             //{
-            //proxy check current password matches password and update the member password to the editmode.newpassword
+            //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
             //}
-            editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
-            editmodel.passwordsuccess = "Your password has been changed successfully";
+            //else
+            //{
+            //    editmodel.passwordsuccess = "Your password has been changed successfully";
+            //}
+            
+            
             return View("EditMember", editmodel);
         }
 

@@ -9,7 +9,7 @@ namespace ASP.Models
     {
         public string currentpassword { get; set; }
         public string newpassword { get; set; }
-        public string confirmpassword { get; set; }
+        //public string confirmpassword { get; set; }
         public decimal addtobalance { get; set; }
         public string passworderror { get; set; }
         public string passwordsuccess { get; set; }
