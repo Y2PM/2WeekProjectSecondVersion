@@ -5,7 +5,7 @@
 
 <h2>Edit Account</h2>
 
-@using (Html.BeginForm("EditMember", "MemberSide", FormMethod.Post))
+@using (Html.BeginForm("EditMemberPassword", "MemberSide", FormMethod.Post))
 {
     <p>
         <label>Current Password</label>
@@ -21,7 +21,7 @@
 }
 @Html.DisplayFor(model => model.passwordsuccess)
 
-@using (Html.BeginForm("EditMember", "MemberSide", FormMethod.Post))
+@using (Html.BeginForm("EditMemberBalance", "MemberSide", FormMethod.Post))
 {
     <p>
         <label>Add to account </label>
