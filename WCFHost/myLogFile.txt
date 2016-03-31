@@ -18,3 +18,4 @@
 31.03.2016 11:21:06 [9] INFO ReadMember.cs - Login sucsess, Username: rocky 
 31.03.2016 11:24:45 [11] INFO ReadMember.cs - Login sucsess, Username: rocky 
 31.03.2016 11:36:25 [13] INFO ReadMember.cs - Login sucsess, Username: rocky 
+31.03.2016 11:45:29 [11] INFO ReadMember.cs - Login fail 
