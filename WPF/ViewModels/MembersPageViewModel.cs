@@ -1,17 +1,10 @@
-﻿using System;
+﻿using DBLayer;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using WPF.Helpers;
-using DBLayer;
-using DBLayer.Read;
-using DBLayer.Delete;
-using DBLayer.Update;
 using System.Collections.ObjectModel;
-using WCFServiceCL;
 using System.ServiceModel;
+using System.Windows.Input;
+using WCFServiceCL;
+using WPF.Helpers;
 
 namespace WPF.ViewModels
 {
@@ -38,10 +31,7 @@ namespace WPF.ViewModels
             set { _navigateToHomePageCommand = value; }
         }
 
-        public bool canNavigateToHomePage()
-        {
-            return true;
-        }
+        public bool canNavigateToHomePage() { return true; }
 
         public void navigateToHomePage()
         {
@@ -107,10 +97,7 @@ namespace WPF.ViewModels
             set { _readMemberByIDCommand = value; }
         }
 
-        public bool canReadMemberById()
-        {
-            return true;
-        }
+        public bool canReadMemberById() { return true; }
 
         public void readMemberByID()
         {
@@ -145,10 +132,7 @@ namespace WPF.ViewModels
             set { _readAllMembersCommand = value; }
         }
 
-        public bool canReadAllMembers()
-        {
-            return true;
-        }
+        public bool canReadAllMembers() { return true; }
 
         public void readAllMembers()
         {
@@ -171,10 +155,7 @@ namespace WPF.ViewModels
             set { _deleteMemberCommand = value; }
         }
 
-        public bool canDeleteMember()
-        {
-            return true;
-        }
+        public bool canDeleteMember() { return true; }
 
         public void deleteMember()
         {
@@ -195,10 +176,7 @@ namespace WPF.ViewModels
             set { _updateMemberCommand = value; }
         }
 
-        public bool canUpdateMember()
-        {
-            return true;
-        }
+        public bool canUpdateMember() { return true; }
 
         public void updateMember()
         {
@@ -206,6 +184,40 @@ namespace WPF.ViewModels
             memberBeingSent.m_name = member_Name;
             memberBeingSent.m_password = member_PW;
             proxy.UpdateMemberServiceMethod(memberBeingSent);
+        }
+
+        private ObservableCollection<Log> _logs;
+        public ObservableCollection<Log> logs
+        {
+            get { return _logs; }
+            set
+            {
+                _logs = value;
+                OnPropertyChanged("logs");
+            }
+        }
+
+        private ICommand _readAllLogsCommand;
+        public ICommand readAllLogsCommand
+        {
+            get
+            {
+                if (_readAllLogsCommand == null)
+                {
+                    _readAllLogsCommand = new Command(readAllLogs, canReadAllLogs);
+                }
+                return _readAllLogsCommand;
+            }
+            set { _readAllLogsCommand = value; }
+        }
+
+        public bool canReadAllLogs() { return true; }
+
+        public void readAllLogs()
+        {
+            List<Log> listFromReadAllLogs = new List<Log>();
+            listFromReadAllLogs = proxy.ReadAllLogsServiceMethod();
+            logs = new ObservableCollection<Log>(listFromReadAllLogs);
         }
 
     }
