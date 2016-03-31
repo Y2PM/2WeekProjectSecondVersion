@@ -20,13 +20,9 @@ namespace ASP.Controllers
         EditMemberModel editmodel = new EditMemberModel();
         Member memberBeingAddedToDb = new Member();
 
-        //for the graphics lotto balls
-        public bool isUnique;
-        public bool uniqueIdentifier { get; set; }
-
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -42,22 +38,26 @@ namespace ASP.Controllers
         {
             return View(logmodel);
         }
-
+        
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
 
             if (proxy.LoginServiceMethod(logmodel.Username, logmodel.Password) == true)
-            //logwork(logmodel.Username, logmodel.Password) == true)
+                //logwork(logmodel.Username, logmodel.Password) == true)
             {
                 currentuser = proxy.ReadCurrentMember(logmodel.Username, logmodel.Password);
+                GamesModel gamemodel = new GamesModel();
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                 return View("Games", gamemodel);
             }
             else
             {
                 logmodel.logerror = "Log in could not be completed. Please Ensure you have entered the correct username and password";
                 return View(logmodel);
-            }
+            } 
         }
 
         public ActionResult SignUp()
@@ -87,10 +87,19 @@ namespace ASP.Controllers
 
         public ActionResult Games(GamesModel gamemodel)
         {
-            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
-            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
-            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
-            return View(gamemodel);
+            if (currentuser != 0)
+            {
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
+                return View(gamemodel);
+            }
+            else
+            {
+                LogInModel logmodel = new LogInModel();
+                logmodel.accessmessage = "To access the Games page you must log in";
+                return View("LogIn", logmodel);
+            }
         }
 
         //remove return view for all the games (or make it just the games page and gamemodel)
@@ -118,6 +127,9 @@ namespace ASP.Controllers
             {
                 gamemodel.fundserrorO = "You have insufficient funds to play this game. Go to Edit Account.";
             }
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
@@ -130,30 +142,10 @@ namespace ASP.Controllers
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
-
-
-
-                    //if (uniqueIdentifier == true)
-                    //{
-                    //    gamemodel.lotteryerror = "";
-                    //}
-                    //else
-                    //{
-                    //    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
-                    //}
-                    //return View("Games", gamemodel);
-
-
-
-                    if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
-                    {
-                        gamemodel.lotteryerror = "";
-                    }
-                    else
-                    {
-                        gamemodel.lotteryerror = " ";
-
-
+                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                }
+                else
+                {
                         if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
                         {
                             //read game payout and add the current user's account
@@ -165,15 +157,18 @@ namespace ASP.Controllers
                         {
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
+            }
+                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                         return View("Games", gamemodel);
                     }
-                }
-            }
+                
             else
             {
                 gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
             }
-
+            
             return View("Games", gamemodel);
         }
 
@@ -199,246 +194,283 @@ namespace ASP.Controllers
             {
                 gamemodel.fundserrorLN = "You have insufficient funds to play this game. Go to Edit Account.";
             }
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
         public ActionResult EditMember()
         {
+            if (currentuser != 0)
+            {
+            return View("EditMember", editmodel);
+            }
+            else
+            {
+                LogInModel logmodel = new LogInModel();
+                logmodel.accessmessage = "To access the Edit Account page you must log in";
+                return View("LogIn", logmodel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditMemberPassword(EditMemberModel editmodel)
+        {
+            ////add your update member method using currentuser and editmodel.newpassword
+            //if (editmodel.newpassword != editmodel.confirmpassword)
+            //{
+            //    //update member password with editmodel.confirmpassword value
+            //    editmodel.passwordsuccess = "Your password has been changed successfully";
+            //}
+            //else
+            //{
+            //    editmodel.passworderror = "Please ensure you have typed in the correct password";
+            //}
+            ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+            //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
+            //{
+            //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
+            //}
+            
+            
+            
             return View("EditMember", editmodel);
         }
 
         [HttpPost]
-        public ActionResult EditMember(EditMemberModel editmodel)
+        public ActionResult EditMemberBalance(EditMemberModel editmodel)
         {
-            //if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
-            //{
-            //proxy check current password matches password and update the member password to the editmode.newpassword
-            //}
-
+            
+            decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            proxy.UpdateMemberAccount(currentuser, currentbalance, editmodel.addtobalance);
+            editmodel.balancesuccess = "£" + editmodel.addtobalance + " was added to your account";
             return View("EditMember", editmodel);
         }
-        List<int> lotterylist;
-        List<int> userlotterylist;
-        int result;
-        int matchcount;
 
-        public int GetOneTen()
+        public ActionResult LogOut()
         {
-            Random rand = new Random();
-            int result = rand.Next(1, 10);
-            //generates a random number between 1 and 10
-            return result;
+            currentuser = 0;
+            return View("SignUp", signmodel);
         }
 
-        public bool DecWin()
-        {
-            if (GetOneTen() % 2 == 0)
+            List<int> lotterylist;
+            List<int> userlotterylist;
+            int result;
+            int matchcount;
+
+            public int GetOneTen()
             {
-                //if the result is even
-                //add from the context the game payout value to the user account value
-                return true;
+                Random rand = new Random();
+                int result = rand.Next(1, 10);
+                //generates a random number between 1 and 10
+                return result;
             }
-            else
+
+            public bool DecWin()
             {
-                return false;
-            }
-        }
-
-        public List<int> Lottery()
-        {
-            Random rand = new Random();
-
-            List<int> unsortedlotterylist = new List<int>();
-
-            while (unsortedlotterylist.Count < 6)
-            {
-                result = rand.Next(1, 51);
-                if (unsortedlotterylist.Contains(result))
+                if (GetOneTen() % 2 == 0)
                 {
-                    result++;
+                    //if the result is even
+                    //add from the context the game payout value to the user account value
+                    return true;
                 }
-                unsortedlotterylist.Add(result);
-            }
-            // this makes sure the list contains 6 unique, random numbers between 1 and 50
-            lotterylist = unsortedlotterylist.OrderBy(v => v).ToList();
-            //this sorts the list in ascending order
-            return lotterylist;
-
-        }
-
-        public bool userlottovalidate(int one, int two, int three, int four, int five, int six)
-        {
-            //returns true if the user's 6 given numbers are between 1 and 50
-            List<int> numbers = new List<int>();
-            List<int> unsorteduserlotterylist = new List<int>();
-            numbers.Add(one);
-            numbers.Add(two);
-            numbers.Add(three);
-            numbers.Add(four);
-            numbers.Add(five);
-            numbers.Add(six);
-
-            foreach (var numb in numbers)
-            {
-                if (!unsorteduserlotterylist.Contains(numb) && numb >= 1 && numb <= 50)
+                else
                 {
-                    unsorteduserlotterylist.Add(numb);
+                    return false;
                 }
             }
-            if (unsorteduserlotterylist.Count == 6)
+
+            public List<int> Lottery()
             {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+                Random rand = new Random();
 
-        public List<int> Userlottery(int one, int two, int three, int four, int five, int six)
-        {
-            List<int> unsorteduserlotterylist = new List<int>();
-            if (userlottovalidate(one, two, three, four, five, six) == true)
-            {
-                //if the user's numbers pass validation (6 distinct numbers between 1 and 50)
-                unsorteduserlotterylist.Add(one);
-                unsorteduserlotterylist.Add(two);
-                unsorteduserlotterylist.Add(three);
-                unsorteduserlotterylist.Add(four);
-                unsorteduserlotterylist.Add(five);
-                unsorteduserlotterylist.Add(six);
-                //the user's six numbers are added to a list
-            }
+                List<int> unsortedlotterylist = new List<int>();
 
-            userlotterylist = unsorteduserlotterylist.OrderBy(v => v).ToList();
-            //the list is sorted so it can be compared
-
-            ////Check if lotto numbers selected are unique
-            //bool isUnique = userlotterylist.Distinct().Count() == userlotterylist.Count();
-
-            //if (isUnique)
-            //{
-            //    uniqueIdentifier = true;
-            //}
-
-            return userlotterylist;
-        }
-
-        public int Matcher(List<int> game, List<int> user)
-        {
-            //counts how many of the user's numbers occur in the lottery numbers
-            foreach (var n in user)
-            {
-                if (game.Contains(n))
+                while (unsortedlotterylist.Count < 6)
                 {
-                    matchcount++;
+                    result = rand.Next(1, 51);
+                    if (unsortedlotterylist.Contains(result))
+                    {
+                        result++;
+                    }
+                    unsortedlotterylist.Add(result);
+                }
+                // this makes sure the list contains 6 unique, random numbers between 1 and 50
+                lotterylist = unsortedlotterylist.OrderBy(v => v).ToList();
+                //this sorts the list in ascending order
+                return lotterylist;
+
+            }
+
+            public bool userlottovalidate(int one, int two, int three, int four, int five, int six)
+            {
+                //returns true if the user's 6 given numbers are between 1 and 50
+                List<int> numbers = new List<int>();
+                List<int> unsorteduserlotterylist = new List<int>();
+                numbers.Add(one);
+                numbers.Add(two);
+                numbers.Add(three);
+                numbers.Add(four);
+                numbers.Add(five);
+                numbers.Add(six);
+
+                foreach (var numb in numbers)
+                {
+                    if (!unsorteduserlotterylist.Contains(numb) && numb >= 1 && numb <= 50)
+                    {
+                        unsorteduserlotterylist.Add(numb);
+                    }
+                }
+                if (unsorteduserlotterylist.Count == 6)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return matchcount;
-        }
 
-        public bool Lotteryresult(List<int> game, List<int> user)
-        {
-            if (game == user)
+            public List<int> Userlottery(int one, int two, int three, int four, int five, int six)
             {
-                //if the generated numbers are the same as the users return true
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool LottoWin(int o, int t, int th, int f, int fi, int s)
-        {
-            List<int> game = Lottery(); //----------------> this is the list of the lottery 
-            List<int> user = Userlottery(o, t, th, f, fi, s);
-            int matches = Matcher(game, user);
-            if (Lotteryresult(game, user) == true)
-            {
-                decimal payout = proxy.ReadGamePayout(gamenamelucky);
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                //when the generated numbers and the user numbers match
-                //add from the context the game payout value to the user account value
-                return true;
-            }
-            else if (matches == 4)
-            {
-                //if the user has 4 of the winning numbers the can get a quarter of the payout
-                //decimal winamount = decimal payout value / 4
-                //update member account to add winamount
-                decimal payout = proxy.ReadGamePayout(gamenamelucky) / 4;
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                return true;
-            }
-            else if (matches == 5)
-            {
-                //the user gets a third of the payout
-                //decimal winamount = decimal payout value / 3
-                //update member account to add winamount
-                //no other lotto conditions warrant a payout
-                decimal payout = proxy.ReadGamePayout(gamenamelucky) / 3;
-                decimal currentbalance = proxy.ReadMemberAccount(currentuser);
-                proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public List<int> LuckyNumber()
-        {
-            //generates a number between 1 and 10. makes it occur 3 times in a list and all other values are distinct
-
-            int lnumber = GetOneTen();
-            List<int> numberlist = new List<int>();
-            numberlist.Add(lnumber);
-            numberlist.Add(lnumber);
-            numberlist.Add(lnumber);
-
-            while (numberlist.Count < 9)
-            {
-                result = GetOneTen();
-                if (!numberlist.Contains(result))
+                List<int> unsorteduserlotterylist = new List<int>();
+                if (userlottovalidate(one, two, three, four, five, six) == true)
                 {
-                    numberlist.Add(result);
+                    //if the user's numbers pass validation (6 distinct numbers between 1 and 50)
+                    unsorteduserlotterylist.Add(one);
+                    unsorteduserlotterylist.Add(two);
+                    unsorteduserlotterylist.Add(three);
+                    unsorteduserlotterylist.Add(four);
+                    unsorteduserlotterylist.Add(five);
+                    unsorteduserlotterylist.Add(six);
+                    //the user's six numbers are added to a list
+                }
+
+                userlotterylist = unsorteduserlotterylist.OrderBy(v => v).ToList();
+                //the list is sorted so it can be compared
+
+                ////Check if lotto numbers selected are unique
+
+
+                return userlotterylist;
+            }
+
+            public int Matcher(List<int> game, List<int> user)
+            {
+                //counts how many of the user's numbers occur in the lottery numbers
+                foreach (var n in user)
+                {
+                    if (game.Contains(n))
+                    {
+                        matchcount++;
+                    }
+                }
+                return matchcount;
+            }
+
+            public bool Lotteryresult(List<int> game, List<int> user)
+            {
+                if (game == user)
+                {
+                    //if the generated numbers are the same as the users return true
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return numberlist;
-        }
 
-        public bool LuckyNWin(int user)
-        {
-            //if the user's number is the lucky number occuring 3 times in the list, they win
-            List<int> lnumbers = LuckyNumber();
-            int numcount = lnumbers.Where(x => x.Equals(user)).Count();
-            if (numcount >= 3)
+            public bool LottoWin(int o, int t, int th, int f, int fi, int s)
             {
-                //add payout value to the user's account
-                return true;
+                game = Lottery(); //----------------> this is the list of the lottery 
+                List<int> user = Userlottery(o, t, th, f, fi, s);
+                int matches = Matcher(game, user);
+                if (Lotteryresult(game, user) == true)
+                {
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky);
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                    //when the generated numbers and the user numbers match
+                    //add from the context the game payout value to the user account value
+                    return true;
+                }
+                else if (matches == 4)
+                {
+                    //if the user has 4 of the winning numbers the can get a quarter of the payout
+                    //decimal winamount = decimal payout value / 4
+                    //update member account to add winamount
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky) / 4;
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                    return true;
+                }
+                else if (matches == 5)
+                {
+                    //the user gets a third of the payout
+                    //decimal winamount = decimal payout value / 3
+                    //update member account to add winamount
+                    //no other lotto conditions warrant a payout
+                    decimal payout = proxy.ReadGamePayout(gamenamelucky) / 3;
+                    decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
-        }
 
-        public bool logwork(string use, string pas)
-        {
-            if (proxy.LoginServiceMethod(use, pas) == true)
+            public List<int> LuckyNumber()
             {
-                currentuser = proxy.ReadCurrentMember(use, pas);
-                return true;
+                //generates a number between 1 and 10. makes it occur 3 times in a list and all other values are distinct
+
+                int lnumber = GetOneTen();
+                List<int> numberlist = new List<int>();
+                numberlist.Add(lnumber);
+                numberlist.Add(lnumber);
+                numberlist.Add(lnumber);
+
+                while (numberlist.Count < 9)
+                {
+                    result = GetOneTen();
+                    if (!numberlist.Contains(result))
+                    {
+                        numberlist.Add(result);
+                    }
+                }
+                return numberlist;
             }
-            else
+
+            public bool LuckyNWin(int user)
             {
-                return false;
+                //if the user's number is the lucky number occuring 3 times in the list, they win
+                List<int> lnumbers = LuckyNumber();
+                int numcount = lnumbers.Where(x => x.Equals(user)).Count();
+                if (numcount >= 3)
+                {
+                    //add payout value to the user's account
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            public bool logwork(string use, string pas)
+            {
+                if (proxy.LoginServiceMethod(use, pas) == true)
+                {
+                    currentuser = proxy.ReadCurrentMember(use, pas);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
-}
