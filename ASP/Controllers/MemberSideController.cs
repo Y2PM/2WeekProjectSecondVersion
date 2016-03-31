@@ -26,11 +26,6 @@ namespace ASP.Controllers
         public bool isUnique;
         public bool uniqueIdentifier { get; set; }
 
-        public void DrawEllipse(Pen pen, int x, int y, int width, int height)
-        {
-
-        }
-
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
