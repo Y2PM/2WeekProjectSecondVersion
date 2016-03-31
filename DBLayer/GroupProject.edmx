@@ -15,6 +15,18 @@
           <Property Name="price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="profit" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="member_id" />
@@ -27,6 +39,7 @@
         </EntityType>
         <EntityContainer Name="GroupProjectModelStoreContainer">
           <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -43,6 +56,18 @@
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="profit" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="member_id" />
@@ -55,6 +80,7 @@
         </EntityType>
         <EntityContainer Name="GroupProjectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
           <EntitySet Name="Members" EntityType="Self.Member" />
         </EntityContainer>
       </Schema>
@@ -66,11 +92,24 @@
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="GroupProjectModel.Game">
               <MappingFragment StoreEntitySet="Game">
-                <ScalarProperty Name="profit" ColumnName="profit" />
-                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="game_id" ColumnName="game_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="payout" ColumnName="payout" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="GroupProjectModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

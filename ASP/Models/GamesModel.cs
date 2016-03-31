@@ -21,6 +21,7 @@ namespace ASP.Models
         public string fundserrorL { get; set; }
         public string fundserrorLN { get; set; }
         public string lotteryerror { get; set; }
+        public string lotterySubmitedIsUnique { get; set; }
         public string resultmessageO { get; set; }
         public string resultmessageL { get; set; }
         public string resultmessageLN { get; set; }

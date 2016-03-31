@@ -3,6 +3,7 @@ using DBLayer;
 using DBLayer.Read;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
@@ -17,12 +18,17 @@ namespace ASP.Controllers
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
         EditMemberModel editmodel = new EditMemberModel();
-
         Member memberBeingAddedToDb = new Member();
 
+        //for the graphics lotto balls
+        public List<int> game;
+
+        public bool isUnique;
+        public bool uniqueIdentifier { get; set; }
+
         //initialise service
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
@@ -31,7 +37,6 @@ namespace ASP.Controllers
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
-        static List<int> game;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -126,23 +131,39 @@ namespace ASP.Controllers
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (userlottovalidate(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == false)
                 {
-                    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
-                    return View("Games", gamemodel);
-                }
-                else
-                {
-                    gamemodel.lotteryerror = " ";
+
+                    
+
+                    //if (uniqueIdentifier == true)
+                    //{
+                    //    gamemodel.lotteryerror = "";
+                    //}
+                    //else
+                    //{
+                    //    gamemodel.lotteryerror = "Ensure that Lottery numbers are unique";
+                    //}
+                    //return View("Games", gamemodel);
 
 
-                    if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+
+                    if (gamemodel.lotteryerror == "Ensure that Lottery numbers are unique")
                     {
-                        //read game payout and add the current user's account
-                        decimal payout = proxy.ReadGamePayout(gamenamelottery);
-                        proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
-                        gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                        gamemodel.lotteryerror = "";
                     }
                     else
                     {
+                    gamemodel.lotteryerror = " ";
+
+
+                if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
+                {
+                    //read game payout and add the current user's account
+                    decimal payout = proxy.ReadGamePayout(gamenamelottery);
+                    proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
+                        gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
+                }
+                else
+                {
                         gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                     }
                     return View("Games", gamemodel);
@@ -290,6 +311,15 @@ namespace ASP.Controllers
 
                 userlotterylist = unsorteduserlotterylist.OrderBy(v => v).ToList();
                 //the list is sorted so it can be compared
+
+                ////Check if lotto numbers selected are unique
+                //bool isUnique = userlotterylist.Distinct().Count() == userlotterylist.Count();
+
+                //if (isUnique)
+                //{
+                //    uniqueIdentifier = true;
+                //}
+
                 return userlotterylist;
             }
 
@@ -321,7 +351,7 @@ namespace ASP.Controllers
 
             public bool LottoWin(int o, int t, int th, int f, int fi, int s)
             {
-                game = Lottery();
+                List<int> game = Lottery(); //----------------> this is the list of the lottery 
                 List<int> user = Userlottery(o, t, th, f, fi, s);
                 int matches = Matcher(game, user);
                 if (Lotteryresult(game, user) == true)

@@ -1,13 +1,17 @@
-﻿using System;
+﻿using log4net;
+using log4net.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace DBLayer.Read
 {
     public class ReadMember : IDisposable
     {
         private GroupProjectEntities context;
-
+        private readonly ILog logger = LogManager.GetLogger("ReadMember.cs");
 
         public ReadMember(GroupProjectEntities groupprojectEntities)
         {
@@ -38,6 +42,7 @@ namespace DBLayer.Read
         public bool login(string user, string pass)
         {
             int memid = 0;
+            string message = "Login fail";
 
             var memberidquery = (from e in context.Members
                                  where e.m_username == user
@@ -50,15 +55,17 @@ namespace DBLayer.Read
             var m = context.Members.Find(memid);
             if (memid == 0)
             {
+                logger.Info(message);
                 return false;
             }
             if (m.m_password == pass)
             {
-                //Login sucsessful
+                logger.Info("Login sucsess");
                 return true;
             }
             else
             {
+                logger.Info(message);
                 return false;
             }
         }

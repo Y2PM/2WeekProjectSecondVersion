@@ -11,10 +11,44 @@
     <Page.DataContext>
         <vm:MainPageViewModel/>
     </Page.DataContext>
-
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="86,35,0,0" TextWrapping="Wrap" Text="Admin Management Tool" VerticalAlignment="Top"/>
-        <Button Command="{Binding navigateToMembersPageCommand}" Content="Members" HorizontalAlignment="Left" Margin="110,83,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding navigateToGamesPageCommand}" Content="Games" HorizontalAlignment="Left" Margin="110,145,0,0" VerticalAlignment="Top" Width="75"/>
+    <Page.Resources>
+        <Style x:Key="bg" TargetType="Grid">
+            <Setter Property="Background" Value="LightBlue"></Setter>
+        </Style>
+        <Style x:Key="font" TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Normal"></Setter>
+            <Setter Property="FontSize" Value="32"></Setter>
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="Foreground" Value="SteelBlue"></Setter>
+        </Style>
+        <Style x:Key="bo" TargetType="Button">
+            <Setter Property="Background" Value="Aquamarine"></Setter>
+            <Setter Property="Foreground" Value="Blue"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="bog" TargetType="Button">
+            <Setter Property="Background" Value="Tomato"></Setter>
+            <Setter Property="Foreground" Value="Yellow"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid Style="{StaticResource bg}">
+        <TextBlock Style="{StaticResource font}" HorizontalAlignment="Center" Margin="114,35,111,0" TextWrapping="Wrap" Text="Admin Management Tool" VerticalAlignment="Top" Width="375"/>
+        <Button Style="{StaticResource bo}" Command="{Binding navigateToMembersPageCommand}" Content="Members" HorizontalAlignment="Center" Margin="210,147,247,0" VerticalAlignment="Top" Width="143" Height="108" RenderTransformOrigin="1.299,-0.598"/>
+        <Button Style="{StaticResource bog}" Command="{Binding navigateToGamesPageCommand}" Content="Games" HorizontalAlignment="Center" Margin="210,346,247,0" VerticalAlignment="Top" Width="143" Height="108"/>
     </Grid>
 </Page>
