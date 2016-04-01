@@ -125,7 +125,8 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
                 }
-                gamemodel.oddevennumber = oegame;
+                gamemodel.announceO = "The winning number is: ";
+                gamemodel.oddevennumber = oegame.ToString();
             }
             else
             {
@@ -154,16 +155,16 @@ namespace ASP.Controllers
                         if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
                         {
                             //read game payout and add the current user's account
-                            gamemodel.lotterynumbers = game;
                             decimal payout = proxy.ReadGamePayout(gamenamelottery);
                             proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                             gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
                         }
                         else
                         {
-                            gamemodel.lotterynumbers = game;
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
+                        gamemodel.announceL = "The winning numbers are: ";
+                        gamemodel.lotterynumbers = game;
                 }
                 return View("Games", gamemodel);
             }
@@ -195,7 +196,8 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageLN = "Better luck next time. Play again to turn your luck around.";
                 }
-                gamemodel.luckynumber = lngame;
+                gamemodel.announceLN = "The winning number is: ";
+                gamemodel.luckynumber = oegame.ToString();
             }
             else
             {

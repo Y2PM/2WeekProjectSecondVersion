@@ -24,7 +24,7 @@
                 @Html.DisplayFor(model => model.resultmessageO)
             }
         </p>
-        The winning number is: @Html.DisplayFor(model => model.oddevennumber)
+        @Html.DisplayFor(model => model.announceO) @Html.DisplayFor(model => model.oddevennumber)
         @Html.DisplayFor(model => model.fundserrorO)
     </div>
     <div class="game">
@@ -94,7 +94,7 @@
             @*</p>*@
             @Html.DisplayFor(model => model.fundserrorL)
         <span>
-            The winning numbers are:
+            @Html.DisplayFor(model => model.announceL)
             @if (Model.lotterynumbers != null)
             {
 
@@ -126,7 +126,7 @@
                     @Html.DisplayFor(model => model.resultmessageLN)
                 }
             </p>
-            The winning number is: @Html.DisplayFor(model => model.luckynumber)
+            @Html.DisplayFor(model => model.announceLN) @Html.DisplayFor(model => model.luckynumber)
             @Html.DisplayFor(model => model.fundserrorLN)
         </div>
 
