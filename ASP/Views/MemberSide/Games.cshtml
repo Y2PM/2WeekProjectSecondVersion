@@ -20,8 +20,8 @@
             <label>Odds N Evens</label> £@Html.DisplayFor(model => model.priceO)
             @using (Html.BeginForm("PlayOdds", "MemberSide", FormMethod.Post))
             {
-                <input type="submit" value="Play" />
-                @Html.DisplayFor(model => model.resultmessageO)
+                <input type="submit" value="Play"/>
+                @Html.DisplayFor(model => model.resultmessageO, new { Style = "color:green" })
             }
         </p>
         @Html.DisplayFor(model => model.fundserrorO)

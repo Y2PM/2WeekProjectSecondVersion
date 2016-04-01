@@ -1,0 +1,26 @@
+﻿@model ASP.Models.MainPageModel
+@{
+    ViewBag.Title = "Games"; 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    input,
+    select,
+    textarea {
+        max-width: 60px;
+    }
+</style>
+
+<div id="mainpage">
+    <h2>Home</h2>
+    <div id="mainpageheader">
+       
+
+        <img src="~/Images/LuckyduckD.png" />
+    </div>
+    <div id="mainpagepresentation">
+        <p>@Model.presentation</p>
+        <div>@Html.ActionLink("Play Games", "Games", "MemberSide") </div>
+    </div>
+</div>

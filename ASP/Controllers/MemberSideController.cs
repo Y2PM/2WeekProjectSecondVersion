@@ -14,6 +14,7 @@ namespace ASP.Controllers
 {
     public class MemberSideController : Controller
     {
+        MainPageModel mainpagemodel = new MainPageModel();
         LogInModel logmodel = new LogInModel();
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
@@ -70,6 +71,10 @@ namespace ASP.Controllers
         public ActionResult SignUp()
         {
             return View(signmodel);
+        }
+        public ActionResult MainPage()
+        {
+            return View(mainpagemodel);
         }
 
         [HttpPost]

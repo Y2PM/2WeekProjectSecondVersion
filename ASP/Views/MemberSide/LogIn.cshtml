@@ -2,26 +2,27 @@
 @{
     ViewBag.Title = "Log In";
 }
+<div class="content">
+    <h1>Log In</h1>
 
-<h1>Log In</h1>
+    @using (Html.BeginForm("LogIn", "MemberSide", FormMethod.Post))
+    {
+        <p>
+            <label>Username</label>
+        </p>
+        @Html.EditorFor(model => model.Username)
+        <p>
+            <label>Password</label>
+        </p>
+        @Html.PasswordFor(model => model.Password)
+        <p>
+            <input type="submit" value="Log In" />
+        </p>
 
-@using (Html.BeginForm("LogIn", "MemberSide", FormMethod.Post))
-{
-<p>
-    <label>Username</label>
-</p>
-    @Html.EditorFor(model => model.Username)
-<p>
-    <label>Password</label>
-</p>
-    @Html.PasswordFor(model => model.Password)
+        @Html.DisplayFor(model => model.logerror)
+        @Html.DisplayFor(model => model.accessmessage)
+    }
     <p>
-        <input type="submit" value="Log In" />
-    </p>
-
-    @Html.DisplayFor(model => model.logerror)
-    @Html.DisplayFor(model => model.accessmessage)
-}
-<p>
         @Html.ActionLink("Or click here to Sign Up", "SignUp", "MemberSide")
-</p>
+    </p>
+</div>

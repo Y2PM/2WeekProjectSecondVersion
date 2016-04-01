@@ -178,6 +178,7 @@
     <Compile Include="Models\GamesModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LogInModel.cs" />
+    <Compile Include="Models\MainPageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SignUpModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +191,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\fakeleprechaun.png" />
+    <Content Include="Images\fakeleprechaun200x200.png" />
+    <Content Include="Images\LuckyduckA.png" />
+    <Content Include="Images\LuckyduckB.png" />
+    <Content Include="Images\LuckyduckD.png" />
+    <Content Include="Images\luckyducklogoA.png" />
+    <Content Include="Images\LuckyducklogoB.png" />
+    <Content Include="Images\luckyducklogoC.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -204,6 +213,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Images\pokemon.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -243,6 +253,7 @@
     <Content Include="Views\MemberSide\LogIn.cshtml" />
     <Content Include="Views\MemberSide\Games.cshtml" />
     <Content Include="Views\MemberSide\EditMember.cshtml" />
+    <Content Include="Views\MemberSide\MainPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
