@@ -1,6 +1,7 @@
 ﻿using DBLayer;
 using System;
 using System.Collections.Generic;
+//using System.Data.SqlClient;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -65,7 +66,7 @@ namespace FinalProjectFDM
             //string username = Console.ReadLine();
             //string password = Console.ReadLine();
 
-
+            //SqlConnection SQLConnectioN = new SqlConnection();
 
 
         }

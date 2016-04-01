@@ -19,26 +19,22 @@ namespace ASP.Controllers
         GamesModel gamemodel = new GamesModel();
         SignUpModel signmodel = new SignUpModel();
         EditMemberModel editmodel = new EditMemberModel();
-        Member memberBeingAddedToDb = new Member();
-
-        //for the graphics lotto balls
-        public bool isUnique;
-        public bool uniqueIdentifier { get; set; }
+        Member memberBeingSent = new Member();
 
         //initialise service
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11699:8081/Service"); //Oyeniyi
-
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-        static int currentuser;
+        static public int currentuser;
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
         static public List<int> game;
+        static public int oegame;
+        static public int lngame;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -49,7 +45,6 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult LogIn(LogInModel logmodel)
         {
-
             if (proxy.LoginServiceMethod(logmodel.Username, logmodel.Password) == true)
                 //logwork(logmodel.Username, logmodel.Password) == true)
             {
@@ -59,7 +54,6 @@ namespace ASP.Controllers
                 gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
                 gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                 return View("Games", gamemodel);
-                //return Games(gamemodel);
             }
             else
             {
@@ -82,12 +76,11 @@ namespace ASP.Controllers
         {
             if (proxy.ReadMemberNewUsername(signmodel.Username) == true) //if sign up is successfully completed
             {
-
-                memberBeingAddedToDb.m_name = signmodel.Name;
-                memberBeingAddedToDb.m_username = signmodel.Username;
-                memberBeingAddedToDb.m_password = signmodel.Password;
-                memberBeingAddedToDb.m_account = 0.0m;
-                proxy.CreateMemberServiceMethod(memberBeingAddedToDb);
+                memberBeingSent.m_name = signmodel.Name;
+                memberBeingSent.m_username = signmodel.Username;
+                memberBeingSent.m_password = signmodel.Password;
+                memberBeingSent.m_account = 0.0m;
+                proxy.CreateMemberServiceMethod(memberBeingSent);
                 return View("LogIn", logmodel);
             }
             else
@@ -117,14 +110,17 @@ namespace ASP.Controllers
         //remove return view for all the games (or make it just the games page and gamemodel)
         public ActionResult PlayOdds()
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceO) == true)
             {
+                
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (DecWin() == true)
                 {
                     decimal payout = proxy.ReadGamePayout(gamenameodds);
-
                     //int memberid = getUserId(logmodel.Username, logmodel.Password);
                     proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                     //read game payout and add the current user's account
@@ -134,6 +130,8 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
                 }
+                gamemodel.announceO = "The winning number is: ";
+                gamemodel.oddevennumber = oegame.ToString();
             }
             else
             {
@@ -145,7 +143,11 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult PlayLottery(GamesModel gamemodel)
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            gamemodel.spaces = "   ";
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceL) == true)
             {
                 //takes a game win method. if it returns true read game payout and add to current user account
@@ -166,10 +168,11 @@ namespace ASP.Controllers
                         {
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
+                        gamemodel.announceL = "The winning numbers are: ";
+                        gamemodel.lotterynumbers = game;
+                }
+                return View("Games", gamemodel);
             }
-                        return View("Games", gamemodel);
-                    }
-                
             else
             {
                 gamemodel.fundserrorL = "You have insufficient funds to play this game. Go to Edit Account.";
@@ -181,6 +184,9 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult PlayLucky(GamesModel gamemodel)
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceLN) == true)
             {
@@ -195,6 +201,8 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageLN = "Better luck next time. Play again to turn your luck around.";
                 }
+                gamemodel.announceLN = "The winning number is: ";
+                gamemodel.luckynumber = oegame.ToString();
             }
             else
             {
@@ -217,21 +225,44 @@ namespace ASP.Controllers
             }
         }
 
+        //[HttpPost]
+        //public ActionResult EditMemberPassword(EditMemberModel editmodel)
+        //{
+        //    ////add your update member method using currentuser and editmodel.newpassword
+        //    //if (editmodel.newpassword != editmodel.confirmpassword)
+        //    //{
+        //    //    //update member password with editmodel.confirmpassword value
+        //    //    editmodel.passwordsuccess = "Your password has been changed successfully";
+        //    //}
+        //    //else
+        //    //{
+        //    //    editmodel.passworderror = "Please ensure you have typed in the correct password";
+        //    //}
+        //    ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
+        //    //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
+        //    //{
+        //    //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
+        //    //}
+
+        //    //memberBeingSent.member_id = currentuser;
+        //    //memberBeingSent.m_password = editmodel.newpassword;
+        //    //proxy.UpdateMemberServiceMethod(memberBeingSent);
+            
+        //    return View("EditMember", editmodel);
+        //}
+
         [HttpPost]
         public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
-            ////add your update member method using currentuser and editmodel.newpassword
-            ////if (editmodel.addtobalance == null && editmodel.newpassword != null && editmodel.currentpassword != null)
-            //if (editmodel.newpassword != editmodel.confirmpassword || proxy.ReadMemberPassword == false)
-            //{
-            //    editmodel.passworderror = "Please ensure you have typed in the correct password";// and that your new and confiremed passwords match";
-            //}
-            //else
-            //{
-            //    editmodel.passwordsuccess = "Your password has been changed successfully";
-            //}
-            
-            
+
+            if (editmodel.newpassword != editmodel.confirmpassword || proxy.UpdateMemberPassword(currentuser, editmodel.currentpassword, editmodel.confirmpassword) == false)
+            {
+                editmodel.passworderror = "Please ensure you have typed in the correct password";
+            }
+            else
+            {
+                editmodel.passwordsuccess = "Your password has been changed successfully";
+            }
             return View("EditMember", editmodel);
         }
 
@@ -244,6 +275,13 @@ namespace ASP.Controllers
             editmodel.balancesuccess = "£" + editmodel.addtobalance + " was added to your account";
             return View("EditMember", editmodel);
         }
+
+        public ActionResult LogOut()
+        {
+            currentuser = 0;
+            return View("SignUp", signmodel);
+        }
+
             List<int> lotterylist;
             List<int> userlotterylist;
             int result;
@@ -252,9 +290,9 @@ namespace ASP.Controllers
             public int GetOneTen()
             {
                 Random rand = new Random();
-                int result = rand.Next(1, 10);
+                oegame = rand.Next(1, 10);
                 //generates a random number between 1 and 10
-                return result;
+                return oegame;
             }
 
             public bool DecWin()
@@ -341,12 +379,7 @@ namespace ASP.Controllers
                 //the list is sorted so it can be compared
 
                 ////Check if lotto numbers selected are unique
-                //bool isUnique = userlotterylist.Distinct().Count() == userlotterylist.Count();
 
-                //if (isUnique)
-                //{
-                //    uniqueIdentifier = true;
-                //}
 
                 return userlotterylist;
             }
@@ -422,11 +455,11 @@ namespace ASP.Controllers
             {
                 //generates a number between 1 and 10. makes it occur 3 times in a list and all other values are distinct
 
-                int lnumber = GetOneTen();
+                int lngame = GetOneTen();
                 List<int> numberlist = new List<int>();
-                numberlist.Add(lnumber);
-                numberlist.Add(lnumber);
-                numberlist.Add(lnumber);
+                numberlist.Add(lngame);
+                numberlist.Add(lngame);
+                numberlist.Add(lngame);
 
                 while (numberlist.Count < 9)
                 {

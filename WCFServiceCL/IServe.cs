@@ -32,6 +32,9 @@ namespace WCFServiceCL
         Member ReadSpecificMemberServiceMethod(int id);
 
         [OperationContract]
+        List<Log> ReadAllLogsServiceMethod();
+
+        [OperationContract]
         void UpdateGameServiceMethod(Game gameToUpdate);
 
         [OperationContract]
@@ -63,5 +66,8 @@ namespace WCFServiceCL
 
         [OperationContract]
         decimal ReadGamePrice(string gamename);
+
+        [OperationContract]
+        bool UpdateMemberPassword(int currentuser, string p1, string p2);
     }
 }

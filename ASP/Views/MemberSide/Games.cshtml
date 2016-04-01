@@ -24,12 +24,13 @@
                 @Html.DisplayFor(model => model.resultmessageO, new { Style = "color:green" })
             }
         </p>
+        @Html.DisplayFor(model => model.announceO) @Html.DisplayFor(model => model.oddevennumber)
         @Html.DisplayFor(model => model.fundserrorO)
     </div>
     <div class="game">
         <p>
             <label>Lottery</label> £@Html.DisplayFor(model => model.priceL)
-            @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Get))
+            @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
             {
                 @Html.EditorFor(model => model.one, additionalViewData: new
     {
@@ -85,13 +86,27 @@
             max = 50
         }
     })
-                <input type="submit" value="Play" />
+                <input type="submit" value="Play"/>
                 @Html.DisplayFor(model => model.resultmessageL)
+
             <p>@Html.DisplayFor(model => model.lotteryerror)</p>
             }
             @*</p>*@
             @Html.DisplayFor(model => model.fundserrorL)
+        <span>
+            @Html.DisplayFor(model => model.announceL)
+            @if (Model.lotterynumbers != null)
+            {
+
+                foreach (var num in Model.lotterynumbers)
+                {
+                    @Html.DisplayFor(model => num)
+                    @Html.DisplayFor(model => model.spaces)
+                }
+            }
+        </span>
         </div>
+
         <div class="game">
             <p>
 
@@ -111,6 +126,7 @@
                     @Html.DisplayFor(model => model.resultmessageLN)
                 }
             </p>
+            @Html.DisplayFor(model => model.announceLN) @Html.DisplayFor(model => model.luckynumber)
             @Html.DisplayFor(model => model.fundserrorLN)
         </div>
 

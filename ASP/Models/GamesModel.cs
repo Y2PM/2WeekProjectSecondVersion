@@ -24,6 +24,13 @@ namespace ASP.Models
         public string resultmessageO { get; set; }
         public string resultmessageL { get; set; }
         public string resultmessageLN { get; set; }
+        public List<int> lotterynumbers { get; set; }
+        public string luckynumber { get; set; }
+        public string oddevennumber { get; set; }
+        public string spaces { get; set; }
+        public string announceO { get; set; }
+        public string announceL { get; set; }
+        public string announceLN { get; set; }
 
     }
 }

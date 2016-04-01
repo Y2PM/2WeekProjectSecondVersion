@@ -59,6 +59,12 @@ namespace WCFServiceCL
             return ReadMemberObject.ReadSpecificMember(id);
         }
 
+        public List<Log> ReadAllLogsServiceMethod()
+        {
+            ReadMember ReadMemberObject = new ReadMember(context);
+            return ReadMemberObject.ReadAllLogs();
+        }
+
         public void UpdateGameServiceMethod(Game gameToUpdate)
         {
             UpdateGame UpdateGameObject = new UpdateGame();
@@ -123,6 +129,12 @@ namespace WCFServiceCL
         {
             ReadGame ReadGameObject = new ReadGame(context);
             return ReadGameObject.ReadGamePrice(gamename);
+        }
+
+        public bool UpdateMemberPassword(int currentuser, string p1, string p2)
+        {
+            UpdateMember UpdateMemberObject = new UpdateMember();
+            return UpdateMemberObject.UpdateMemberPassword(currentuser, p1, p2);
         }
     }
 }

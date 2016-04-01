@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:WPF.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="MainPage" Height="600" Width="600">
+	Title="MainPage" Height="650" Width="650">
 
     <Page.DataContext>
         <vm:MainPageViewModel/>
@@ -19,31 +19,49 @@
             <Setter Property="FontStyle" Value="Normal"></Setter>
             <Setter Property="FontSize" Value="32"></Setter>
             <Setter Property="FontFamily" Value="Arial"></Setter>
-            <Setter Property="Foreground" Value="SteelBlue"></Setter>
+            <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
         </Style>
         <Style x:Key="bo" TargetType="Button">
-            <Setter Property="Background" Value="Aquamarine"></Setter>
             <Setter Property="Foreground" Value="Blue"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" BorderBrush="DarkSlateBlue" CornerRadius="5" BorderThickness="2" Background="Aquamarine">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="5"></Setter>
+                                <Setter Property="Cursor" Value="Wait"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="GhostWhite"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="bog" TargetType="Button">
-            <Setter Property="Background" Value="Tomato"></Setter>
             <Setter Property="Foreground" Value="Yellow"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" BorderBrush="LightGoldenrodYellow" CornerRadius="5" BorderThickness="2" Background="Tomato">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="5"></Setter>
+                                <Setter Property="Cursor" Value="Wait"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Orange"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
     <Grid Style="{StaticResource bg}">

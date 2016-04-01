@@ -82,6 +82,35 @@ namespace DBLayer.Update
             }
         }
 
+        public bool UpdateMemberPassword(int memberid, string oldpassword, string newpassword)
+        {
+            using (var context = new GroupProjectEntities())
+            {
+                string actualpassword = null;
+                var memberpasswordquery = (from e in context.Members
+                                           where e.member_id == memberid
+                                           select e.m_password);
+
+                foreach (var p in memberpasswordquery)
+                {
+                    actualpassword = p.ToString();
+                }
+                if (actualpassword == oldpassword)
+                {
+                    var member = context.Members.Find(memberid);
+                    member.m_password = newpassword;
+                    context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
+
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
