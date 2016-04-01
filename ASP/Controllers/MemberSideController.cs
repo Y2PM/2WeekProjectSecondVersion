@@ -32,6 +32,8 @@ namespace ASP.Controllers
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
         static public List<int> game;
+        static public int oegame;
+        static public int lngame;
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -103,14 +105,17 @@ namespace ASP.Controllers
         //remove return view for all the games (or make it just the games page and gamemodel)
         public ActionResult PlayOdds()
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceO) == true)
             {
+                
                 //takes a game win method. if it returns true read game payout and add to current user account
                 if (DecWin() == true)
                 {
                     decimal payout = proxy.ReadGamePayout(gamenameodds);
-
                     //int memberid = getUserId(logmodel.Username, logmodel.Password);
                     proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                     //read game payout and add the current user's account
@@ -120,21 +125,23 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageO = "Better luck next time. Play again to turn your luck around.";
                 }
+                gamemodel.oddevennumber = oegame;
             }
             else
             {
                 gamemodel.fundserrorO = "You have insufficient funds to play this game. Go to Edit Account.";
             }
-                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
-                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
-                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
         [HttpPost]
         public ActionResult PlayLottery(GamesModel gamemodel)
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
+            gamemodel.spaces = "   ";
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceL) == true)
             {
                 //takes a game win method. if it returns true read game payout and add to current user account
@@ -158,9 +165,6 @@ namespace ASP.Controllers
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
                 }
-                gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
-                gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
-                gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
                 return View("Games", gamemodel);
             }
             else
@@ -174,6 +178,9 @@ namespace ASP.Controllers
         [HttpPost]
         public ActionResult PlayLucky(GamesModel gamemodel)
         {
+            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
+            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
+            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             decimal currentbalance = proxy.ReadMemberAccount(currentuser);
             if (proxy.UpdateMemberAccountPay(currentuser, currentbalance, gamemodel.priceLN) == true)
             {
@@ -188,14 +195,12 @@ namespace ASP.Controllers
                 {
                     gamemodel.resultmessageLN = "Better luck next time. Play again to turn your luck around.";
                 }
+                gamemodel.luckynumber = lngame;
             }
             else
             {
                 gamemodel.fundserrorLN = "You have insufficient funds to play this game. Go to Edit Account.";
             }
-            gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
-            gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
-            gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
             return View("Games", gamemodel);
         }
 
@@ -278,9 +283,9 @@ namespace ASP.Controllers
             public int GetOneTen()
             {
                 Random rand = new Random();
-                int result = rand.Next(1, 10);
+                oegame = rand.Next(1, 10);
                 //generates a random number between 1 and 10
-                return result;
+                return oegame;
             }
 
             public bool DecWin()
@@ -443,11 +448,11 @@ namespace ASP.Controllers
             {
                 //generates a number between 1 and 10. makes it occur 3 times in a list and all other values are distinct
 
-                int lnumber = GetOneTen();
+                int lngame = GetOneTen();
                 List<int> numberlist = new List<int>();
-                numberlist.Add(lnumber);
-                numberlist.Add(lnumber);
-                numberlist.Add(lnumber);
+                numberlist.Add(lngame);
+                numberlist.Add(lngame);
+                numberlist.Add(lngame);
 
                 while (numberlist.Count < 9)
                 {

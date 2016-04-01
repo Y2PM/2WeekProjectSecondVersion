@@ -24,6 +24,7 @@
                 @Html.DisplayFor(model => model.resultmessageO)
             }
         </p>
+        The winning number is: @Html.DisplayFor(model => model.oddevennumber)
         @Html.DisplayFor(model => model.fundserrorO)
     </div>
     <div class="game">
@@ -85,14 +86,27 @@
             max = 50
         }
     })
-                <input type="submit" value="Play" />
+                <input type="submit" value="Play"/>
                 @Html.DisplayFor(model => model.resultmessageL)
+
             <p>@Html.DisplayFor(model => model.lotteryerror)</p>
             }
             @*</p>*@
             @Html.DisplayFor(model => model.fundserrorL)
-        @Html.DisplayFor(model => model.lotterynumbers)
+        <span>
+            The winning numbers are:
+            @if (Model.lotterynumbers != null)
+            {
+
+                foreach (var num in Model.lotterynumbers)
+                {
+                    @Html.DisplayFor(model => num)
+                    @Html.DisplayFor(model => model.spaces)
+                }
+            }
+        </span>
         </div>
+
         <div class="game">
             <p>
 
@@ -112,6 +126,7 @@
                     @Html.DisplayFor(model => model.resultmessageLN)
                 }
             </p>
+            The winning number is: @Html.DisplayFor(model => model.luckynumber)
             @Html.DisplayFor(model => model.fundserrorLN)
         </div>
 
