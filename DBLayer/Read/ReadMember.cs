@@ -47,7 +47,6 @@ namespace DBLayer.Read
         public bool login(string user, string pass)
         {
             int memid = 0;
-            string message = "Login fail";
 
             var memberidquery = (from e in context.Members
                                  where e.m_username == user
@@ -59,9 +58,11 @@ namespace DBLayer.Read
             }
 
             var m = context.Members.Find(memid);
+            string messageF = "Login fail, Username: " + user;
+
             if (memid == 0)
             {
-                logger.Info(message);
+                logger.Info(messageF);
                 return false;
             }
             if (m.m_password == pass)
@@ -71,7 +72,7 @@ namespace DBLayer.Read
             }
             else
             {
-                logger.Info(message);
+                logger.Info(messageF);
                 return false;
             }
         }
