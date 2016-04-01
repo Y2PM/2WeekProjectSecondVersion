@@ -21,13 +21,13 @@ namespace ASP.Controllers
         Member memberBeingSent = new Member();
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-        static int currentuser;
+        static public int currentuser;
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
@@ -147,12 +147,14 @@ namespace ASP.Controllers
                         if (LottoWin(gamemodel.one, gamemodel.two, gamemodel.three, gamemodel.four, gamemodel.five, gamemodel.six) == true)
                         {
                             //read game payout and add the current user's account
+                            gamemodel.lotterynumbers = game;
                             decimal payout = proxy.ReadGamePayout(gamenamelottery);
                             proxy.UpdateMemberAccount(currentuser, currentbalance, payout);
                             gamemodel.resultmessageL = "Congrats, you won! Keep your lucky streak going and play on!";
                         }
                         else
                         {
+                            gamemodel.lotterynumbers = game;
                             gamemodel.resultmessageL = "Better luck next time. Play again to turn your luck around.";
                         }
                 }
