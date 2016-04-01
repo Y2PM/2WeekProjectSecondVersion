@@ -29,7 +29,7 @@
     <div class="game">
         <p>
             <label>Lottery</label> £@Html.DisplayFor(model => model.priceL)
-            @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Get))
+            @using (Html.BeginForm("PlayLottery", "MemberSide", FormMethod.Post))
             {
                 @Html.EditorFor(model => model.one, additionalViewData: new
     {
@@ -91,6 +91,7 @@
             }
             @*</p>*@
             @Html.DisplayFor(model => model.fundserrorL)
+        @Html.DisplayFor(model => model.lotterynumbers)
         </div>
         <div class="game">
             <p>

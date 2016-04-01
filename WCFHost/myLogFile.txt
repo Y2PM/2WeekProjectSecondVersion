@@ -30,6 +30,3 @@
 01.04.2016 09:20:26 [11] INFO ReadMember.cs - Login sucsess, Username: 1A 
 01.04.2016 09:24:36 [13] INFO ReadMember.cs - Login sucsess, Username: 1A 
 01.04.2016 09:26:17 [11] INFO ReadMember.cs - Login fail, Username: abababa 
-01.04.2016 09:50:16 [8] INFO ReadMember.cs - Login fail, Username:  
-01.04.2016 10:38:39 [10] INFO ReadMember.cs - Login fail, Username: kihwbckaehvb 
-01.04.2016 10:38:57 [10] INFO ReadMember.cs - Login sucsess, Username: 1A 
