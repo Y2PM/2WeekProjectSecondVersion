@@ -21,17 +21,18 @@ namespace ASP.Controllers
         Member memberBeingSent = new Member();
 
         //initialise service
-        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
-        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
+        static EndpointAddress endpoint = new EndpointAddress("http://trnlon11675:8081/Service"); //Ada
+        //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11605:8081/Service"); //Cemal
         //static EndpointAddress endpoint = new EndpointAddress("http://trnlon11566:8081/Service"); //Joseph
 
         IServe proxy = ChannelFactory<IServe>.CreateChannel(new BasicHttpBinding(), endpoint);
         //might need intermediary method to mimic global userid
-        static int currentuser;
+        static public int currentuser;
         string gamenameodds = "Odds N Evens";
         string gamenamelottery = "Lottery";
         string gamenamelucky = "Lucky Number";
         static public List<int> game;
+
 
         // GET: MemberSide
         public ActionResult LogIn()
@@ -50,7 +51,8 @@ namespace ASP.Controllers
                 gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
                 gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
                 gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
-                return View("Games", gamemodel);
+                return RedirectToAction("Games");
+                //return View("Games", gamemodel);
             }
             else
             {
@@ -90,6 +92,7 @@ namespace ASP.Controllers
                 gamemodel.priceO = proxy.ReadGamePrice(gamenameodds);
                 gamemodel.priceL = proxy.ReadGamePrice(gamenamelottery);
                 gamemodel.priceLN = proxy.ReadGamePrice(gamenamelucky);
+                //return View()
                 return View(gamemodel);
             }
             else
@@ -241,13 +244,13 @@ namespace ASP.Controllers
         public ActionResult EditMemberPassword(EditMemberModel editmodel)
         {
 
-            if (editmodel.newpassword != editmodel.confirmpassword || proxy.UpdateMemberPassword(currentuser, editmodel.currentpassword, editmodel.confirmpassword) == false)
+            if (editmodel.newpassword == editmodel.confirmpassword && proxy.UpdateMemberPassword(currentuser, editmodel.currentpassword, editmodel.confirmpassword) == true)
             {
-                editmodel.passworderror = "Please ensure you have typed in the correct password";
+                editmodel.passwordsuccess = "Your password has been changed successfully";
             }
             else
             {
-                editmodel.passwordsuccess = "Your password has been changed successfully";
+                editmodel.passworderror = "Please ensure you have typed in the correct passwords";
             }
             return View("EditMember", editmodel);
         }
