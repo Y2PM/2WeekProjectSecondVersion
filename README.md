@@ -1,2 +1,0 @@
-# 2WeekProjectSecondVersion
-Final project.
